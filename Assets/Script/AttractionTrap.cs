@@ -4,7 +4,7 @@ public class FreezeTrap : MonoBehaviour
 {
     public float attractionRadius = 5f; // Rayon d'attraction
     public float attractionForce = 10000f; // Force d'attraction
-    public float duration = 3f; // Durée de l'attraction en secondes
+    public float duration = 4f; // Durée de l'attraction en secondes
     public LayerMask enemyLayer; // Masque de couche pour les ennemis
 
     private void OnTriggerEnter2D(Collider2D other)

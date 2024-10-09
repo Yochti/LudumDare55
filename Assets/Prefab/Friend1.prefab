@@ -286,10 +286,10 @@ MonoBehaviour:
   - {fileID: 6168586058550245975}
   - {fileID: 5395485815906978207}
   - {fileID: 2054015700445750919}
-  shootingRange: 10
+  shootingRange: 15
   shootingCooldown: 0.5
   maxDistanceFromPlayer: 5
-  bulletSpeed: 20
+  bulletSpeed: 25
   moveSpeed: 8
 --- !u!1 &5132959868288152473
 GameObject:

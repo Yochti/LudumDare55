@@ -6,13 +6,23 @@ public class HealthBar : MonoBehaviour
 {
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI SoulsText;
-    public PlayerSoulsCollect playerSouls;
+    public TextMeshProUGUI recentSoulsText;
     public PlayerHealth HealthInt;
 
+    private void Start()
+    {
+        SoulsText.text = PlayerSoulsCollect.soulValue.ToString();
+    }
     void Update()
     {
+        if(PlayerSoulsCollect.recentSoulsValue >= 1)
+        {
+            recentSoulsText.text = "+" + PlayerSoulsCollect.recentSoulsValue.ToString();
+            recentSoulsText.gameObject.SetActive(true);
+            return;
+        }
+        recentSoulsText.gameObject.SetActive(false);
         HealthText.text = HealthInt.currentHealth.ToString();
-        SoulsText.text = playerSouls.soulValue.ToString();
 
     }
 }

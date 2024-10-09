@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - Soul
   - Turret
+  - BulletA
+  - Boss
+  - Cursor
+  - BulletG
+  - BulletS
   layers:
   - Default
   - TransparentFX
@@ -16,8 +21,8 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
+  - Portal
+  - Player
   - 
   - 
   - 
@@ -44,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Top
+    uniqueID: 305536861
     locked: 0

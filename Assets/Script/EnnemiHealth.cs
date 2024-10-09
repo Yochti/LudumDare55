@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class EnemmiHealth : MonoBehaviour
 {
@@ -7,19 +9,43 @@ public class EnemmiHealth : MonoBehaviour
     public AudioSource deathSFX;
     public ParticleSystem explosionVFXPrefab; // Prefab de l'effet d'explosion
     public float explosionDelay = 0.1f; // Délai avant la destruction de l'objet après l'explosion
-
+    public int scorePoint;
+    private float lerpSpeed = 0.008f;
+    private SpriteRenderer sprite;
+    private Color originalColor;
+    private int verificationScore;
     void Start()
     {
+        verificationScore = 0;
         currentHealth = maxHealth;
+        sprite = GetComponent<SpriteRenderer>();
+        originalColor = sprite.color; // Sauvegarde de la couleur originale du sprite
     }
 
     public void TakeDamage(int damage)
     {
+        sprite.color = Color.white; // Change la couleur pour indiquer des dégâts
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            StartCoroutine(waitToColor()); // Appel de la coroutine pour restaurer la couleur d'origine
+        }
+    }
+
+    public void Heal(int heal)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += heal;
+        }
+        else
+        {
+            currentHealth = maxHealth;
         }
     }
 
@@ -29,9 +55,23 @@ public class EnemmiHealth : MonoBehaviour
         {
             Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
         }
+        if(verificationScore < 1)
+        {
+            Score.ScoreCount += scorePoint;
+            verificationScore++;
+        }
+
         deathSFX.Play();
         CameraShake.Instance.ShakeCamera(3f, 0.1f);
-        Score.ScoreCount += 10;
+
         Destroy(gameObject, explosionDelay);
+    }
+
+    IEnumerator waitToColor()
+    {
+        yield return new WaitForSeconds(0.1f); // Attend un court délai
+
+        // Restaure la couleur originale du sprite
+        sprite.color = originalColor;
     }
 }

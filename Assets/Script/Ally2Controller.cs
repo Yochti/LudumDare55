@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class AllyHealer : MonoBehaviour
 {
-    public Transform player; 
+    public Transform player;
+    public AlliesSummon ally;
+    public PlayerHealth PlayerH;
     public float moveSpeed = 5f; 
     public float maxDistanceFromPlayer = 5f; 
     public float healingInterval = 30f;
     public AudioSource healSFX;
-    private float lastHealTime; 
-
+    public AudioSource reviveSFX;
+    private float lastHealTime;
+    public bool canRevive;
+    public float countdown;
+    private playerBulletDamage hInt;
     void Start()
     {
+        hInt = FindObjectOfType<playerBulletDamage>();
         lastHealTime = Time.time;
+        countdown = 600f;
     }
 
     void Update()
@@ -31,8 +38,31 @@ public class AllyHealer : MonoBehaviour
             healSFX.Play();
             lastHealTime = Time.time;
         }
+        revivePlayer();
     }
+    void revivePlayer()
+    {
+        if (ally.lvlToRevive)
+        {
+            countdown -= Time.deltaTime;
 
+            if (countdown <= 0)
+            {
+                canRevive = true;
+            }
+        }
+        if (PlayerH.currentHealth <= 0 && canRevive)
+        {
+                    PlayerH.currentHealth = PlayerH.maxHealth;
+                    countdown = 600f;
+                    canRevive = false;
+                    reviveSFX.Play();
+        }
+            
+            
+        
+            
+    }
     void HealPlayer()
     {
         
@@ -41,9 +71,8 @@ public class AllyHealer : MonoBehaviour
         {
             int missingHealth = playerHealth.maxHealth - playerHealth.currentHealth;
             int healingAmount = missingHealth / 2;
-
-            
             playerHealth.Heal(healingAmount);
+            hInt.hName(healingAmount);
         }
     }
 }

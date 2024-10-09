@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShopOpening : MonoBehaviour
 {
     public GameObject PanelShop;
+    public GameObject HealthBar;
 
     private void Update()
     {
@@ -15,10 +16,16 @@ public class ShopOpening : MonoBehaviour
 
             if (isActive)
             {
-                Time.timeScale = 0f; 
+                Time.timeScale = 0f;
+                HealthBar.SetActive(false);
+                Cursor.visible = true;
+
             }
             else
             {
+                Cursor.visible = false;
+                HealthBar.SetActive(true);
+
                 Time.timeScale = 1f; 
             }
         }

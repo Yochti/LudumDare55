@@ -3,7 +3,7 @@ using UnityEngine;
 public class BulletLifEnemy : MonoBehaviour
 {
     public float bulletLifetime = 8f;
-    public int bulletDamage = 20;
+    public float bulletDamage = 8f;
 
     void Start()
     {

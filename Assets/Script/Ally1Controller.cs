@@ -6,7 +6,7 @@ public class Ally1Controller : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform[] firePoints;
     public float shootingRange = 10f;
-    public float shootingCooldown = 0.1f;
+    public float shootingCooldown = 0.5f;
     public float maxDistanceFromPlayer = 5f;
     public float bulletSpeed = 20f;
     public float moveSpeed = 8f; 

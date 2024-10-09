@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class Ally4Controller : MonoBehaviour
 {
-    public GameObject bulletTurretPrefab; 
+    public GameObject bulletTurretPrefab;
     public GameObject healTurretPrefab;
+    public GameObject laserTurretPrefab;
     public Transform player;
+    public AlliesSummon allySummon;
 
     public float moveSpeed = 2f;
     public float wanderRadius = 10f;
-    public float wanderTimer = 10f; 
-    public float turretPlacementDelay = 5f; 
+    public float wanderTimer = 10f;
+    public float turretPlacementDelay = 5f;
 
-    private float timer; 
-    private float wanderTime; 
-    private Vector3 wanderPosition; 
+    private float timer;
+    private float wanderTime;
+    private Vector3 wanderPosition;
 
-    private int maxTurrets = 3; 
-    private int currentTurrets = 0; 
+    public int maxTurrets = 3;
+    private int currentTurrets = 0;
 
     private void Start()
     {
@@ -34,22 +36,35 @@ public class Ally4Controller : MonoBehaviour
         }
         else
         {
-            if (wanderTime <= 0)
-            {
-                wanderPosition = player.position + Random.insideUnitSphere * wanderRadius;
-                wanderTime = wanderTimer;
-            }
-            else
-            {
-                wanderTime -= Time.deltaTime;
-            }
+     
 
             transform.position = Vector3.MoveTowards(transform.position, wanderPosition, moveSpeed * Time.deltaTime);
         }
 
         if (timer <= 0)
         {
-            GameObject turretPrefab = Random.value < 0.5f ? bulletTurretPrefab : healTurretPrefab;
+            GameObject turretPrefab;
+
+            if (allySummon.hStatus == "3")
+            {
+                float randomValue = Random.value;
+                if (randomValue < 0.33f)
+                {
+                    turretPrefab = bulletTurretPrefab;
+                }
+                else if (randomValue < 0.66f)
+                {
+                    turretPrefab = healTurretPrefab;
+                }
+                else
+                {
+                    turretPrefab = laserTurretPrefab;
+                }
+            }
+            else
+            {
+                turretPrefab = Random.value < 0.5f ? bulletTurretPrefab : healTurretPrefab;
+            }
 
             if (currentTurrets < maxTurrets)
             {
@@ -57,7 +72,6 @@ public class Ally4Controller : MonoBehaviour
             }
             else
             {
-                
                 ReplaceOldestTurretAndPlaceNew(turretPrefab);
             }
 

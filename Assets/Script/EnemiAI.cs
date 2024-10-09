@@ -4,7 +4,7 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed = 3f;
     public float attackRange = 2f;
     public float attackCooldown = 2f;
-    public int damage = 10;
+    public float damage = 10f;
 
     private Transform player;
     private Rigidbody2D rb;
