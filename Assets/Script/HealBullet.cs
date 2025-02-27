@@ -4,9 +4,10 @@ public class HealBullet : MonoBehaviour
 {
     public int healAmount = 1; // Quantité de soin à appliquer au joueur
     private playerBulletDamage hInt;
-
+    public float lifeTime = 5f;
     private void Start()
     {
+        Destroy(this.gameObject, lifeTime);
         hInt = FindObjectOfType<playerBulletDamage>(); 
     }
     private void OnTriggerEnter2D(Collider2D other)

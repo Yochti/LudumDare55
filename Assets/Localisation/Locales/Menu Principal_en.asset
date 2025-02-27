@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Menu Principal_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: cd86e88bc0ae31f46ac416e960e007d5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6825324544
+    m_Localized: PRESS ANY KEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2900228190208
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2955513311232
+    m_Localized: BESTIARY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3011129782272
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5530560114688
+    m_Localized: SELECT THE GAME MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5681626361856
+    m_Localized: 20 Waves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5871812882432
+    m_Localized: Survive 20 waves to win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6008740130816
+    m_Localized: Survive 20 minutes to win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6162054524928
+    m_Localized: Endless
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6224889393152
+    m_Localized: Not available in the demo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6325552689152
+    m_Localized: Coming soon...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7304771678208
+    m_Localized: Move up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7385734328320
+    m_Localized: Move down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7467481313280
+    m_Localized: Move left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7552457912320
+    m_Localized: Move right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8726200332288
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13190764310528
+    m_Localized: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30338169581568
+    m_Localized: 20 Minutes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776550434451456
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776622387736576
+    m_Localized: AutoShoot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776714012307456
+    m_Localized: AutoAim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5905145083867136
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

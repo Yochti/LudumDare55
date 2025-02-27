@@ -94,12 +94,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5302052955546217987}
   - component: {fileID: 6607199156665820534}
-  - component: {fileID: 667492566860028846}
   - component: {fileID: 2982487201522353153}
   - component: {fileID: 4860908189560402773}
   - component: {fileID: 3656780057544828876}
   - component: {fileID: 1692674641730784639}
   - component: {fileID: 2137598157659540748}
+  - component: {fileID: 2471327732374857331}
   m_Layer: 6
   m_Name: MiniGolem
   m_TagString: Enemy
@@ -115,7 +115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491700632731090606}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.6590064, w: 0.75213736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -44.673, y: 18.153, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -124,7 +124,7 @@ Transform:
   - {fileID: 5893991623465991022}
   - {fileID: 2401692334087104139}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -82.448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6607199156665820534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -177,20 +177,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &667492566860028846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491700632731090606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 2
 --- !u!114 &2982487201522353153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,12 +189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 123
+  maxHealth: 100
   currentHealth: 0
   deathSFX: {fileID: 4860908189560402773}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 5
+  sprite: {fileID: 6607199156665820534}
+  hasBeenHit: 0
 --- !u!82 &4860908189560402773
 AudioSource:
   m_ObjectHideFlags: 0
@@ -390,12 +378,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 40
-  moveSpeed: 5
+  moveSpeed: 5.5
   largeGolemPrefab: {fileID: 5934414819551043130, guid: 8ccb4ab826800af4dbda3aa191427629, type: 3}
   playerDetectionRadius: 50
-  damage: 15
+  damage: 12
   attackCooldown: 0.8
   attackRange: 1.25
+--- !u!114 &2471327732374857331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491700632731090606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
+  soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
 --- !u!1 &6148154935456835669
 GameObject:
   m_ObjectHideFlags: 0

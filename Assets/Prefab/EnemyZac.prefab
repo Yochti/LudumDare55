@@ -111,9 +111,10 @@ MonoBehaviour:
   splitCount: 2
   attackRange: 1.5
   attackCooldown: 1.5
-  attackDamage: 20
+  attackDamage: 16
   fragmentSpawnDistance: 5
   enemyHp: {fileID: 3397782836574853039}
+  detectionRadius: 8
 --- !u!114 &3397782836574853039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,12 +127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 70
   currentHealth: 0
   deathSFX: {fileID: 4114614737345291418}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 6
+  sprite: {fileID: 3383633220278769879}
+  hasBeenHit: 0
 --- !u!82 &4114614737345291418
 AudioSource:
   m_ObjectHideFlags: 0
@@ -143,8 +146,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5305107621172599151, guid: bc626ea4466e98c4185214231848ebec, type: 2}
   m_audioClip: {fileID: 8300000, guid: 19fbc59c32d25e54dabab940a0c9544c, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.827
   m_Pitch: 1
   Loop: 0
   Mute: 0

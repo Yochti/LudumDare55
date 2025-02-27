@@ -177,3 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b5405f74d1d444588ccd23460137dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSpeed: 10
+  returnSpeed: 15
+  flightDuration: 1.5
+  damageAmount: 10

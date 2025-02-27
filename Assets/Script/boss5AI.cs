@@ -8,7 +8,6 @@ public class Boss5Behaviour: MonoBehaviour
     public float spawnInterval = 10f; // Intervalle entre chaque spawn de petits ennemis
     public int numberOfSmallEnemies = 25; // Nombre de petits ennemis à instancier à chaque spawn
     private Boss1Health bossHp;
-    private EnemyWaveManager waveManager;
     private float nextSpawnTime; // Temps du prochain spawn de petits ennemis
     private Rigidbody2D rb;
     private void Start()
@@ -16,8 +15,6 @@ public class Boss5Behaviour: MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         bossHp = GetComponent<Boss1Health>();
-        waveManager = FindAnyObjectByType<EnemyWaveManager>();
-        AdjustBossHealth(); 
     }
     void Update()
     {
@@ -55,13 +52,5 @@ public class Boss5Behaviour: MonoBehaviour
             Instantiate(smallEnemyPrefab, spawnPosition, Quaternion.identity);
         }
     }
-    void AdjustBossHealth()
-    {
-        int currentWave = waveManager.currentWave;
-        int baseHealth = bossHp.maxHealth;
-
-        int modifiedHealth = baseHealth + (currentWave * 300);
-        bossHp.maxHealth = modifiedHealth;
-        bossHp.currentHealth = modifiedHealth;
-    }
+    
 }

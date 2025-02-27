@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-French (France) (fr-FR)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-French (France) (fr-FR)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c8224cc3d7c4e5442866b6091928c178
+  m_SerializeEntries:
+  - m_GUID: 83f2acfe3201e24479671f32ae250f7b
+    m_Address: Shopkey_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74e812c2ec6219945a53dee38fbc84b7
+    m_Address: Menu Principal_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e515af152e453041b0ff01ed06b4293
+    m_Address: InvocAndSpecialDescription_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49fe6e4ebf5ec504bb332dca15b78212
+    m_Address: WeaponsDescription_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45706c41b864a0142ac038947817bec1
+    m_Address: UpgradesTable_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b82d05e79692db84cb4d4b72e262780c
+    m_Address: InGame_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: a629d28016145f44db09b6408e6f9183, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fa9984118880d3444b502583e782c18e, type: 2}
+    - {fileID: 11400000, guid: a216008c24039d94f8aa1f7cbaa7db9e, type: 2}

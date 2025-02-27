@@ -611,10 +611,10 @@ GameObject:
   - component: {fileID: 5807444253743435212}
   - component: {fileID: 1350145034309563217}
   - component: {fileID: 5490038756287123918}
-  - component: {fileID: 4087702043559550692}
   - component: {fileID: 5349709462940646836}
   - component: {fileID: 1139460347396022478}
   - component: {fileID: 6891115463559994302}
+  - component: {fileID: -5905326143021840584}
   m_Layer: 6
   m_Name: Boss5
   m_TagString: Boss
@@ -780,21 +780,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
   soulAmount: 40
---- !u!114 &4087702043559550692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866625965084010780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 1911805385073514072, guid: 185fafe34c38bdd49989fdc4d9f38ea0, type: 3}
-  soulAmount: 1
+  magnetDropChance: 0.5
+  healthDropChance: 1.5
+  upgradeDropChance: 0.5
 --- !u!82 &5349709462940646836
 AudioSource:
   m_ObjectHideFlags: 0
@@ -905,8 +896,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallEnemyPrefab: {fileID: 6487934540284879706, guid: 212a05f292aee304a905fb6b4c153750, type: 3}
   moveSpeed: 5
-  spawnInterval: 20
-  numberOfSmallEnemies: 25
+  spawnInterval: 23
+  numberOfSmallEnemies: 20
 --- !u!114 &6891115463559994302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,6 +916,19 @@ MonoBehaviour:
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 100
+  hasBeenHit: 0
+--- !u!114 &-5905326143021840584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866625965084010780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2906429240075486248
 GameObject:
   m_ObjectHideFlags: 0

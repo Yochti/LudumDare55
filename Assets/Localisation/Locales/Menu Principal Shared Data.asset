@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Menu Principal Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Menu Principal
+  m_TableCollectionNameGuidString: cd86e88bc0ae31f46ac416e960e007d5
+  m_Entries:
+  - m_Id: 6825324544
+    m_Key: Press any key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2900228190208
+    m_Key: JOUER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2955513311232
+    m_Key: Bestiaire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3011129782272
+    m_Key: BOUTIQUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5530560114688
+    m_Key: Mode de jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5681626361856
+    m_Key: 20 Vagues
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5871812882432
+    m_Key: 20 vagues descrption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6008740130816
+    m_Key: 20 Minutes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6162054524928
+    m_Key: Infinie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6224889393152
+    m_Key: Not available
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6325552689152
+    m_Key: Coming soon...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7304771678208
+    m_Key: En haut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7385734328320
+    m_Key: En bas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7467481313280
+    m_Key: A gauche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7552457912320
+    m_Key: A droite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8726200332288
+    m_Key: Fermer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13190764310528
+    m_Key: Plein ecran
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30338169581568
+    m_Key: 20 Minute
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776550434451456
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776622387736576
+    m_Key: Autoshoot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1776714012307456
+    m_Key: AutoAim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5905145083867136
+    m_Key: Quit
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2722552954837532674
+  references:
+    version: 2
+    RefIds:
+    - rid: 2722552954837532674
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1729700098380

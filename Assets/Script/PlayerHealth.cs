@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
-    [HideInInspector]  public int maxHealth;
+    [HideInInspector]  public static int maxHealth;
     public int currentHealth;
     public float invicibilityFlashDelay;
     public float invicibilityFlashDelay2 = .05f;
@@ -14,29 +14,23 @@ public class PlayerHealth : MonoBehaviour
     public AllyHealer ally2;
     public Slider healthSlider;
     public saveSytem save;
-    public int finalSouls;
+    public static int finalSouls;
     public int isDead;
     public int healthRegen;
     public float healthRegenCooldown;
-
+    public ParticleSystem healParticle;
     private bool isInvincible = false; // Pour contrôler l'état d'invincibilité
     private SpriteRenderer playerSprite;
-
+    public bool PanelDeathIsactive;
+    public TextMeshProUGUI currentTxt;
+    public TextMeshProUGUI maxTxt;
     void Start()
     {
-        if (save.HealthRegen != 0)
-            healthRegen = save.PlayerRegen;
-        else
-            healthRegen = 0;
-        if (save.PlayerFrame != 0)
-            invicibilityFlashDelay = save.PlayerFrame;
-        else
-            invicibilityFlashDelay = .4f;
 
-        if (save.PlayerHealth != 0)
-            maxHealth = save.PlayerHealth;
-        else
-            maxHealth = 200;
+        invicibilityFlashDelay = PlayerStats.invincibilityFrame;
+        healthRegen = PlayerStats.healthRegen;
+        if (save.HealthUpgrades != 0) maxHealth = PlayerStats.health;
+        else maxHealth = 150;
 
         isDead = 0;
         currentHealth = maxHealth;
@@ -46,30 +40,39 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        currentTxt.text = currentHealth.ToString();
+        maxTxt.text = maxHealth.ToString();
+        if (healthSlider.maxValue != maxHealth)
+            healthSlider.maxValue = maxHealth;
+        finalSouls = PlayerSoulsCollect.soulValue + 25 * (staticRef.wavesS + 1) + killAmountStats.totalKill/2;
+
+        if (isDead == 1)
+        {        
+            save.SaveData();
+            save.LoadData();
+            player.SetActive(false);
+
+            // Vérifie immédiatement la sauvegarde
+            PanelDeathIsactive = true;
+            Debug.Log("TotalSouls après chargement: " + save.TotalSouls);
+        }
+
+        DeathControl();
+        if (healthSlider.value != currentHealth)
+        {
+            healthSlider.value = currentHealth;
+        }
+        if (healthRegen == 0)
+            return;
         healthRegenCooldown -= Time.deltaTime;
         if(healthRegenCooldown <= 0)
         {
             healthRegenCooldown = 1f;
             Heal(healthRegen);
         }
-        if (healthSlider.value != currentHealth)
-        {
-            healthSlider.value = currentHealth;
-        }
+        
 
-        if (healthSlider.maxValue != maxHealth)
-            healthSlider.maxValue = maxHealth;
-
-        if (isDead == 1)
-        {
-            finalSouls = PlayerSoulsCollect.soulValue;
-            save.TotalSouls += PlayerSoulsCollect.soulValue;
-            save.SaveData();
-            save.LoadData(); // Vérifie immédiatement la sauvegarde
-            Debug.Log("TotalSouls après chargement: " + save.TotalSouls);
-        }
-
-        DeathControl();
+        
     }
 
     public void TakeDamage(float damage)
@@ -78,7 +81,9 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= (int)damage;
             DeathControl();
-            StartCoroutine(InvincibilityCoroutine()); // Lance la coroutine d'invincibilité
+            if(currentHealth > 0)
+                StartCoroutine(InvincibilityCoroutine());
+
         }
     }
 
@@ -87,12 +92,12 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0 && !ally2.canRevive)
         {
             isDead++;
+            
             healthSlider.value = 0;
             healthSlider.gameObject.SetActive(false);
             deathPanel.SetActive(true);
             FriendHolder.SetActive(false);
             Cursor.visible = true;
-            //player.SetActive(false);
         }
         else
         {
@@ -106,6 +111,9 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (amount > 10 && healParticle != null)
+            healParticle.Play();
+
     }
 
     private IEnumerator InvincibilityCoroutine()
@@ -124,4 +132,5 @@ public class PlayerHealth : MonoBehaviour
         playerSprite.enabled = true; // Assure que le sprite est visible à la fin
         isInvincible = false;
     }
+
 }

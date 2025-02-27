@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class BulletPlayerLifetime : MonoBehaviour
 {
     public float bulletLifetime = 8f;
@@ -10,28 +10,27 @@ public class BulletPlayerLifetime : MonoBehaviour
     private PlayerShootingAk playerAk;
     private killAmountStats kStats;
     public bool isCritical;
-    public int critChance = 15;
+    public int critChance;
     private saveSytem save;
     public float critDamage = 200f;
     void Start()
     {
+        StartCoroutine(waitingForAwake());
+
         playerAk = FindObjectOfType<PlayerShootingAk>();
         save = FindObjectOfType<saveSytem>();
-
-        if (save.PlayerCritchance != 0)
-            critChance = save.PlayerCritchance;
-        else
-            critChance = 15;
-        if (save.PlayerCritDamages != 0)
-            critDamage = save.PlayerCritDamages;
+        critChance = PlayerStats.critRate;
+        critDamage = PlayerStats.critDamage;
         
-                
         
         pDamage = FindAnyObjectByType<playerBulletDamage>();
         kStats = FindAnyObjectByType<killAmountStats>();
 
-        bulletDamage = Random.Range(bulletDamagemin + save.PlayerDamages, bulletDamagemax + save.PlayerDamages);
-
+        bulletDamage = Random.Range(
+            Mathf.FloorToInt(bulletDamagemin * (1 + PlayerStats.additionalDamage)),
+            Mathf.FloorToInt(bulletDamagemax * (1 + PlayerStats.additionalDamage)) + 1
+        );
+        print("crit Chance" + critChance + "Crit damage" + critDamage);
         if (Random.Range(1, 100) <= critChance)
         {
             bulletDamage = (int)(bulletDamage * (critDamage /100f));
@@ -39,12 +38,14 @@ public class BulletPlayerLifetime : MonoBehaviour
         }
         print(bulletDamage);
         Destroy(gameObject, bulletLifetime);
+        print(PlayerStats.additionalDamage);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Boss"))
         {
+            
             other.gameObject.GetComponent<Boss1Health>().TakeDamage(bulletDamage);
             pDamage.OnHit(bulletDamage);
             DamagePopUp.Create(other.transform.position, bulletDamage, isCritical); ;
@@ -53,10 +54,10 @@ public class BulletPlayerLifetime : MonoBehaviour
             {
                 kStats.IncreaseKillPlayer();
             }
-            if (playerAk == null)
-                return;
-            else
+            if (playerAk != null)
                 playerAk.timeSinceLastShot += .069f;
+
+
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
@@ -68,16 +69,20 @@ public class BulletPlayerLifetime : MonoBehaviour
             {
                 kStats.IncreaseKillPlayer();
             }
-            if (playerAk == null)
-                return;
-            else
+            if (playerAk != null)
                 playerAk.timeSinceLastShot += .069f;
 
-        }
 
+        }
         if (!other.gameObject.CompareTag("BulletA") || !other.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
+
+
+    }
+    IEnumerator waitingForAwake()
+    {
+        yield return new WaitForSeconds(0.0001f);
     }
 }

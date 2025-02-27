@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1939680156655067522}
   - component: {fileID: 6010927462370715641}
   - component: {fileID: 9218203736495412582}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletGrenade 1
   m_TagString: BulletA
   m_Icon: {fileID: 0}
@@ -164,7 +164,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageRadius: 10
   damageAmount: 40
+  bulletDamagemin: 18
+  bulletDamagemax: 32
   lifetime: 2.5
+  isCritical: 0
+  critChance: 15
+  critDamage: 200
 --- !u!1 &9162871421007589996
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6418594657047533441}
   - component: {fileID: 7921711679363654158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -46,19 +46,19 @@ public class Ally3Controller : MonoBehaviour
 
     void PlaceRandomTrap()
     {
-        if (alliesSummon.junktrapStatus == "3") // Vérifier si JunkTrap est au niveau 2
-        {
-            GameObject[] trapPrefabs = { mineTrapPrefab, attractionTrapPrefab, damageTrapPrefab }; // Ajouter le nouveau piège
-            int randomIndex = Random.Range(0, trapPrefabs.Length);
-            Vector3 trapPosition = transform.position + transform.forward * 2f;
-            Instantiate(trapPrefabs[randomIndex], trapPosition, Quaternion.identity);
-        }
-        else
-        {
+       if (alliesSummon.junktrapStatus == "1" || alliesSummon.junktrapStatus == "2") 
+       {
             GameObject[] trapPrefabs = { mineTrapPrefab, attractionTrapPrefab };
             int randomIndex = Random.Range(0, trapPrefabs.Length);
-            Vector3 trapPosition = transform.position + transform.forward * 2f;
+            Vector2 trapPosition = transform.position + transform.forward * 2f;
             Instantiate(trapPrefabs[randomIndex], trapPosition, Quaternion.identity);
-        }
+       }
+       else
+       {
+            GameObject[] trapPrefabs = { mineTrapPrefab, attractionTrapPrefab, damageTrapPrefab }; // Ajouter le nouveau piège
+            int randomIndex = Random.Range(0, trapPrefabs.Length);
+            Vector2 trapPosition = transform.position + transform.forward * 2f;
+            Instantiate(trapPrefabs[randomIndex], trapPosition, Quaternion.identity);
+       }
     }
 }

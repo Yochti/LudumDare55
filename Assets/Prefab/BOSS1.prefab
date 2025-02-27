@@ -259,8 +259,8 @@ GameObject:
   - component: {fileID: 4327756295087743219}
   - component: {fileID: 2747588489830652114}
   - component: {fileID: 8506828776182573931}
-  - component: {fileID: 6420458588791294762}
   - component: {fileID: 6937689100921896247}
+  - component: {fileID: -467428956356798764}
   m_Layer: 6
   m_Name: BOSS1
   m_TagString: Boss
@@ -424,7 +424,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
   soulAmount: 40
+  magnetDropChance: 0.5
+  healthDropChance: 1.5
+  upgradeDropChance: 0.5
 --- !u!58 &4327756295087743219
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -474,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   damageRadius: 1.5
-  damagePerSecond: 70
+  damagePerSecond: 55
   damageCooldown: 1
 --- !u!82 &8506828776182573931
 AudioSource:
@@ -572,20 +577,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6420458588791294762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4902051105938509024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 1911805385073514072, guid: 185fafe34c38bdd49989fdc4d9f38ea0, type: 3}
-  soulAmount: 1
 --- !u!114 &6937689100921896247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +595,19 @@ MonoBehaviour:
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 100
+  hasBeenHit: 0
+--- !u!114 &-467428956356798764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902051105938509024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4908051436465652225
 GameObject:
   m_ObjectHideFlags: 0

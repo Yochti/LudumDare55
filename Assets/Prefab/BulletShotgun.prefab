@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1939680156655067522}
   - component: {fileID: 6010927462370715641}
   - component: {fileID: -9052976035001064857}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletShotgun
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48041b1da35e39544a55ec67bc299b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifetime: 8
+  bulletLifetime: 6
   bulletDamagemin: 7
   bulletDamagemax: 13
   bulletDamage: 10
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8121693057784912671}
   - component: {fileID: 7962534492171954962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

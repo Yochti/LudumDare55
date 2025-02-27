@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 220065033960895179}
   - component: {fileID: 3699968810737651708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: -1939680156655067522}
   - component: {fileID: 6010927462370715641}
   - component: {fileID: 3044018764369753821}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet 1
   m_TagString: BulletA
   m_Icon: {fileID: 0}
@@ -246,6 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7820ce546a7909a4892a9cf6b0a2c097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifetime: 8
+  bulletLifetime: 6
   bulletDamage: 15
   isCritical: 0

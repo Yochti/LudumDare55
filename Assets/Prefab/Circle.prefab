@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5183446083659567498}
   - component: {fileID: 343051263342531423}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3033606146670626862}
   - component: {fileID: 2162515719848273779}
   - component: {fileID: 8650306075106555852}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,11 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f0cc43dc8671a4ba0ce343276b0887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 3
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  explosionDamage: 50
+  explosionRadius: 2
+  explosionDamage: 40
   explosionSFX: {fileID: 8650306075106555852}
 --- !u!58 &2162515719848273779
 CircleCollider2D:
@@ -234,7 +231,7 @@ AudioSource:
   m_GameObject: {fileID: 5790926939624273630}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5305107621172599151, guid: bc626ea4466e98c4185214231848ebec, type: 2}
   m_audioClip: {fileID: 8300000, guid: d75491c2930700841b6e8944452e3121, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -180,9 +180,10 @@ GameObject:
   - component: {fileID: 4318056714414135516}
   - component: {fileID: 5769917946358775003}
   - component: {fileID: 1900981823665351821}
+  - component: {fileID: 342445262274854866}
   m_Layer: 0
   m_Name: HealthPower
-  m_TagString: Untagged
+  m_TagString: HealPower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,4 +269,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pH: {fileID: 4282043295387118422, guid: c1b5bd5165eae114ebe72975cdb332a6, type: 3}
-  healA: 30
+  healA: 25
+--- !u!58 &342445262274854866
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7711192003903593271}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

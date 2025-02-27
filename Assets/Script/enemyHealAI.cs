@@ -2,97 +2,70 @@ using UnityEngine;
 
 public class HealingEnemy : MonoBehaviour
 {
-    public float detectionRadius = 10f; // Rayon de détection des ennemis
+    [Header("Detection Settings")]
+    public float detectionRadius = 200f; // Rayon de détection des ennemis
     public float healingRange = 2f; // Portée de guérison
-    public float healingRate = 10f; // Taux de guérison par seconde
-    public float moveSpeed = 3f; // Vitesse de déplacement
-    public LayerMask enemyLayerMask; // Masque de collision pour les ennemis
-    public LayerMask playerLayerMask; // Masque de collision pour le joueur
 
-    private GameObject targetEnemy; // Ennemi cible à guérir
-    private bool isHealing = false; // Indique si l'ennemi est en train de guérir
-    private float nextHealTime = 0f; // Temps avant la prochaine guérison
+    [Header("Healing Settings")]
+    public float healingRate = 8f; // Taux de guérison par seconde
+    public int healAmount = 3; // Quantité de points de vie guéris par tick
+
+    [Header("Movement Settings")]
+    public float moveSpeed = 3f; // Vitesse de déplacement
+
+    private Transform targetPlayer;
+    private float healCooldown;
 
     void Update()
     {
-        FindTargetEnemy();
+        FindPlayer();
+        MoveTowardsPlayer();
 
-        if (targetEnemy != null)
+        if (Time.time >= healCooldown)
         {
-            float distanceToTarget = Vector2.Distance(transform.position, targetEnemy.transform.position);
-
-            if (distanceToTarget <= healingRange)
-            {
-                if (Time.time >= nextHealTime)
-                {
-                    HealTarget();
-                    nextHealTime = Time.time + 1f / healingRate;
-                }
-            }
-            else
-            {
-                MoveTowardsTarget(targetEnemy.transform.position);
-            }
-        }
-        else
-        {
-            MoveTowardsPlayer();
+            HealEnemiesInRange();
+            healCooldown = Time.time + 1f / healingRate;
         }
     }
 
-    void FindTargetEnemy()
+    void FindPlayer()
     {
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayerMask);
+        // Si un joueur est déjà ciblé, évitez de recalculer
+        if (targetPlayer != null) return;
 
-        float minHealthPercentage = Mathf.Infinity;
-
-        foreach (Collider2D enemyCollider in enemiesInRange)
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+        foreach (Collider2D collider in objectsInRange)
         {
-            EnemmiHealth enemyHealth = enemyCollider.GetComponent<EnemmiHealth>();
-            if (enemyHealth != null)
+            PlayerMovement player = collider.GetComponent<PlayerMovement>();
+            if (player != null)
             {
-                float healthPercentage = enemyHealth.currentHealth / enemyHealth.maxHealth;
-                if (healthPercentage < minHealthPercentage)
-                {
-                    minHealthPercentage = healthPercentage;
-                    targetEnemy = enemyCollider.gameObject;
-                }
+                targetPlayer = player.transform;
+                break;
             }
         }
-    }
-
-    void MoveTowardsTarget(Vector2 targetPosition)
-    {
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
     }
 
     void MoveTowardsPlayer()
     {
-        Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayerMask);
-        if (players.Length > 0)
-        {
-            // Si le joueur est détecté, se diriger vers lui
-            MoveTowardsTarget(players[0].transform.position);
-        }
+        if (targetPlayer == null) return;
 
+        Vector2 direction = ((Vector2)targetPlayer.position - (Vector2)transform.position).normalized;
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
     }
 
-    void HealTarget()
+    void HealEnemiesInRange()
     {
-        EnemmiHealth enemyHealth = targetEnemy.GetComponent<EnemmiHealth>();
-        if (enemyHealth != null)
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, healingRange);
+
+        foreach (Collider2D collider in enemiesInRange)
         {
-            enemyHealth.Heal(5);
+            EnemmiHealth enemyHealth = collider.GetComponent<EnemmiHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.Heal(healAmount);
+            }
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, healingRange);
-    }
 }

@@ -21,43 +21,57 @@ public class killAmountStats : MonoBehaviour
     public int explosiveBullet;
     public int totalKillDimitri;
 
+
+    public static int totalKill;
     public void IncreaseKillPlayer()
     {
         killPlayer++;
+        increaseTotal();
     }
     public void IncreaseBababoyKill()
     {
         killBababoy++;
+        increaseTotal();
     }
     public void IncreaseMineKill()
     {
         mineTrapKill++;
         totalkillJunktrap++;
+        increaseTotal();
     }
     public void IncreaseTrap3Kill()
     {
         trap3kill++;
         totalkillJunktrap++;
+        increaseTotal();
     }
     public void Increaseturret1kill()
     {
         turret1kill++;
         totalkillH++;
+        increaseTotal();
     }
     public void IncreaseTuret3Kill()
     {
         turet3kill++;
         totalkillH++;
+        increaseTotal();
     }
     public void IncreaseFois3Kill()
     {
         fois3kill++;
         totalKillDimitri++;
+        increaseTotal();
     }
     public void IncreaseExplosive()
     {
         explosiveBullet++;
         totalKillDimitri++;
+        increaseTotal();
+    }
+    private void increaseTotal()
+    {
+        totalKill++;
     }
     
 }

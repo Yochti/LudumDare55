@@ -12,6 +12,8 @@ public class Boss1Health : MonoBehaviour
     private Slider healthSlider;
     private Slider easeSlider;
     private float lerpSpeed = 0.01f;
+    public bool hasBeenHit;
+
     void Start()
     {
         currentHealth = maxHealth;

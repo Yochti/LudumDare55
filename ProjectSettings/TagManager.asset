@@ -13,6 +13,11 @@ TagManager:
   - Cursor
   - BulletG
   - BulletS
+  - HealPower
+  - Clone
+  - Poutch
+  - Soul2
+  - Soul3
   layers:
   - Default
   - TransparentFX
@@ -23,7 +28,7 @@ TagManager:
   - Enemy
   - Portal
   - Player
-  - 
+  - culling
   - 
   - 
   - 

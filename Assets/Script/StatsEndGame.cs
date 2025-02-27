@@ -32,7 +32,6 @@ public class StatsEndGame : MonoBehaviour
     public bulletBababoyDamage bDmg;
     public killAmountStats kStats;
 
-    public EnemyWaveManager WaveInt;
     public TextMeshProUGUI WaveText;
 
     private void Update()
@@ -54,6 +53,6 @@ public class StatsEndGame : MonoBehaviour
         killH.text = kStats.totalkillH.ToString();
         killDimitri.text = kStats.totalKillDimitri.ToString();
 
-        WaveText.text = (WaveInt.currentWave + 1).ToString();
+        WaveText.text = (staticRef.wavesS + 1).ToString();
     }
 }

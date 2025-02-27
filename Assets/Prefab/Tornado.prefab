@@ -103,11 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attractionRadius: 5
-  attractionForce: 1e+9
-  duration: 3
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  attractionSpeed: 4.5
+  attractionDuration: 1.5
 --- !u!61 &-2736690870941647094
 BoxCollider2D:
   m_ObjectHideFlags: 0

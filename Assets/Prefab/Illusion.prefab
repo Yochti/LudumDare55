@@ -284,7 +284,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 54354.504, y: -43095.41, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7164623906000519689}
@@ -454,6 +454,8 @@ MonoBehaviour:
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 0392400f22b6be14d8bad98522c8c4d3, type: 3}
   explosionDelay: 0.1
   scorePoint: 0
+  sprite: {fileID: 6176012782446809810}
+  hasBeenHit: 0
 --- !u!82 &1681841239093753704
 AudioSource:
   m_ObjectHideFlags: 0

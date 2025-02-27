@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: WeaponsDescription_fr-FR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr-FR
+  m_SharedData: {fileID: 11400000, guid: e7d9735c9315bcc45b8df0fc532a0641, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6561083392
+    m_Localized: Pistolet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47375855616
+    m_Localized: Akimbo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 145723895808
+    m_Localized: Famas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 230276870144
+    m_Localized: Pompe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 293061406720
+    m_Localized: Lance grenade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372996452352
+    m_Localized: Sniper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 414411010048
+    m_Localized: Taser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 503246368768
+    m_Localized: Spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 859070148608
+    m_Localized: "Une arme equilibr\xE9e entre degats et vitesse d'attaque."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 975701159936
+    m_Localized: "Une arme qui permet d'envoyer d'envoyer DEUX projectiles \xE0 la
+      fois mais qui vous empeche d'utiliser de special."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1140050767872
+    m_Localized: "Une arme avec une tr\xE8s faible vitesse d'attaque mais qui fait
+      moins de degats"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1351489826816
+    m_Localized: Une arme parfaites pour les combats rapproches
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438089621504
+    m_Localized: Une arme qui lance des grenandes explosives, cette arme fait de
+      gros degats en zone et les grenades peuvent se coller aux ennemis.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1652804431872
+    m_Localized: Une arme a longue distance qui charge son tir pour augmenter ses
+      degats.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1819695788032
+    m_Localized: Une arme qui lance un projectile qui se decompose en 6 petits projectiles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2020753944576
+    m_Localized: Une arme parfaite pour les combats nombreux, vous permet de tisser
+      des liens de degats entre vous et vos ennemis.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

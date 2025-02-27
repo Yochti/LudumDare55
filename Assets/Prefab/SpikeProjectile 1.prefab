@@ -275,7 +275,7 @@ MonoBehaviour:
   maxDistance: 6
   damage: 0
   miniSpikePrefab: {fileID: 430853662062222236, guid: 2d230e0a451106748ba9cd08847e75c9, type: 3}
-  numMiniSpikes: 10
+  numMiniSpikes: 8
   bulletDamagemin: 9
   bulletDamagemax: 14
   isCritical: 0

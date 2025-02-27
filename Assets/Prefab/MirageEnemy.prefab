@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 8006529494307714723}
   - component: {fileID: 1894243187005300201}
   - component: {fileID: 9183436582035094665}
-  - component: {fileID: 1060609848845764578}
+  - component: {fileID: 7675824739132873990}
   m_Layer: 6
   m_Name: MirageEnemy
   m_TagString: Enemy
@@ -703,10 +703,11 @@ MonoBehaviour:
   moveSpeed: 4
   attackRange: 2
   illusionSpawnInterval: 5
-  illusionDamage: 9
-  attackDamage: 31
+  illusionDamage: 5
+  attackDamage: 16
   illusionPrefab: {fileID: 3294885776241752888, guid: cb9252e0e1f1c674899c163e86b89209, type: 3}
   maxIllusions: 4
+  detectionRadius: 8
 --- !u!50 &1040465970483614141
 Rigidbody2D:
   serializedVersion: 4
@@ -791,12 +792,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 100
   currentHealth: 0
   deathSFX: {fileID: 9183436582035094665}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 10
+  sprite: {fileID: 7457189018751469931}
+  hasBeenHit: 0
 --- !u!82 &9183436582035094665
 AudioSource:
   m_ObjectHideFlags: 0
@@ -893,7 +896,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1060609848845764578
+--- !u!114 &7675824739132873990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -902,11 +905,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6663153977354861336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
   soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
 --- !u!1 &6732749567257224999
 GameObject:
   m_ObjectHideFlags: 0

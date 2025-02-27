@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UpgradesTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b17da6863cf1b8d46b8b4d38ae8e840b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 201076125696
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265341251584
+    m_Localized: Damages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328692019200
+    m_Localized: Attack speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 395675054080
+    m_Localized: Move speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 466185498624
+    m_Localized: Health regen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 605461557248
+    m_Localized: Invincibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729931722752
+    m_Localized: Crit rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 799775272960
+    m_Localized: Crit damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 884902866944
+    m_Localized: Attraction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 966763098112
+    m_Localized: Increase your max health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1069196390400
+    m_Localized: Increase your damages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1186586570752
+    m_Localized: Increase your Attack speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1343600340992
+    m_Localized: Your health slowly regenerate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1476387811328
+    m_Localized: The player move faster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1622223761408
+    m_Localized: You have more chance to do critical hit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1797264650240
+    m_Localized: Your critical hit deals more damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2009316077568
+    m_Localized: Your soul attraction range is increased
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2690647207936
+    m_Localized: Increases the invincibility time after being hit by an enemy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 936440079986688
+    m_Localized: 'Cost:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 936542219677696
+    m_Localized: 'Next:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 936626512605184
+    m_Localized: 'Current:'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

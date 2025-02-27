@@ -53,7 +53,7 @@ public class AllyHealer : MonoBehaviour
         }
         if (PlayerH.currentHealth <= 0 && canRevive)
         {
-                    PlayerH.currentHealth = PlayerH.maxHealth;
+                    PlayerH.currentHealth = PlayerHealth.maxHealth/3;
                     countdown = 600f;
                     canRevive = false;
                     reviveSFX.Play();
@@ -69,8 +69,8 @@ public class AllyHealer : MonoBehaviour
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            int missingHealth = playerHealth.maxHealth - playerHealth.currentHealth;
-            int healingAmount = missingHealth / 2;
+            int missingHealth = PlayerHealth.maxHealth - playerHealth.currentHealth;
+            int healingAmount = missingHealth / 4 + missingHealth / 6;
             playerHealth.Heal(healingAmount);
             hInt.hName(healingAmount);
         }

@@ -183,8 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 1911805385073514072, guid: 185fafe34c38bdd49989fdc4d9f38ea0, type: 3}
-  soulAmount: 1
+  power: {fileID: 4782856252009577361, guid: 6e162c3ffeee3924494d8dffc6f3e245, type: 3}
 --- !u!114 &5878948485547213402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +197,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  magnetPrefab: {fileID: 0}
+  healthPrefab: {fileID: 0}
   soulAmount: 35
+  magnetDropChance: 0.5
+  healthDropChance: 1.5
+  upgradeDropChance: 0.5
 --- !u!114 &5355815909897933126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +220,8 @@ MonoBehaviour:
   deathSFX: {fileID: 8606262350219199655}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
-  _animation: {fileID: 4011301634167477773, guid: 1f49fdad4b6950746b5457109b1011d0, type: 3}
   scorePoint: 0
+  hasBeenHit: 0
 --- !u!82 &8606262350219199655
 AudioSource:
   m_ObjectHideFlags: 0

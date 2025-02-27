@@ -11,14 +11,14 @@ public class EnemmiHealth : MonoBehaviour
     public float explosionDelay = 0.1f; // Délai avant la destruction de l'objet après l'explosion
     public int scorePoint;
     private float lerpSpeed = 0.008f;
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     private Color originalColor;
     private int verificationScore;
+    public bool hasBeenHit;
     void Start()
     {
         verificationScore = 0;
         currentHealth = maxHealth;
-        sprite = GetComponent<SpriteRenderer>();
         originalColor = sprite.color; // Sauvegarde de la couleur originale du sprite
     }
 
@@ -60,7 +60,7 @@ public class EnemmiHealth : MonoBehaviour
             Score.ScoreCount += scorePoint;
             verificationScore++;
         }
-
+        playerPassif.passifVampire(1);
         deathSFX.Play();
         CameraShake.Instance.ShakeCamera(3f, 0.1f);
 
@@ -71,7 +71,6 @@ public class EnemmiHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); // Attend un court délai
 
-        // Restaure la couleur originale du sprite
         sprite.color = originalColor;
     }
 }

@@ -324,12 +324,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3190950157292100191}
   - component: {fileID: 8447309057143052487}
-  - component: {fileID: 184954638462298348}
   - component: {fileID: 2807021187412462428}
   - component: {fileID: 6527463012064180976}
   - component: {fileID: 303759216633593172}
   - component: {fileID: 569454396590649463}
   - component: {fileID: 990942568040979826}
+  - component: {fileID: 6934482282147861439}
   m_Layer: 6
   m_Name: BigGolem (1)
   m_TagString: Enemy
@@ -411,26 +411,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &184954638462298348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5934414819551043130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  magnetPrefab: {fileID: 1911805385073514072, guid: 185fafe34c38bdd49989fdc4d9f38ea0, type: 3}
-  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
-  upgradePrefab: {fileID: 0}
-  soulAmount: 4
-  magnetDropChance: 0.5
-  healthDropChance: 1.5
-  upgradeDropChance: 0.5
 --- !u!114 &2807021187412462428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,12 +423,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 250
+  maxHealth: 200
   currentHealth: 0
   deathSFX: {fileID: 6527463012064180976}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 10
+  sprite: {fileID: 8447309057143052487}
+  hasBeenHit: 0
 --- !u!82 &6527463012064180976
 AudioSource:
   m_ObjectHideFlags: 0
@@ -460,7 +442,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5305107621172599151, guid: bc626ea4466e98c4185214231848ebec, type: 2}
   m_audioClip: {fileID: 8300000, guid: 19fbc59c32d25e54dabab940a0c9544c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -630,9 +612,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  damage: 40
+  damage: 16
   attackCooldown: 1
   attackRange: 2
+  detectionRadius: 8
+--- !u!114 &6934482282147861439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934414819551043130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
+  soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
 --- !u!1 &8215816902124581309
 GameObject:
   m_ObjectHideFlags: 0

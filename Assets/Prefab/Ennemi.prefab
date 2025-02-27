@@ -262,7 +262,8 @@ MonoBehaviour:
   moveSpeed: 4
   attackRange: 2
   attackCooldown: 2
-  damage: 10
+  damage: 15
+  detectionRadius: 7
 --- !u!114 &7855090738710770030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,12 +276,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 80
   currentHealth: 0
   deathSFX: {fileID: 5524155434827750551}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 10
+  sprite: {fileID: 3172760782725889280}
+  hasBeenHit: 0
 --- !u!114 &-4597092190061367941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 3
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  soulAmount: 2
+  magnetDropChance: 0.5
+  healthDropChance: 1.5
+  upgradeDropChance: 0.5
 --- !u!82 &5524155434827750551
 AudioSource:
   m_ObjectHideFlags: 0

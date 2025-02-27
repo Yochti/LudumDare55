@@ -260,11 +260,11 @@ GameObject:
   - component: {fileID: 3599795620378675471}
   - component: {fileID: 6210494594116306408}
   - component: {fileID: 6412461254931430504}
-  - component: {fileID: 3611091345322596828}
   - component: {fileID: 875057946007109248}
   - component: {fileID: 264693385634306352}
   - component: {fileID: 8513930970623859160}
   - component: {fileID: -2132600143221422538}
+  - component: {fileID: 4738862797146989473}
   m_Layer: 6
   m_Name: Boss4
   m_TagString: Boss
@@ -404,20 +404,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3611091345322596828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972092279587177863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 1911805385073514072, guid: 185fafe34c38bdd49989fdc4d9f38ea0, type: 3}
-  soulAmount: 1
 --- !u!114 &875057946007109248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 50
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  soulAmount: 40
+  magnetDropChance: 0.5
+  healthDropChance: 1.5
+  upgradeDropChance: 0.5
 --- !u!114 &264693385634306352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,12 +549,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca8c4ef9807f8b4f9f31e7b46a2e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3000
+  maxHealth: 2500
   currentHealth: 0
   deathSFX: {fileID: 8513930970623859160}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 200
+  hasBeenHit: 0
+--- !u!114 &4738862797146989473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972092279587177863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536181062881cb948ada5bc5265bdc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3742216373533507581
 GameObject:
   m_ObjectHideFlags: 0

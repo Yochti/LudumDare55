@@ -4,6 +4,7 @@ using UnityEngine;
 public class SoulCollector : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer; 
+    public GameObject spriteRenderer1; 
     public float attractSpeed = 20f;
     public float destructionDelay = 5f;
 
@@ -18,7 +19,8 @@ public class SoulCollector : MonoBehaviour
         {
             AttractSoulsToPlayer(other.transform);
             Invoke("DestroyCollector", destructionDelay);
-            spriteRenderer.enabled = false; 
+            spriteRenderer.enabled = false;
+            spriteRenderer1.SetActive(false);
         }
     }
 
@@ -39,13 +41,13 @@ public class SoulCollector : MonoBehaviour
             Vector2 direction = (playerTransform.position - soul.transform.position).normalized;
             soul.transform.position = Vector2.MoveTowards(soul.transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
 
-            yield return null; // Attendre la prochaine frame
+            yield return null;
         }
 
         if (soul != null)
         {
-            PlayerSoulsCollect.soulValue++; // Incrémenter le compteur de souls du joueur
-            Destroy(soul); // Détruire l'âme après qu'elle ait atteint le joueur
+            PlayerSoulsCollect.soulValue++; 
+            Destroy(soul);
         }
     }
     private void DestroyCollector()

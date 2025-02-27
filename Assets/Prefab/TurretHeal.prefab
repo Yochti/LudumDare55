@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healPrefab: {fileID: 6601389381162515306, guid: 4bdcbe17482805546b69daa3133ef24a, type: 3}
-  fireRate: 3
+  fireRate: 1.5
   bulletSpeed: 20
 --- !u!1 &3347304057855932942
 GameObject:

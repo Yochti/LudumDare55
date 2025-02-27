@@ -17,7 +17,6 @@ public class BossBehavioure : MonoBehaviour
     {
         bossHp = GetComponent<Boss1Health>();
         waveManager = FindObjectOfType<EnemyWaveManager>();
-        AdjustBossHealth(); 
 
     }
     private void Update()
@@ -34,8 +33,9 @@ public class BossBehavioure : MonoBehaviour
 
     private void RotateAroundPlayer()
     {
+        
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-
+        
         float angle = Time.time * rotationSpeed;
         Vector3 offset = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0f) * rotationRadius;
         Vector3 targetPosition = playerPosition + offset;
@@ -57,12 +57,5 @@ public class BossBehavioure : MonoBehaviour
             rotationTimer = 0.1f;
         }
     }
-    void AdjustBossHealth()
-    {
-        int currentWave = waveManager.currentWave;
-        int baseHealth = bossHp.maxHealth;
-        int modifiedHealth = baseHealth + (currentWave * 200);
-        bossHp.maxHealth = modifiedHealth;
-        bossHp.currentHealth = modifiedHealth;
-    }
+    
 }

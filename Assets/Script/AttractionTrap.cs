@@ -1,40 +1,44 @@
 using UnityEngine;
 using System.Collections;
+
 public class FreezeTrap : MonoBehaviour
 {
-    public float attractionRadius = 5f; // Rayon d'attraction
-    public float attractionForce = 10000f; // Force d'attraction
-    public float duration = 4f; // Durée de l'attraction en secondes
-    public LayerMask enemyLayer; // Masque de couche pour les ennemis
+    public float attractionRadius = 5f;  // Rayon de l'attraction
+    public float attractionSpeed = 3f;   // Vitesse d'attraction
+    public float attractionDuration = 3f; // Durée de l'attraction
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (enemyLayer == (enemyLayer | (1 << other.gameObject.layer)))
+        if (other.CompareTag("Enemy"))
         {
-            AttractEnemies();
-            Destroy(gameObject);
-
+            StartCoroutine(AttractEnemies());
+            Destroy(gameObject, 1.5f);
         }
     }
 
-    private void AttractEnemies()
+    private IEnumerator AttractEnemies()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attractionRadius, enemyLayer);
-        foreach (Collider2D collider in colliders)
+        float elapsedTime = 0f;
+
+        while (elapsedTime < attractionDuration)
         {
-            Rigidbody2D rb = collider.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attractionRadius);
+
+            foreach (Collider2D collider in colliders)
             {
-                rb.velocity = Vector2.zero; 
-                StartCoroutine(DisableRigidbody(rb)); 
+                if (collider.CompareTag("Enemy"))
+                {
+                    Transform enemyTransform = collider.transform;
+                    enemyTransform.position = Vector2.MoveTowards(
+                        enemyTransform.position,
+                        transform.position,
+                        attractionSpeed * Time.deltaTime
+                    );
+                }
             }
-        }
-    }
 
-    private IEnumerator DisableRigidbody(Rigidbody2D rb)
-    {
-        rb.constraints = RigidbodyConstraints2D.FreezeAll; 
-        yield return new WaitForSeconds(duration);
-        rb.constraints = RigidbodyConstraints2D.None;
+            elapsedTime += Time.deltaTime;
+            yield return null; // Attendre la prochaine frame
+        }
     }
 }

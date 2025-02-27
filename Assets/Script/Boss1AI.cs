@@ -18,7 +18,6 @@ public class ElectricSentinel : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<Boss1Health>(); 
         waveManager = FindObjectOfType<EnemyWaveManager>(); // Récupération de l'instance d'EnemyWaveManager dans la scène
-        AdjustHealth(); // Appel de la fonction pour ajuster les points de vie de l'Electric Sentinel
     }
 
     void Update()
@@ -65,11 +64,5 @@ public class ElectricSentinel : MonoBehaviour
         }
     }
 
-    void AdjustHealth()
-    {
-        int currentWave = waveManager.currentWave; 
-        int modifiedHealth = enemyHealth.maxHealth + (currentWave * 250);
-        enemyHealth.currentHealth = modifiedHealth;
-        enemyHealth.maxHealth= modifiedHealth;
-    }
+    
 }

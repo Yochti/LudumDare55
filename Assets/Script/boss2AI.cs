@@ -23,7 +23,6 @@ public class AbyssalAssassin : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bossHp = GetComponent<Boss1Health>(); 
         waveManager = FindObjectOfType<EnemyWaveManager>(); // Récupération de l'instance d'EnemyWaveManager dans la scène
-        AdjustBossHealth(); // Appel de la fonction pour ajuster les points de vie du boss
     }
 
     void Update()
@@ -81,12 +80,5 @@ public class AbyssalAssassin : MonoBehaviour
         }
     }
 
-    void AdjustBossHealth()
-    {
-        int currentWave = waveManager.currentWave; 
-        int baseHealth = bossHp.maxHealth; 
-        int modifiedHealth = baseHealth + (currentWave * 300);
-        bossHp.maxHealth = modifiedHealth;
-        bossHp.currentHealth = modifiedHealth; 
-    }
+    
 }

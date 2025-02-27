@@ -492,7 +492,7 @@ SpriteRenderer:
   m_Size: {x: 2.67, y: 0.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2449707334348396468
@@ -536,6 +536,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalPrefab: {fileID: 0}
   portalPrefab1: {fileID: 0}
+  portalPrefab2: {fileID: 0}
   portalHeight: 2
   portalDistance: 3
   portalChangeInterval: 6
+  alliesState: {fileID: 0}
+  portalState: 1
+  p3: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5422791480499308693}
   - component: {fileID: 5107816721255954734}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LinerendererSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

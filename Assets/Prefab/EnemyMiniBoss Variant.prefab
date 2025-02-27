@@ -100,6 +100,14 @@ PrefabInstance:
       propertyPath: soulAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2591895611422208679, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
+      propertyPath: healthPrefab
+      value: 
+      objectReference: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+    - target: {fileID: 2591895611422208679, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
+      propertyPath: magnetPrefab
+      value: 
+      objectReference: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
     - target: {fileID: 3795349192787081394, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
       propertyPath: m_Color.b
       value: 0.007843138
@@ -131,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 5857285634338656741, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
       propertyPath: m_Name
       value: EnemyMiniBoss Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857285634338656741, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6304308227842447798, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
       propertyPath: m_SortingOrder
@@ -190,6 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1536238791482737013, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
+    - {fileID: 2591895611422208679, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5359136687449673231, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
     - {fileID: 6838809471625176798, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}

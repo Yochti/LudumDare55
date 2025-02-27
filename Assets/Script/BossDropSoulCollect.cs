@@ -2,23 +2,18 @@ using UnityEngine;
 
 public class BossDropSoulCollect : MonoBehaviour
 {
-    public GameObject soulPrefab;
-    public int soulAmount = 1;
-
     private void OnDestroy()
     {
-        GenerateSouls();
+        PowerUp();
     }
 
-    void GenerateSouls()
+    void PowerUp()
     {
-        for (int i = 0; i < soulAmount; i++)
+        if (UIManager.instance != null)
         {
-            Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
-            Vector3 soulPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
-
-            GameObject soul = Instantiate(soulPrefab, soulPosition, Quaternion.identity);
+            UIManager.instance.ShowPowerPanel();
         }
+        Time.timeScale = 0f;
+        Cursor.visible = true;
     }
 }
-

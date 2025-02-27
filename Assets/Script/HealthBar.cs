@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class HealthBar : MonoBehaviour
 {
-    public TextMeshProUGUI HealthText;
-    public TextMeshProUGUI SoulsText;
-    public TextMeshProUGUI recentSoulsText;
-    public PlayerHealth HealthInt;
 
+    public saveSytem save;
+    public GameObject tutoPanel;
     private void Start()
     {
-        SoulsText.text = PlayerSoulsCollect.soulValue.ToString();
-    }
-    void Update()
-    {
-        if(PlayerSoulsCollect.recentSoulsValue >= 1)
+        save.LoadData();
+        if (!save.firstFight)
         {
-            recentSoulsText.text = "+" + PlayerSoulsCollect.recentSoulsValue.ToString();
-            recentSoulsText.gameObject.SetActive(true);
-            return;
+            tutoPanel.SetActive(true);
+            save.firstFight = true;
+            save.SaveData();
+
         }
-        recentSoulsText.gameObject.SetActive(false);
-        HealthText.text = HealthInt.currentHealth.ToString();
+
 
     }
+
 }

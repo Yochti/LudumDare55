@@ -5,11 +5,21 @@ using UnityEngine.SceneManagement;
 public class PlayMaintittle : MonoBehaviour
 {
     public GameObject optionPanel;
-   public void playButton()
-   {
-        SceneManager.LoadScene(1);
-   }
+    public GameObject gameModePanel;
    
+
+    public void chooseGameMode()
+    {
+        gameModePanel.SetActive(true);
+    }
+    public void backtomainmenuFromGameMode()
+    {
+        gameModePanel.SetActive(false);
+    }
+    public void quitGame()
+    {
+        Application.Quit();
+    }
     public void optionPanelOpen()
     {
         optionPanel.SetActive(true);

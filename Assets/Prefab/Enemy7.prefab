@@ -479,9 +479,9 @@ GameObject:
   - component: {fileID: 1793613709416867186}
   - component: {fileID: 7688506489384091562}
   - component: {fileID: 1209847357615550748}
-  - component: {fileID: 945823312288917547}
-  - component: {fileID: 6063731228475551397}
   - component: {fileID: 8047042808219430598}
+  - component: {fileID: -6808455034283789401}
+  - component: {fileID: 4593384292433521484}
   m_Layer: 6
   m_Name: Enemy7
   m_TagString: Enemy
@@ -503,8 +503,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4299353388382470582}
-  - {fileID: 7657688846209106265}
   - {fileID: 1447133066986088083}
+  - {fileID: 7657688846209106265}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1018183890787672925
@@ -574,7 +574,8 @@ MonoBehaviour:
   moveSpeed: 4
   attackRange: 3
   attackCooldown: 2
-  damage: 15
+  damage: 12
+  detectionRadius: 8
 --- !u!82 &7688506489384091562
 AudioSource:
   m_ObjectHideFlags: 0
@@ -698,38 +699,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &945823312288917547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5631428006026131284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 4
---- !u!114 &6063731228475551397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5631428006026131284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 155
-  currentHealth: 0
-  deathSFX: {fileID: 7688506489384091562}
-  explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
-  explosionDelay: 0.1
-  scorePoint: 10
 --- !u!61 &8047042808219430598
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -775,6 +744,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.61115265, y: 0.60337365}
   m_EdgeRadius: 0
+--- !u!114 &-6808455034283789401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631428006026131284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
+  soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
+--- !u!114 &4593384292433521484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631428006026131284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  deathSFX: {fileID: 7688506489384091562}
+  explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
+  explosionDelay: 0.1
+  scorePoint: 10
+  sprite: {fileID: 435770709936399989}
+  hasBeenHit: 0
 --- !u!1 &5943856872262351553
 GameObject:
   m_ObjectHideFlags: 0

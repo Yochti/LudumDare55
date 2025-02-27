@@ -348,12 +348,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1237604874002664147}
   - component: {fileID: 4470597320447014228}
-  - component: {fileID: 1861863135490563253}
   - component: {fileID: -3890627278835924427}
   - component: {fileID: -7789347552112792144}
   - component: {fileID: 8991770329096116406}
   - component: {fileID: -1248003092977335245}
   - component: {fileID: -1978529392835299221}
+  - component: {fileID: -1650012272472204611}
   m_Layer: 6
   m_Name: HealerEnemy
   m_TagString: Enemy
@@ -431,20 +431,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1861863135490563253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7099781372076000237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 3
 --- !u!114 &-3890627278835924427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +449,8 @@ MonoBehaviour:
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
   scorePoint: 10
+  sprite: {fileID: 4470597320447014228}
+  hasBeenHit: 0
 --- !u!82 &-7789347552112792144
 AudioSource:
   m_ObjectHideFlags: 0
@@ -643,16 +631,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3588d31ad9dcdfe4a84b5b3c9a933537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 200
+  detectionRadius: 1000
   healingRange: 5
   healingRate: 5
-  moveSpeed: 4
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
+  healAmount: 3
+  moveSpeed: 2.5
+--- !u!114 &-1650012272472204611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099781372076000237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
+  soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
 --- !u!1 &9008413337151023414
 GameObject:
   m_ObjectHideFlags: 0

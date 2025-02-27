@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; // Nécessaire pour utiliser UI Image
 
 public class PortalManager : MonoBehaviour
 {
@@ -7,44 +8,48 @@ public class PortalManager : MonoBehaviour
     public float longRange = 20f; // Portée du deuxième portail
     public float portalSpeed = 10f;
     public float portalLifetime = 10f;
-    public float portalCountdown = 0f;
-    public LayerMask portalLayerMask; // Masque de collision pour les portails
-
+    public float baseCooldown = 20f;
+    private float initialCooldown = 20f;
+    public Image cooldownImage;
+    public Sprite cooldownSprite;
+    public GameObject Player;
     private GameObject firstPortal; // Premier portail tiré
     private GameObject secondPortal; // Deuxième portail tiré
     private bool isTeleporting = false; // Indique si le joueur est en train de se téléporter
     private bool isFirstPortal = true;
     private Vector3 firstPortalDestination; // Destination du premier portail
     private Vector3 secondPortalDestination; // Destination du deuxième portail
+    private float portalCountdown; // Cooldown actuel
+
+    private void Start()
+    {
+        cooldownImage.sprite = cooldownSprite;
+        portalCountdown = 0; // Initialiser le cooldown
+        cooldownImage.fillAmount = 1 - (portalCountdown / initialCooldown);
+    }
 
     void Update()
     {
-        portalCountdown -= Time.deltaTime;
+        initialCooldown = 20 * (1 - PlayerStats.superCooldownR);
+        if (portalCountdown > 0)
+        {
+            portalCountdown -= Time.deltaTime;
+            cooldownImage.fillAmount = 1 - (portalCountdown / baseCooldown); // Met à jour le remplissage de l'image
+        }
+
+        // Vérifie les entrées de l'utilisateur pour activer les portails
         if (Input.GetMouseButtonDown(1) && !isTeleporting)
         {
             if (portalCountdown <= 0)
             {
                 if (isFirstPortal)
                 {
-                    Vector3 mousePosition1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    firstPortal = Instantiate(portalPrefab, transform.position, Quaternion.identity);
-                    firstPortalDestination = transform.position + (mousePosition1 - transform.position).normalized * shortRange;
-                    Vector3 firstPortalVelocity = (firstPortalDestination - firstPortal.transform.position).normalized * portalSpeed;
-                    firstPortal.GetComponent<Rigidbody2D>().velocity = firstPortalVelocity;
-                    isFirstPortal = false;
+                    CreateFirstPortal();
                 }
                 else
                 {
-                    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                    secondPortal = Instantiate(portalPrefab, transform.position, Quaternion.identity);
-                    secondPortalDestination = transform.position + (mousePosition - transform.position).normalized * longRange;
-                    Vector3 secondPortalVelocity = (secondPortalDestination - secondPortal.transform.position).normalized * portalSpeed;
-                    secondPortal.GetComponent<Rigidbody2D>().velocity = secondPortalVelocity;
-
-                    LateUpdate();
-                    isFirstPortal = true;
-                    portalCountdown = 10f;
+                    CreateSecondPortal();
+                    portalCountdown = initialCooldown; // Réinitialiser le cooldown après avoir créé le deuxième portail
                 }
             }
         }
@@ -52,13 +57,44 @@ public class PortalManager : MonoBehaviour
         StopFirstPortal();
         StopSecondPortal();
 
+        HandleTeleportation();
+    }
+
+    private void CreateFirstPortal()
+    {
+        Vector3 mousePosition1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        firstPortal = Instantiate(portalPrefab, transform.position, Quaternion.identity);
+        firstPortalDestination = transform.position + (mousePosition1 - transform.position).normalized * shortRange;
+        Vector3 firstPortalVelocity = (firstPortalDestination - firstPortal.transform.position).normalized * portalSpeed;
+        firstPortal.GetComponent<Rigidbody2D>().velocity = firstPortalVelocity;
+        isFirstPortal = false;
+    }
+
+    private void CreateSecondPortal()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        secondPortal = Instantiate(portalPrefab, transform.position, Quaternion.identity);
+        secondPortalDestination = transform.position + (mousePosition - transform.position).normalized * longRange;
+        Vector3 secondPortalVelocity = (secondPortalDestination - secondPortal.transform.position).normalized * portalSpeed;
+        secondPortal.GetComponent<Rigidbody2D>().velocity = secondPortalVelocity;
+
+        LateUpdate();
+        isFirstPortal = true;
+    }
+
+    private void HandleTeleportation()
+    {
+
         if (firstPortal != null && secondPortal != null && !isTeleporting)
         {
-            if (Vector2.Distance(transform.position, firstPortal.transform.position) < 1f)
+            float distanceToFirst = Vector2.Distance(Player.transform.position, firstPortal.transform.position);
+            float distanceToSecond = Vector2.Distance(Player.transform.position, secondPortal.transform.position);
+
+            if (distanceToFirst < 1.5f)
             {
                 Teleport(secondPortal.transform.position);
             }
-            else if (Vector2.Distance(transform.position, secondPortal.transform.position) < 1f)
+            else if (distanceToSecond < 1.5f)
             {
                 Teleport(firstPortal.transform.position);
             }
@@ -84,7 +120,7 @@ public class PortalManager : MonoBehaviour
     void Teleport(Vector3 destination)
     {
         isTeleporting = true;
-        transform.position = destination;
+        Player.transform.position = destination;
         Invoke("ResetTeleport", 1.5f);
     }
 
@@ -95,9 +131,12 @@ public class PortalManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (firstPortal != null && secondPortal != null)
+        if (firstPortal != null)
         {
             Destroy(firstPortal, portalLifetime);
+        }
+        if (secondPortal != null)
+        {
             Destroy(secondPortal, portalLifetime);
         }
     }

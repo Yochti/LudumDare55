@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 3795349192787081394}
   - component: {fileID: 6108115607623429263}
   - component: {fileID: -3636169979996181121}
-  - component: {fileID: 2591895611422208679}
   - component: {fileID: 7058486935074670579}
   - component: {fileID: 5120334229752228667}
   - component: {fileID: -8736133378208771900}
+  - component: {fileID: 4786451566757658864}
   m_Layer: 6
   m_Name: Enemy4
   m_TagString: Enemy
@@ -251,20 +251,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2591895611422208679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5857285634338656741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb473dbc940e6f44a81113a20811ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
-  soulAmount: 0
 --- !u!82 &7058486935074670579
 AudioSource:
   m_ObjectHideFlags: 0
@@ -380,6 +366,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackDamage: 10
   enemyHp: {fileID: -8736133378208771900}
+  detectionRadius: 8
 --- !u!114 &-8736133378208771900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,8 +384,35 @@ MonoBehaviour:
   deathSFX: {fileID: 7058486935074670579}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
   explosionDelay: 0.1
-  _animation: {fileID: 4011301634167477773, guid: 1f49fdad4b6950746b5457109b1011d0, type: 3}
   scorePoint: 20
+  sprite: {fileID: 3795349192787081394}
+  hasBeenHit: 0
+--- !u!114 &4786451566757658864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857285634338656741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16468c55cfaf1c643ac633701d6400d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 9039336384499207327, guid: e390cfbb28ffef540b1a39a5ecdfe7be, type: 3}
+  soul2Prefab: {fileID: 1042144416591173498, guid: ad48958d7c137214d88855d8e9184931, type: 3}
+  soul3Prefab: {fileID: 7668039501411941191, guid: ccee2f32d2f74e841ac9484500c68a52, type: 3}
+  magnetPrefab: {fileID: 6124843443170164461, guid: edd8f36d68941a6429ddc4fb47c16b34, type: 3}
+  healthPrefab: {fileID: 7711192003903593271, guid: b7bd39262ba53f946b7df5135b720c3a, type: 3}
+  speedPrefab: {fileID: 3733327223905706526, guid: 8bf53afaad66b22488f05103221ae285, type: 3}
+  soulAmount: 3
+  soul2Drop: 1
+  soul3Drop: 0.2
+  magnetDropChance: 0.3
+  healthDropChance: 1
+  speedBoostDropChance: 1
+  upgradeDropChance: 0
+  playerLuck: 0
 --- !u!1 &6435611024713010821
 GameObject:
   m_ObjectHideFlags: 0

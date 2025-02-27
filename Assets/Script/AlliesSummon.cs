@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class AlliesSummon : MonoBehaviour
 {
     // script
@@ -15,6 +16,7 @@ public class AlliesSummon : MonoBehaviour
     public HealBullet bulletH;
     public portal1 p1;
     public PortalDivision p2;
+
     // GameObject
     public GameObject player;
     public GameObject friendHolder;
@@ -25,47 +27,16 @@ public class AlliesSummon : MonoBehaviour
     public GameObject JunkTrap;
     public GameObject heiMERDEinger;
     public GameObject Dimitri;
-
-    private int price = 100;
-    public bool lvlToRevive;
-    public Image BigHealthBar;
-    public Slider slider;
+    public GameObject hera;
 
     // Status ally
-    public string bababoyStatus; 
-    public string nameStatus; 
-    public string junktrapStatus; 
-    public string hStatus; 
+    public string bababoyStatus;
+    public string nameStatus;
+    public string junktrapStatus;
+    public string hStatus;
     public string dimitriStatus;
-
-    //Text
-    public TextMeshProUGUI bababoyTxt1;
-    public TextMeshProUGUI bababoyTxt2;
-    public TextMeshProUGUI bababoyTxt3;    
-    public TextMeshProUGUI NameTxt1;
-    public TextMeshProUGUI NameTxt2;
-    public TextMeshProUGUI NameTxt3;    
-    public TextMeshProUGUI JunkTxt1;
-    public TextMeshProUGUI JunkTxt2;
-    public TextMeshProUGUI JunkTxt3;    
-    public TextMeshProUGUI HTxt1;
-    public TextMeshProUGUI HTxt2;
-    public TextMeshProUGUI HTxt3;
-    public TextMeshProUGUI DTxt1;
-    public TextMeshProUGUI DTxt2;
-    public TextMeshProUGUI DTxt3;
-
-    public TextMeshProUGUI BababoyLvl;
-    public TextMeshProUGUI NameLvl;
-    public TextMeshProUGUI JunkLvl;
-    public TextMeshProUGUI HLvl;
-    public TextMeshProUGUI DLvl;
-    
-    public TextMeshProUGUI BababoyPrice;
-    public TextMeshProUGUI NamePrice;
-    public TextMeshProUGUI JunkPrice;
-    public TextMeshProUGUI HPrice;
-    public TextMeshProUGUI DPrice;
+    public int heraStatus;
+    public bool lvlToRevive;
 
     private void Start()
     {
@@ -74,200 +45,235 @@ public class AlliesSummon : MonoBehaviour
         junktrapStatus = "0";
         hStatus = "0";
         dimitriStatus = "0";
+        heraStatus = 0;
     }
 
     public void Bababoy()
     {
-        if(PlayerSoulsCollect.soulValue >= 100 && bababoyStatus == "0")
-        {
-            bababoyTxt1.gameObject.SetActive(false);
-            bababoyTxt2.gameObject.SetActive(true);
-            BababoyLvl.text = 1.ToString();
-            BababoyPrice.text = 200.ToString();
-            bababoy.SetActive(true);
-            PlayerSoulsCollect.soulValue -= price;
-            friendHolder.transform.position = player.transform.position;
-            bababoyStatus = "1";
-        }
-        if(PlayerSoulsCollect.soulValue >= 200 && bababoyStatus =="1")
-        {
-            bababoyTxt2.gameObject.SetActive(false);
-            BababoyLvl.text = 2.ToString();
-            BababoyPrice.text = 500.ToString();
+        Time.timeScale = 1f;
 
-            bababoyTxt3.gameObject.SetActive(true);
-            PlayerSoulsCollect.soulValue -= 200;
-            ally1.shootingCooldown = 0.2f;
-            ally1.bulletSpeed = 30f;
-            bulletAlly.bulletDamage += 5;
-            bababoyStatus = "2";
+        if (bababoyStatus == "0")
+        {
+            ActivateBababoy(1);
         }
-        if(PlayerSoulsCollect.soulValue >= 500 && bababoyStatus == "2") {
-            PlayerSoulsCollect.soulValue -= 500;
-            BababoyLvl.text = 3.ToString();
-            bababoyTxt2.gameObject.SetActive(false);
-            bababoyTxt3.gameObject.SetActive(true);
-            bababoy2.SetActive(true);
-            bababoy.SetActive(false);
+        else if (bababoyStatus == "1")
+        {
+            UpgradeBababoy(2);
         }
-
+        else if (bababoyStatus == "2")
+        {
+            FinalUpgradeBababoy(3);
+        }
     }
+
+    private void ActivateBababoy(int level)
+    {
+        bababoy.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        bababoyStatus = level.ToString();
+    }
+
+    private void UpgradeBababoy(int level)
+    {
+        bababoyStatus = level.ToString();
+        ally1.shootingCooldown = 0.2f;
+        ally1.bulletSpeed = 30f;
+        bulletAlly.bulletDamage += 5;
+    }
+
+    private void FinalUpgradeBababoy(int level)
+    {
+        bababoy2.SetActive(true);
+        bababoy.SetActive(false);
+        bababoyStatus = level.ToString();
+    }
+
     public void Name()
     {
-        if (PlayerSoulsCollect.soulValue >= 100 && nameStatus == "0")
+        Time.timeScale = 1f;
+
+        if (nameStatus == "0")
         {
-            NameLvl.text = 1.ToString();
-            NameTxt1.gameObject.SetActive(false);
-            NameTxt2.gameObject.SetActive(true);
-            namee.SetActive(true);
-            PlayerSoulsCollect.soulValue -= price;
-            playerHealth.maxHealth += 100;
-            playerHealth.currentHealth += 100;
-            nameStatus = "1";
-            NamePrice.text = 200.ToString();
-            slider.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 72);
-            friendHolder.transform.position = player.transform.position;
-
-            BigHealthBar.rectTransform.sizeDelta = new Vector2(528, 100);
+            ActivateName(1);
         }
-        if (nameStatus == "1" && PlayerSoulsCollect.soulValue >= 200)
+        else if (nameStatus == "1")
         {
-            NameLvl.text = 2.ToString();
-            NamePrice.text = 500.ToString();
-
-            NameTxt2.gameObject.SetActive(false);
-            NameTxt3.gameObject.SetActive(true);
-            nameStatus = "2";
-            PlayerSoulsCollect.soulValue -= 200;
-            playerHealth.maxHealth += 200;
-            playerHealth.currentHealth += 200;
-            ally2.healingInterval = 15;
-            slider.GetComponent<RectTransform>().sizeDelta = new Vector2(700, 72);
-            BigHealthBar.rectTransform.sizeDelta = new Vector2(760, 100);
-
-
+            UpgradeName(2);
         }
-        if (nameStatus == "2" && PlayerSoulsCollect.soulValue >= 500)
+        else if (nameStatus == "2")
         {
-            NameLvl.text = 3.ToString();
-
-            PlayerSoulsCollect.soulValue -= 500;
-            lvlToRevive = true;
-            ally2.canRevive = true;
+            FinalUpgradeName(3);
         }
-
     }
-   
-    public void jUNKTRAP()
+
+    private void ActivateName(int level)
     {
-        if (PlayerSoulsCollect.soulValue >= 100 && junktrapStatus == "0")
+        namee.SetActive(true);
+        PlayerHealth.maxHealth += 25;
+        playerHealth.currentHealth += 25;
+        nameStatus = level.ToString();
+    }
+
+    private void UpgradeName(int level)
+    {
+        nameStatus = level.ToString();
+        PlayerHealth.maxHealth += 25;
+        playerHealth.currentHealth += 25;
+        ally2.healingInterval = 19;
+    }
+
+    private void FinalUpgradeName(int level)
+    {
+        nameStatus = level.ToString();
+        lvlToRevive = true;
+        ally2.canRevive = true;
+    }
+
+    public void JunkTrape()
+    {
+        Time.timeScale = 1f;
+
+        if (junktrapStatus == "0")
         {
-            JunkPrice.text = 200.ToString();
-            JunkLvl.text = 1.ToString();
-            JunkTxt1.gameObject.SetActive(false);
-            JunkTxt2.gameObject.SetActive(true);
-            JunkTrap.SetActive(true);
-            PlayerSoulsCollect.soulValue -= price;
-            junktrapStatus = "1";
-            friendHolder.transform.position = player.transform.position;
-
+            ActivateJunkTrap(1);
         }
-        if (junktrapStatus == "1" && PlayerSoulsCollect.soulValue >= 200)
+        else if (junktrapStatus == "1")
         {
-            JunkLvl.text = 2.ToString();
-            JunkPrice.text = 500.ToString();
-
-            JunkTxt2.gameObject.SetActive(false);
-            JunkTxt3.gameObject.SetActive(true);
-            ally3.trapPlacementInterval -= 6;
-            junktrapStatus = "2";
-            PlayerSoulsCollect.soulValue -= 200;
-
+            UpgradeJunkTrap(2);
         }
-        if (junktrapStatus == "2" && PlayerSoulsCollect.soulValue >= 500)
+        else if (junktrapStatus == "2")
         {
-            JunkLvl.text = 3.ToString();
-
-            junktrapStatus = "3";
-            PlayerSoulsCollect.soulValue -= 500;
-
+            FinalUpgradeJunkTrap(3);
         }
+    }
 
+    private void ActivateJunkTrap(int level)
+    {
+        JunkTrap.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        junktrapStatus = level.ToString();
+    }
+
+    private void UpgradeJunkTrap(int level)
+    {
+        junktrapStatus = level.ToString();
+        ally3.trapPlacementInterval -= 6;
+    }
+
+    private void FinalUpgradeJunkTrap(int level)
+    {
+        junktrapStatus = level.ToString();
     }
 
     public void HeiMERDEinger()
     {
-        if (PlayerSoulsCollect.soulValue >= 100 && hStatus == "0")
+        Time.timeScale = 1f;
+
+        if (hStatus == "0")
         {
-            HPrice.text = 200.ToString();
-            HLvl.text = 1.ToString();
-            HTxt1.gameObject.SetActive(false);
-            HTxt2.gameObject.SetActive(true);
-            heiMERDEinger.SetActive(true);
-            PlayerSoulsCollect.soulValue -= price;
-            friendHolder.transform.position = player.transform.position;
-
-            hStatus = "1";
+            ActivateHeiMERDEinger(1);
         }
-        if (hStatus == "1" && PlayerSoulsCollect.soulValue >= 200)
+        else if (hStatus == "1")
         {
-            HLvl.text = 2.ToString();
-            HPrice.text = 500.ToString();
-
-            HTxt2.gameObject.SetActive(false);
-            HTxt3.gameObject.SetActive(true);
-            ally4.maxTurrets = 5;
-            bulletH.healAmount += 1;
-            bulletAlly.bulletDamage += 5;
-            hStatus = "2";
-            PlayerSoulsCollect.soulValue -= 200;
-
+            UpgradeHeiMERDEinger(2);
         }
-        if (hStatus == "2" && PlayerSoulsCollect.soulValue >= 500)
+        else if (hStatus == "2")
         {
-            HLvl.text = 3.ToString();
-
-            PlayerSoulsCollect.soulValue -= 500;
-            hStatus = "3";
-
+            FinalUpgradeHeiMERDEinger(3);
         }
+    }
 
+    private void ActivateHeiMERDEinger(int level)
+    {
+        heiMERDEinger.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        hStatus = level.ToString();
+    }
+
+    private void UpgradeHeiMERDEinger(int level)
+    {
+        hStatus = level.ToString();
+        ally4.maxTurrets = 5;
+        bulletH.healAmount += 1;
+        bulletAlly.bulletDamage += 5;
+    }
+
+    private void FinalUpgradeHeiMERDEinger(int level)
+    {
+        hStatus = level.ToString();
     }
 
     public void DimitriVoid()
     {
-        if (PlayerSoulsCollect.soulValue >= 100 && dimitriStatus == "0")
+        Time.timeScale = 1f;
+
+        if (dimitriStatus == "0")
         {
-            DPrice.text = 200.ToString();
-            DLvl.text = 1.ToString();
-            Dimitri.SetActive(true);
-            DTxt1.gameObject.SetActive(false);
-            DTxt2.gameObject.SetActive(true);
-            PlayerSoulsCollect.soulValue -= price;
-            dimitriStatus = "1";
-            friendHolder.transform.position = player.transform.position;
-
+            ActivateDimitri(1);
         }
-        if (dimitriStatus == "1" && PlayerSoulsCollect.soulValue >= 200)
+        else if (dimitriStatus == "1")
         {
-            DPrice.text = 500.ToString();
-            DLvl.text = 2.ToString();
-            DTxt2.gameObject.SetActive(false);
-            DTxt3.gameObject.SetActive(true);
-            p2.numberOfBullet += 2;
-            dimitriStatus = "2";
-            PlayerSoulsCollect.soulValue -= 200;
-
+            UpgradeDimitri(2);
         }
-        if (dimitriStatus == "2" && PlayerSoulsCollect.soulValue >= 500)
+        else if (dimitriStatus == "2")
         {
-            DLvl.text = 3.ToString();
-
-            dimitriStatus = "3";
-            PlayerSoulsCollect.soulValue -= 500;
-
+            FinalUpgradeDimitri(3);
         }
-
     }
 
+    private void ActivateDimitri(int level)
+    {
+
+        Dimitri.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        dimitriStatus = level.ToString();
+    }
+
+    private void UpgradeDimitri(int level)
+    {
+        dimitriStatus = level.ToString();
+        p2.numberOfBullet += 2;
+    }
+
+    private void FinalUpgradeDimitri(int level)
+    {
+        dimitriStatus = level.ToString();
+    }
+
+    public void HeraVoid()
+    {
+        Time.timeScale = 1f;
+        if (heraStatus == 0)
+        {
+            ActivateHera(1);
+        }
+        else if (heraStatus == 1)
+        {
+            UpgradeHera(2);
+        }
+        else if (heraStatus == 2)
+        {
+            FinalUpgradeHera(3);
+        }
+    }
+
+    private void ActivateHera(int level)
+    {
+        hera.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        heraStatus = level;
+    }
+
+    private void UpgradeHera(int level)
+    {
+        heraStatus = level;
+        PlayerGrowZone.damageMultiplier = 2f;
+        HealZone.healAmount = 2;
+    }
+
+    private void FinalUpgradeHera(int level)
+    {
+        heraStatus = level;
+    }
 }
+

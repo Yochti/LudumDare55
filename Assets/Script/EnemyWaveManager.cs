@@ -4,33 +4,64 @@ using TMPro;
 
 public class EnemyWaveManager : MonoBehaviour
 {
-    public GameObject[] enemyPrefab; // Tableau des préfabriqués d'ennemis
-    public GameObject[] bossPrefabs5; // Tableau des préfabriqués de boss pour la vague 5
-    public GameObject[] bossPrefabs10; // Tableau des préfabriqués de boss pour la vague 10
-    public float spawnInterval = 0.1f; // Intervalle entre chaque génération d'ennemi
+    public GameObject[] enemyPrefab;
+    public GameObject[] bossPrefabs5; 
+    public GameObject[] bossPrefabs10; 
+    public float spawnInterval = 0.05f;
     public float enemiesPerWave = 5f;
     public float multiplicator = 3.5f;
-    public int wavesCount = 50; // Nombre de vagues total
-    public float maxSpawnRange = 150f; // Portée maximale de génération
+    public int wavesCount = 50; 
+    public float maxSpawnRange = 150f;
     public TextMeshProUGUI waveText;
     public GameObject player;
     // Script enemy
-    public EnemyAI e1;
-    public EnemmiHealth eHP;
-    public EnemmiHealth eHP2;
-    public EnemmiHealth eHP3;
-    public EnemmiHealth eHP4;
-    public EnemyController IEnemy;
-    public BulletLifEnemy eBullet;
-    public EnemyAI3 e3;
-    public EnemmiHealth eHP5;    public EnemmiHealth eHP6;    public EnemmiHealth eHP6_2;
-    public Enemy9AI eDamage;
-    public MirageEnemy eDamage2;
+    public EnemmiHealth[] eHp;
+    public Boss1Health[] bHp;
+    public PlayerHealth pH;
+    public Boss5Behaviour boss4AI;
+    public EnemyAI eAI1;
+    public BulletLifEnemy bulletEnemy;
+    public EnemyAI3 eAI3;
+    public EnemyController eAI5;
+    public Enemy7AI eAI7;
+    public Enemy8AI eAI8;
+    public Enemy9AI eAI9;
+    public MirageEnemy eMirageAI;
+    public LargeGolemAI eBigAI;
+
+    public GameObject powerUpPanel;
     public int currentWave = 0;
     private bool isWaveActive = false;
-
+    public GameObject winPanel;
     void Start()
     {
+        currentWave = 0;
+        for (int i = 0; i < eHp.Length; i++)
+        {
+            eHp[i].maxHealth = 95;
+        }
+        eHp[11].maxHealth = 45;
+        eHp[0].maxHealth = 200;
+        for (int y = 0; y < bHp.Length; y++)
+        {
+            bHp[y].maxHealth = 2100;
+        }
+        bHp[3].maxHealth = 1100;
+        boss4AI.numberOfSmallEnemies = 20;
+        eAI1.damage = 10;
+        bulletEnemy.bulletDamage = 8f;
+        eAI3.explosionDamage = 40f;
+        eAI3.moveSpeed = 7.5f;
+        eAI5.attackDamage = 14;
+        eAI7.damage = 11;
+        eAI8.damage = 12;
+        eAI8.moveSpeed = 5.5f;
+        eAI9.attackDamage = 12;
+        eMirageAI.attackDamage = 16;
+        eMirageAI.maxIllusions = 4;
+        eBigAI.damage = 16;
+
+
         StartCoroutine(InitialDelay());
     }
 
@@ -46,57 +77,82 @@ public class EnemyWaveManager : MonoBehaviour
         if ((currentWave + 1) == 10 || (currentWave > 0 && (currentWave + 1) % 10 == 0))
         {
             SpawnBoss10();
-            IncreaseEnemyStats();
+            IncreaseEnemyStats5();
+            IncreaseEnemyStats10();
 
         }
         else if ((currentWave + 1) == 5 || (currentWave > 0 && (currentWave + 1) % 5 == 0))
         {
             SpawnBoss5();
-            IncreaseEnemyStats();
+            IncreaseEnemyStats10();
         }
     }
 
     IEnumerator SpawnWave()
     {
+        
         isWaveActive = true;
 
         SpawnEnemy();
         yield return new WaitForSeconds(spawnInterval);
 
         yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0);
-
-        currentWave++;
         isWaveActive = false;
-
+        currentWave++;
         if (currentWave < wavesCount)
         {
+            
+            yield return new WaitForSeconds(0.8f);
+            pH.Heal(PlayerStats.healthRegenWaves);
+            powerUpPanel.SetActive(true);
             waveText.gameObject.SetActive(true);
             waveText.text = "Wave " + (currentWave + 1);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.01f);
             waveText.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             StartNextWave();
+        }
+        else
+        {
+            winPanel.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.visible = true;
         }
     }
 
-    void IncreaseEnemyStats()
+    void IncreaseEnemyStats5()
     {
-        e1.damage += 5f;
-        e3.explosionDamage += 2.5f;
-        eHP.maxHealth += 5;
-        eHP2.maxHealth += 3;
-        eHP3.maxHealth += 2;
-        eHP4.maxHealth += 5;
-        eHP5.maxHealth += 5;
-        eHP6.maxHealth += 3;
-        eHP6_2.maxHealth += 8;
-        eBullet.bulletDamage += 4f;
-        eDamage.attackDamage += 4;
-        eDamage2.attackDamage += 3;eDamage2.illusionDamage += 2;
-        IEnemy.invisibilityDuration += 0.5f;
-        IEnemy.moveSpeed += 0.25f;
+        for (int i = 0; i < eHp.Length; i++)
+        {
+            eHp[i].maxHealth += 15;
+        }
+    }
+    void IncreaseEnemyStats10()
+    {
+        for (int i = 0; i < eHp.Length; i++)
+        {
+            eHp[i].maxHealth += 20;
+        }
+        for (int y = 0; y < bHp.Length; y++)
+        {
+            bHp[y].maxHealth += 650;
+        }
+        boss4AI.numberOfSmallEnemies += 10;
+        eAI1.damage += 6f;
+        eAI1.moveSpeed += .2f;
+        eAI3.explosionDamage += 10f;
+        eAI3.moveSpeed += 0.5f;
+        eAI7.damage += 8f;
+        eAI8.damage += 8;
+        eAI8.moveSpeed += .25f;
+        eMirageAI.maxIllusions += 1;
+        eMirageAI.attackDamage += 4;
+        eAI9.attackDamage += 4f;
+        eAI5.attackDamage += 5;
+        eBigAI.damage += 8;
+        bulletEnemy.bulletDamage += 7f;
     }
 
     void SpawnEnemy()
@@ -108,7 +164,7 @@ public class EnemyWaveManager : MonoBehaviour
 
             Vector3 spawnPosition = player.transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
 
-            float minSpawnDistance = 5f;
+            float minSpawnDistance = 15f;
             float distanceToPlayer = Vector3.Distance(spawnPosition, player.transform.position);
 
             if (distanceToPlayer < minSpawnDistance)
