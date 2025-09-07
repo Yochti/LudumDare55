@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4114614737345291418}
   - component: {fileID: 4248271856900921248}
   - component: {fileID: 3625205229406128981}
+  - component: {fileID: 5564389071752391268}
   m_Layer: 6
   m_Name: EnemyZac
   m_TagString: Enemy
@@ -111,7 +112,7 @@ MonoBehaviour:
   splitCount: 2
   attackRange: 1.5
   attackCooldown: 1.5
-  attackDamage: 16
+  attackDamage: 12
   fragmentSpawnDistance: 5
   enemyHp: {fileID: 3397782836574853039}
   detectionRadius: 8
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 95
   currentHealth: 0
   deathSFX: {fileID: 4114614737345291418}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -303,6 +304,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5564389071752391268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590331036323950346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 4
+  stunCooldown: 2
 --- !u!1 &4302503623639278591
 GameObject:
   m_ObjectHideFlags: 0

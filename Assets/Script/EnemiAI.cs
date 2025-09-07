@@ -13,15 +13,19 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private bool canAttack = true;
     private Transform poutch;
+    private EnemyC enemyC;
 
     void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
+
         if (poutch == null)
         {
             GameObject poutchObject = GameObject.FindGameObjectWithTag("Poutch");

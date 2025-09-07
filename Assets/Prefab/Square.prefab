@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: -3851808465005391655}
   - component: {fileID: 1112419516510994187}
   - component: {fileID: -8855887379039674045}
+  - component: {fileID: -8426535733896696965}
   m_Layer: 6
   m_Name: Square
   m_TagString: Enemy
@@ -407,6 +408,21 @@ MonoBehaviour:
   speedBoostDropChance: 1
   upgradeDropChance: 0
   playerLuck: 0
+--- !u!114 &-8426535733896696965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801645912519270603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 8
+  currentSpeed: 0
+  stunCooldown: 2
 --- !u!1 &1561680520172614161
 GameObject:
   m_ObjectHideFlags: 0

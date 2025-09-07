@@ -7,44 +7,19 @@ using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 
-public class HealthButton : MonoBehaviour, IPointerEnterHandler
+public class HealthButton : MonoBehaviour
 {
-    // UI References
-    public Image imageRight;
-    public Sprite healthSprite;
-
-    public LocalizedString localizedName;
-    public LocalizedString localizedDescription;
-
-    public TextMeshProUGUI HealthName; // Pour le nom
-    public TextMeshProUGUI HealthDescription; // Pour la description
-
     public saveSytem save;
-
-    private string translatedName;
-    private string translatedDescription;
-
-    // References
-    public BuyUpgrades buyUpgrades;
 
     public Image[] healthImages = new Image[3];
     public Image[] damageImages = new Image[3];
     public Image[] attackSpeedImages = new Image[3];
     public Image[] speedImages = new Image[3];
-    public Image[] healthRegenImages = new Image[3];
-    public Image[] invincibilityFrameImages = new Image[3];
+    //public Image[] healthRegenImages = new Image[3];
     public Image[] critChanceImages = new Image[3];
     public Image[] critDamageImages = new Image[3];
-    public Image[] soulsAttractImages = new Image[3];
+    public Image[] luck = new Image[3];
 
-    private void Start()
-    {
-        localizedName.StringChanged += (translatedText) => { translatedName = translatedText; };
-        localizedDescription.StringChanged += (translatedText) => { translatedDescription = translatedText; };
-
-        localizedName.RefreshString();
-        localizedDescription.RefreshString();
-    }
 
     private void Update()
     {
@@ -52,11 +27,10 @@ public class HealthButton : MonoBehaviour, IPointerEnterHandler
         UpdateUpgradeVisuals(save.DamagesUpgrades, damageImages);
         UpdateUpgradeVisuals(save.AttackSpeedUpgrades, attackSpeedImages);
         UpdateUpgradeVisuals(save.SpeedUpgrades, speedImages);
-        UpdateUpgradeVisuals(save.HealthRegen, healthRegenImages);
-        UpdateUpgradeVisuals(save.InvincibilityFrame, invincibilityFrameImages);
+        //UpdateUpgradeVisuals(save.HealthRegen, healthRegenImages);
         UpdateUpgradeVisuals(save.CritChance, critChanceImages);
         UpdateUpgradeVisuals(save.CritDamage, critDamageImages);
-        UpdateUpgradeVisuals(save.SoulsAttract, soulsAttractImages);
+        UpdateUpgradeVisuals(save.Luck, luck);
     }
 
     private void UpdateUpgradeVisuals(int upgradeLevel, Image[] images)
@@ -66,7 +40,7 @@ public class HealthButton : MonoBehaviour, IPointerEnterHandler
             if (i < upgradeLevel)
             {
                 Color newColor;
-                if (ColorUtility.TryParseHtmlString("#BFBFBF", out newColor))
+                if (ColorUtility.TryParseHtmlString("#FFFFFF", out newColor))
                 {
                     images[i].color = newColor;
                 }
@@ -74,16 +48,6 @@ public class HealthButton : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        imageRight.sprite = healthSprite;
-        HealthName.text = translatedName;
-        HealthDescription.text = translatedDescription;
-    }
 
-    private void OnDestroy()
-    {
-        localizedName.StringChanged -= (translatedText) => { translatedName = translatedText; };
-        localizedDescription.StringChanged -= (translatedText) => { translatedDescription = translatedText; };
-    }
+
 }

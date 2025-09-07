@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 2591895611422208679}
   - component: {fileID: 7058486935074670579}
   - component: {fileID: 5120334229752228667}
+  - component: {fileID: 894662142949586402}
   m_Layer: 6
   m_Name: Enemy4 2
   m_TagString: Enemy
@@ -201,7 +202,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.6, y: -0.11, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4351125440409218735}
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 40
   currentHealth: 0
   deathSFX: {fileID: 7058486935074670579}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -483,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00cbb92747afd754596683aeb9ed1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallerSlimePrefab: {fileID: 0}
+  smallerSlimePrefab: {fileID: 5857285634338656741, guid: f822df8ba1365814ca134a7f0aeaaa46, type: 3}
   moveSpeed: 6
   splitCount: 0
   attackRange: 1.5
@@ -491,6 +492,20 @@ MonoBehaviour:
   attackDamage: 10
   enemyHp: {fileID: -4693336880265390284}
   detectionRadius: 8
+--- !u!114 &894662142949586402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857285634338656741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 6
+  stunCooldown: 2
 --- !u!1 &5895120469962627677
 GameObject:
   m_ObjectHideFlags: 0

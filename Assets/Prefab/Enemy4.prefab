@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 5120334229752228667}
   - component: {fileID: -8736133378208771900}
   - component: {fileID: 4786451566757658864}
+  - component: {fileID: -251303681732661535}
   m_Layer: 6
   m_Name: Enemy4
   m_TagString: Enemy
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00cbb92747afd754596683aeb9ed1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallerSlimePrefab: {fileID: 5857285634338656741, guid: 40149860a43d10d43a672d92e709037c, type: 3}
+  smallerSlimePrefab: {fileID: 5857285634338656741, guid: 0ae5a13617776be43846ce41783d89c0, type: 3}
   moveSpeed: 6
   splitCount: 2
   attackRange: 2
@@ -379,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 95
   currentHealth: 0
   deathSFX: {fileID: 7058486935074670579}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -413,6 +414,20 @@ MonoBehaviour:
   speedBoostDropChance: 1
   upgradeDropChance: 0
   playerLuck: 0
+--- !u!114 &-251303681732661535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857285634338656741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 6
+  stunCooldown: 2
 --- !u!1 &6435611024713010821
 GameObject:
   m_ObjectHideFlags: 0

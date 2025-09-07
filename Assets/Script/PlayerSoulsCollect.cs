@@ -9,10 +9,10 @@ public class PlayerSoulsCollect : MonoBehaviour
     public GameObject player; // Assurez-vous que cette référence est assignée
     public PlayerHealth playerH;
     public PlayerXPManager pXP;
-
+    public PlayerMovement pM;
     public float attractionSpeed = 10f; // Vitesse d'attraction de l'orbe
     public float snapDistance = 0.5f; // Distance minimale pour un déplacement instantané
-
+    public saveSytem save;
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Soul") || other.CompareTag("Soul2") || other.CompareTag("Soul3"))
@@ -30,12 +30,24 @@ public class PlayerSoulsCollect : MonoBehaviour
     {
         // Identifier la valeur de l'XP en fonction du type de l'orbe
         int xpValue = 0;
-        if (soul.CompareTag("Soul"))
-            xpValue = 10;
+        if (soul.CompareTag("Soul") )
+        {
+            if (!save.xpAmountDifficulty) xpValue = 10;
+            else xpValue = 6;
+
+        }
         else if (soul.CompareTag("Soul2"))
-            xpValue = 150;
+        {
+            if (!save.xpAmountDifficulty) xpValue = 150;
+            else xpValue = 90;
+        }
+            
         else if (soul.CompareTag("Soul3"))
-            xpValue = 1000;
+        {
+            if (!save.xpAmountDifficulty) xpValue = 1000;
+            else xpValue = 600;
+        }
+            
 
         // Attraction rapide de l'orbe vers le joueur
         while (soul != null)

@@ -16,7 +16,8 @@ public class AlliesSummon : MonoBehaviour
     public HealBullet bulletH;
     public portal1 p1;
     public PortalDivision p2;
-
+    public LinkerLineRay izoCd;
+    public LinkerManager izoAdd1;
     // GameObject
     public GameObject player;
     public GameObject friendHolder;
@@ -28,13 +29,14 @@ public class AlliesSummon : MonoBehaviour
     public GameObject heiMERDEinger;
     public GameObject Dimitri;
     public GameObject hera;
-
+    public GameObject izo;
     // Status ally
     public string bababoyStatus;
     public string nameStatus;
     public string junktrapStatus;
     public string hStatus;
     public string dimitriStatus;
+    public string izoStatus;
     public int heraStatus;
     public bool lvlToRevive;
 
@@ -45,6 +47,7 @@ public class AlliesSummon : MonoBehaviour
         junktrapStatus = "0";
         hStatus = "0";
         dimitriStatus = "0";
+        izoStatus = "0";
         heraStatus = 0;
     }
 
@@ -275,5 +278,44 @@ public class AlliesSummon : MonoBehaviour
     {
         heraStatus = level;
     }
+
+    public void Izo()
+    {
+        Time.timeScale = 1f;
+
+        if (izoStatus == "0")
+        {
+            ActivateIzo(1);
+        }
+        else if (izoStatus == "1")
+        {
+            UpgradeIzo(2);
+        }
+        else if (izoStatus == "2")
+        {
+            FinalUpgradeIzo(3);
+        }
+    }
+
+    private void ActivateIzo(int level)
+    {
+        izo.SetActive(true);
+        friendHolder.transform.position = player.transform.position;
+        izoStatus = level.ToString();
+    }
+
+    private void UpgradeIzo(int level)
+    {
+        izoStatus = level.ToString();
+        izoCd.stunDuration += 0.35f; // stun un peu plus long
+        izoCd.cooldownBetweenStuns -= 1f;       // cooldown plus court
+    }
+
+    private void FinalUpgradeIzo(int level)
+    {
+        izoStatus = level.ToString();
+        izoAdd1.ActivateThirdLinker(); // active le 3e point et donc la zone de slow
+    }
+
 }
 

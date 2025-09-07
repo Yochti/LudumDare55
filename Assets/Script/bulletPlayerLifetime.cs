@@ -55,7 +55,7 @@ public class BulletPlayerLifetime : MonoBehaviour
                 kStats.IncreaseKillPlayer();
             }
             if (playerAk != null)
-                playerAk.timeSinceLastShot += .069f;
+                playerAk.timeSinceLastShot += .045f;
 
 
         }
@@ -70,7 +70,7 @@ public class BulletPlayerLifetime : MonoBehaviour
                 kStats.IncreaseKillPlayer();
             }
             if (playerAk != null)
-                playerAk.timeSinceLastShot += .069f;
+                playerAk.timeSinceLastShot += .045f;
 
 
         }

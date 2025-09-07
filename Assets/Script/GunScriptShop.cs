@@ -6,87 +6,65 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
+using UnityEngine.Video;
 
 public class GunScriptShop : MonoBehaviour, IPointerEnterHandler
 {
-    public Sprite healthSprite;
-    public Image imageRight;
-
-    // Utilisation de LocalizedString pour le nom et la description
+    public VideoPlayer videoPlayer;
+    public VideoClip videoClip;
+    public OnHoverScaleUp hoverS;
     public LocalizedString localizedName;
-    public LocalizedString localizedDescription;
 
-    public TextMeshProUGUI PriceTMP; // Ne change pas le prix
+    public TextMeshProUGUI PriceTMP;
     public saveSytem save;
     public string price;
-    public float sliderDamagef;
-    public float sliderSpeedf;
-    public Slider sliderDamage;
-    public Slider sliderSpeed;
-    public TextMeshProUGUI totalSoulsTMP;
 
-    // Références aux composants TextMeshProUGUI pour le nom et la description
+    [field:SerializeField] public static bool hasClicked = false; // Variable statique partagée par tous les objets GunScriptShop
+
     public TextMeshProUGUI NameTMP; // Référence pour le nom
-    public TextMeshProUGUI DescriptionTMP; // Référence pour la description
 
-    // Variables pour stocker les descriptions traduites
     private string translatedName;
-    private string translatedDescription;
 
     private void Start()
     {
         // Charger les traductions des noms et descriptions au démarrage
         localizedName.StringChanged += (translatedText) => { translatedName = translatedText; };
-        localizedDescription.StringChanged += (translatedText) => { translatedDescription = translatedText; };
-
-        // Rafraîchir les traductions
         localizedName.RefreshString();
-        localizedDescription.RefreshString();
-    }
-
-    private void Update()
-    {
-        // Mettre à jour le total des âmes en permanence
-        totalSoulsTMP.text = save.TotalSouls.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        imageRight.sprite = healthSprite;
-
-        // Met à jour les éléments visuels avec les textes traduits
+        if (hasClicked) return; // Bloquer si un bouton a été cliqué
         UpdateTexts();
-
-        // Prix inchangé
+        videoPlayer.clip = videoClip;
         PriceTMP.text = price;
-
-        SetSliderValueD();
-        SetSliderValueS();
     }
 
     private void UpdateTexts()
     {
-        // Met à jour les textes de nom et de description avec les traductions
         NameTMP.text = translatedName; // Met à jour le nom avec la traduction
-        DescriptionTMP.text = translatedDescription; // Met à jour la description avec la traduction
     }
-
-    public void SetSliderValueD()
+    public void ToggleClick(GameObject gameObject)
     {
-        // Définir la valeur du slider directement
-        sliderDamage.value = Mathf.Clamp(sliderDamagef, sliderDamage.minValue, sliderDamage.maxValue);
+        hasClicked = !hasClicked;
+        hoverS.hoverExit();
+        if(!hasClicked)gameObject.transform.localScale *= 1.25f;
     }
-
-    public void SetSliderValueS()
+    /*public void OnPointerClick(PointerEventData eventData)
     {
-        // Définir la valeur du slider directement
-        sliderSpeed.value = Mathf.Clamp(sliderSpeedf, sliderSpeed.minValue, sliderSpeed.maxValue);
-    }
+        if (hasClicked)
+        {
+            hasClicked = false; // Réactive OnPointerEnter pour tous les boutons
+        }
+        else
+        {
+            hasClicked = true; // Désactive OnPointerEnter pour tous les boutons
+        }
+    }*/
 
     private void OnDestroy()
     {
         // Désabonner les événements pour éviter les fuites de mémoire
         localizedName.StringChanged -= (translatedText) => { translatedName = translatedText; };
-        localizedDescription.StringChanged -= (translatedText) => { translatedDescription = translatedText; };
     }
 }

@@ -15,9 +15,12 @@ public class SlimeAcid : MonoBehaviour
     private bool isDead = false; // Indique si le slime est mort
     private Vector3 targetPosition; // Dernière position connue de la cible
     public float detectionRadius = 8f; // Rayon de détection
+    private EnemyC enemyC;
 
     void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -27,6 +30,7 @@ public class SlimeAcid : MonoBehaviour
 
     void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
 
         if (poutch == null)
         {

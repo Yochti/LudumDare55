@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 8047042808219430598}
   - component: {fileID: -6808455034283789401}
   - component: {fileID: 4593384292433521484}
+  - component: {fileID: -1974342619647850593}
   m_Layer: 6
   m_Name: Enemy7
   m_TagString: Enemy
@@ -574,7 +575,7 @@ MonoBehaviour:
   moveSpeed: 4
   attackRange: 3
   attackCooldown: 2
-  damage: 12
+  damage: 11
   detectionRadius: 8
 --- !u!82 &7688506489384091562
 AudioSource:
@@ -782,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 95
   currentHealth: 0
   deathSFX: {fileID: 7688506489384091562}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -790,6 +791,20 @@ MonoBehaviour:
   scorePoint: 10
   sprite: {fileID: 435770709936399989}
   hasBeenHit: 0
+--- !u!114 &-1974342619647850593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631428006026131284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 4
+  stunCooldown: 2
 --- !u!1 &5943856872262351553
 GameObject:
   m_ObjectHideFlags: 0

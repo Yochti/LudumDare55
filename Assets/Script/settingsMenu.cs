@@ -11,7 +11,9 @@ public class settingsMenu : MonoBehaviour
     Resolution[] resolutions;
     public saveSytem save;
     public GameObject optionPanel;
-  
+    private float previousMusicVolume;
+    private float previousSFXVolume;
+    private float previousGlobalVolume;
 
     private void Start()
     {
@@ -108,6 +110,29 @@ public class settingsMenu : MonoBehaviour
         save.SFXVolume = volume;
         save.SaveData();
 
+    }
+    public void MuteGlobal(bool mute)
+    {
+        if (mute)
+            audioMixerGlobal.SetFloat("GlobalVolume", -80f); 
+        else
+            setVolumeGlobal(save.GlobalVolume); 
+    }
+
+    public void MuteMusic(bool mute)
+    {
+        if (mute)
+            audioMixerGlobal.SetFloat("MusicVolume", -80f);
+        else
+            setVolumeMusic(save.MusicVolume);
+    }
+
+    public void MuteSFX(bool mute)
+    {
+        if (mute)
+            audioMixerGlobal.SetFloat("SFXVolume", -80f);
+        else
+            setVolumeSFX(save.SFXVolume);
     }
 
 

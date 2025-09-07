@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7855090738710770030}
   - component: {fileID: -4597092190061367941}
   - component: {fileID: 5524155434827750551}
+  - component: {fileID: -6498877256607519752}
   m_Layer: 6
   m_Name: EnemyDeadZac
   m_TagString: Enemy
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 95
   currentHealth: 0
   deathSFX: {fileID: 5524155434827750551}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -399,3 +400,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6498877256607519752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140718148431446908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 4
+  stunCooldown: 2

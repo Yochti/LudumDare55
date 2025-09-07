@@ -11,10 +11,11 @@ public class Enemy2Controller : MonoBehaviour
     private Vector3 targetPosition;    // Position vers laquelle l'ennemi se dirige
     private float nextFireTime;        // Temps avant le prochain tir
     public float detectionRadius = 7f; // Rayon autour de la dernière position connue du joueur
+    private EnemyC enemyC;
 
     private void Start()
     {
-        // Initialiser la référence du joueur si présent
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -24,7 +25,8 @@ public class Enemy2Controller : MonoBehaviour
 
     void Update()
     {
-        // Vérifier et mettre à jour les références du joueur et du poutch
+        moveSpeed = enemyC.currentSpeed;
+
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");

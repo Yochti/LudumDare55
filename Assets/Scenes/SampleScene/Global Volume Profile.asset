@@ -18,16 +18,16 @@ MonoBehaviour:
     m_Value: 0.07
   contrast:
     m_OverrideState: 1
-    m_Value: -7.1
+    m_Value: -17.7
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.8773585, g: 0.83183515, b: 0.83183515, a: 1}
+    m_Value: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 6
   saturation:
     m_OverrideState: 1
-    m_Value: 25.4
+    m_Value: -1.6
 --- !u!114 &-4358526044087314680
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_Value: 1.58
   intensity:
     m_OverrideState: 1
-    m_Value: 1.51
+    m_Value: 2.7
   scatter:
     m_OverrideState: 0
     m_Value: 0
@@ -170,8 +170,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.213628
-          value: 0.13793105
+          time: 0.22897196
+          value: 0.1625616
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.35849056
-          value: 0.9413681
+          time: 0.43457943
+          value: 0.89162564
           inSlope: 1.0952792
           outSlope: 1.0952792
           tangentMode: 0
@@ -188,8 +188,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.8238994
-          value: 0.6644951
+          time: 0.8481308
+          value: 0.4581281
           inSlope: -0.017464386
           outSlope: -0.017464386
           tangentMode: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.9025157
-          value: 0.9120521
+          time: 0.96495324
+          value: 1
           inSlope: 2.6375692
           outSlope: 2.6375692
           tangentMode: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 1
+          time: 0.96728975
           value: 1
           inSlope: 1
           outSlope: 1

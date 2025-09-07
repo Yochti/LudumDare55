@@ -16,9 +16,11 @@ public class EnemyController : MonoBehaviour
     private bool isAttacking = false;
     private bool isInvisible = false;
     private Transform poutch;
+    private EnemyC enemyC;
 
     void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -27,6 +29,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
         if (poutch == null)
         {
             GameObject poutchObject = GameObject.FindGameObjectWithTag("Poutch");

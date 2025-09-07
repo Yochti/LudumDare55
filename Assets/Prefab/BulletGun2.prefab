@@ -163,12 +163,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletLifetime: 6
-  bulletDamagemin: 5
-  bulletDamagemax: 10
+  bulletDamagemin: 11
+  bulletDamagemax: 16
   bulletDamage: 0
   isCritical: 0
-  critChance: 10
-  critDamage: 170
+  critChance: 25
+  critDamage: 175
 --- !u!1 &6233416925279187815
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class InvocationShop : MonoBehaviour, IPointerEnterHandler
     private void Update()
     {
         // Mettre à jour le total des âmes en permanence
-        totalSoulsTMP.text = save.TotalSouls.ToString();
+        totalSoulsTMP.text = save.totalSouls.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

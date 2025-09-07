@@ -7,65 +7,77 @@ public class hoverInvocSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     public GameObject invocPanel;
     private Vector3 originalScale;
-    public float scaleFactor = 1.2f; // Taille maximale
-    public float bounceDuration = 0.3f; // Durée du rebond
+    public float scaleFactor = 1.2f;
+    public float bounceDuration = 0.3f;
     public AudioSource audioS;
+
+    private Coroutine scaleCoroutine;
 
     private void Start()
     {
         originalScale = invocPanel.transform.localScale;
     }
+    private void OnEnable()
+    {
+        //invocPanel.transform.localScale = originalScale;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         audioS.Play();
-        StartCoroutine(ScaleBounceEffect());
+
+        if (scaleCoroutine != null)
+            StopCoroutine(scaleCoroutine);
+
+        scaleCoroutine = StartCoroutine(ScaleBounceEffect());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        StopCoroutine(ScaleBounceEffect());
-        invocPanel.transform.localScale = originalScale;  // Retour à la taille d'origine
+        if (scaleCoroutine != null)
+        {
+            StopCoroutine(scaleCoroutine);
+            scaleCoroutine = null;
+        }
+
+        invocPanel.transform.localScale = originalScale;
     }
 
     private IEnumerator ScaleBounceEffect()
     {
         Vector3 targetScale = originalScale * scaleFactor;
-        Vector3 currentScale = originalScale;
-
-        float timeElapsed = 0f;
+        Vector3 smallScale = originalScale * (scaleFactor - 0.05f);
+        float t;
 
         // Phase 1: Agrandir rapidement
-        while (timeElapsed < bounceDuration / 4)
+        t = 0f;
+        while (t < 1f)
         {
-            currentScale = Vector3.Lerp(originalScale, targetScale, timeElapsed / (bounceDuration / 4));
-            invocPanel.transform.localScale = currentScale;
-            timeElapsed += Time.unscaledDeltaTime; // Utilisation de Time.unscaledDeltaTime
+            invocPanel.transform.localScale = Vector3.Lerp(originalScale, targetScale, t);
+            t += Time.unscaledDeltaTime / (bounceDuration / 4f);
             yield return null;
         }
 
-        // Phase 2: Rétrécir légèrement (effet de rebond)
-        timeElapsed = 0f;
-        Vector3 smallScale = originalScale * (scaleFactor - 0.05f);  // Un peu plus petit que la taille cible
-        while (timeElapsed < bounceDuration / 3)
+        // Phase 2: Rétrécir un peu
+        t = 0f;
+        while (t < 1f)
         {
-            currentScale = Vector3.Lerp(targetScale, smallScale, timeElapsed / (bounceDuration / 3));
-            invocPanel.transform.localScale = currentScale;
-            timeElapsed += Time.unscaledDeltaTime; // Utilisation de Time.unscaledDeltaTime
+            invocPanel.transform.localScale = Vector3.Lerp(targetScale, smallScale, t);
+            t += Time.unscaledDeltaTime / (bounceDuration / 3f);
             yield return null;
         }
 
-        // Phase 3: Reprendre et arriver à la taille finale
-        timeElapsed = 0f;
-        while (timeElapsed < bounceDuration / 4)
+        // Phase 3: Revenir à l'échelle finale
+        t = 0f;
+        while (t < 1f)
         {
-            currentScale = Vector3.Lerp(smallScale, targetScale, timeElapsed / (bounceDuration / 4));
-            invocPanel.transform.localScale = currentScale;
-            timeElapsed += Time.unscaledDeltaTime; // Utilisation de Time.unscaledDeltaTime
+            invocPanel.transform.localScale = Vector3.Lerp(smallScale, targetScale, t);
+            t += Time.unscaledDeltaTime / (bounceDuration / 4f);
             yield return null;
         }
 
-        // Assurer que l'échelle finale est atteinte
         invocPanel.transform.localScale = targetScale;
+
+        scaleCoroutine = null;
     }
 }

@@ -1,8 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.IO;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,94 +7,106 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 500f;
     public float dashDistance = 5f;
     public float dashDuration = 0.1f;
-    public static float dashCooldown = 1.75f;
+    public static float dashCooldown = 1.8f;
     public AudioSource audioDash;
     public saveSytem save;
     private Rigidbody2D rb;
     private bool isDashing = false;
     private bool canDash = true;
+    public PlayerHealth playerHealth;
+    private Vector2 movement;
+    private Vector2 lastPosition;
+    private float distanceTraveled = 0f;
+    public float triggerDistance = 10f;
 
-    // Input keys with default values
-    public string moveUpKey = "Z";
-    public string moveDownKey = "S";
-    public string moveLeftKey = "Q";
-    public string moveRightKey = "D";
-    public string dashKey = "Space";
+    // Turret passive power-up
+    public static bool hasTurretActivate = false;
+    private float turretBuffTimer = 0f;
+    private float turretBuffTick = 0.1f;
+    private float turretMaxBuffTime = 5f;
+    private float turretAttackSpeedBonus = 0f;
+    private float turretBuffIntervalTimer = 0f;
 
-    private Vector2 movement; // Sauvegarde de la direction de mouvement pour le dash
+    public static int healthRegenMovePassif;
 
     void Start()
     {
-        moveUpKey = string.IsNullOrEmpty(save.UpKey) ? "Z" : save.UpKey;
-        moveDownKey = string.IsNullOrEmpty(save.DownKey) ? "S" : save.DownKey;
-        moveLeftKey = string.IsNullOrEmpty(save.LeftKey) ? "Q" : save.LeftKey;
-        moveRightKey = string.IsNullOrEmpty(save.RightKey) ? "D" : save.RightKey;
-        dashKey = string.IsNullOrEmpty(save.DashKey) ? "Space" : save.DashKey;
+        healthRegenMovePassif = 0;
         rb = GetComponent<Rigidbody2D>();
+        hasTurretActivate = false;
         moveSpeed = save.SpeedUpgrades != 0 ? save.PlayerMoveSpeed : 5f;
+        lastPosition = transform.position;
     }
 
     void Update()
     {
-        dashCooldown = 1.75f  *(1-PlayerStats.dashCooldownR);
+        moveSpeed = PlayerStats.moveSpeed;
+        dashCooldown = 1.8f * (1 - PlayerStats.dashCooldownR);
 
-        moveSpeed = 6 + PlayerStats.moveSpeed ;
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        movement = new Vector2(moveX, moveY).normalized;
 
-        // Initialisation du mouvement
-        movement = Vector2.zero;
-
-        if (Input.GetKey(GetKeyCodeFromString(moveUpKey)))
+        distanceTraveled += Vector2.Distance(rb.position, lastPosition);
+        lastPosition = rb.position;
+        if (distanceTraveled >= triggerDistance && playerHealth != null)
         {
-            movement.y += 1;
-        }
-        if (Input.GetKey(GetKeyCodeFromString(moveDownKey)))
-        {
-            movement.y -= 1;
-        }
-        if (Input.GetKey(GetKeyCodeFromString(moveLeftKey)))
-        {
-            movement.x -= 1;
-        }
-        if (Input.GetKey(GetKeyCodeFromString(moveRightKey)))
-        {
-            movement.x += 1;
+            playerHealth.Heal(healthRegenMovePassif);
+            distanceTraveled = 0f;
         }
 
-        movement = movement.normalized;
+        // Handle turret passive buff
+        if (hasTurretActivate)
+        {
+            if (movement == Vector2.zero)
+            {
+                turretBuffTimer += Time.deltaTime;
+                turretBuffIntervalTimer += Time.deltaTime;
+
+                if (turretBuffTimer <= turretMaxBuffTime && turretBuffIntervalTimer >= turretBuffTick)
+                {
+                    turretAtqSpeed();
+                    turretBuffIntervalTimer = 0f;
+                }
+            }
+            else if (turretAttackSpeedBonus > 0f)
+            {
+                resetTurretAtqSpeed();
+            }
+        }
+
         rb.velocity = movement * moveSpeed;
 
-        // Rotation vers la position de la souris
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = new Vector2(
-            mousePosition.x - transform.position.x,
-            mousePosition.y - transform.position.y
-        );
+        Vector2 direction = mousePosition - transform.position;
         transform.up = direction;
 
-        // Dash
-        if (Input.GetKeyDown(GetKeyCodeFromString(dashKey)) && canDash && movement != Vector2.zero)
+        if (Input.GetKeyDown(KeyCode.Space) && canDash && movement != Vector2.zero && !save.noDashDifficulty)
         {
             StartCoroutine(Dash());
         }
     }
 
-    KeyCode GetKeyCodeFromString(string key)
+    private void turretAtqSpeed()
     {
-        try
-        {
-            key = RemoveInvisibleChars(key.Trim());
-            return (KeyCode)Enum.Parse(typeof(KeyCode), key, true);
-        }
-        catch
-        {
-            Debug.LogError("Touche invalide : '" + key + "'");
-            return KeyCode.None;
-        }
+        PlayerStats.attackSpeed += 0.012f;
+        turretAttackSpeedBonus += 0.012f;
     }
 
-    string RemoveInvisibleChars(string input)
+    private void resetTurretAtqSpeed()
     {
-        return new string(Array.FindAll(input.ToCharArray(), c => !char.IsControl(c) && !char.IsWhiteSpace(c) && c < 128));
+        PlayerStats.attackSpeed -= turretAttackSpeedBonus;
+        turretAttackSpeedBonus = 0f;
+        turretBuffTimer = 0f;
+        turretBuffIntervalTimer = 0f;
+    }
+
+    public void ActivateTurretPassive()
+    {
+        hasTurretActivate = true;
+        turretBuffTimer = 0f;
+        turretBuffIntervalTimer = 0f;
+        turretAttackSpeedBonus = 0f;
     }
 
     IEnumerator Dash()
@@ -105,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         canDash = false;
 
-        Vector2 dashDirection = movement; 
+        Vector2 dashDirection = movement;
         float startTime = Time.time;
         audioDash.Play();
 
@@ -116,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
-
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }

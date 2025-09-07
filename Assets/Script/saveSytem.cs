@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 public class saveSytem : MonoBehaviour
 {
-    public int TotalSouls;
+    public int totalSouls;
     //Level Upgrades
     public int HealthUpgrades;
     public int DamagesUpgrades;
@@ -15,7 +15,7 @@ public class saveSytem : MonoBehaviour
     public int CritChance;
     public int CritDamage;
     public int SoulsAttract;
-
+    public int Luck;
     //GameMode
     public string whichGameMode;
 
@@ -28,12 +28,7 @@ public class saveSytem : MonoBehaviour
     public bool isAutoAim;
     // FPS RESTRICT 
     public int MaxFps;
-    //Key Bindings
-    public string UpKey;
-    public string DownKey;
-    public string LeftKey;
-    public string RightKey;
-    public string DashKey;
+
 
     //References Caracteristique
     public int PlayerHealth;
@@ -45,7 +40,7 @@ public class saveSytem : MonoBehaviour
     public int PlayerCritchance;
     public float PlayerCritDamages;
     public int PlayerSoulsA;
-
+    public int PlayerLuck;
     //Invoc
     public string InvocSlot1;
     public string InvocSlot2;
@@ -56,6 +51,7 @@ public class saveSytem : MonoBehaviour
     //Invoc
     public bool hasInvoc5;
     public bool hasInvoc6;
+    public bool hasInvoc7;
     //Weapons
     public bool hasGun1;  
     public bool hasGun2;  
@@ -72,8 +68,19 @@ public class saveSytem : MonoBehaviour
     public bool hasSpecial2;
     public bool hasSpecial3;
     public string whichSpecial;
-
-
+    //XP
+    public int lvl;
+    public float xp;
+    //difficulty
+    public bool generalDifficulty;
+    public bool enemyAmountDifficulty;
+    public bool xpAmountDifficulty;
+    public bool rerollDifficulty;
+    public bool noDashDifficulty;
+    public bool noChestDifficulty;
+    public bool noInvocDifficulty;
+    public bool noDrop;
+    public float percentageBonus;
     private void Awake()
     {
         LoadData();
@@ -90,7 +97,7 @@ public class saveSytem : MonoBehaviour
         SaveData savedData = new SaveData
         {
             WhichGameMode = whichGameMode,
-            totalSouls = TotalSouls,
+            TotalSouls = totalSouls,
             healthUpgrades = HealthUpgrades,
             damagesUpgrades = DamagesUpgrades,
             attackSpeedUpgrades = AttackSpeedUpgrades,
@@ -100,6 +107,7 @@ public class saveSytem : MonoBehaviour
             critChance = CritChance,
             critDamage = CritDamage,
             soulsAttract = SoulsAttract,
+            luck = Luck,
             //carac
             playerHealth = PlayerHealth,
             playerDamages = PlayerDamages,
@@ -110,6 +118,7 @@ public class saveSytem : MonoBehaviour
             playerCritchance = PlayerCritchance,
             playerCritDamages = PlayerCritDamages,
             playerSoulsA = PlayerSoulsA,
+            playerLuck = PlayerLuck,
             //Invoc
             invocSlot1 = InvocSlot1,
             invocSlot2 = InvocSlot2,
@@ -117,6 +126,7 @@ public class saveSytem : MonoBehaviour
             invocSlot4 = InvocSlot4,
             HasInvoc5 = hasInvoc5,
             HasInvoc6 = hasInvoc6,
+            HasInvoc7 = hasInvoc7,
             //Weapons
             HasGun1 = hasGun1,
             HasGun2 = hasGun2,
@@ -136,16 +146,24 @@ public class saveSytem : MonoBehaviour
             HasSpecial2 = hasSpecial2,
             HasSpecial3 = hasSpecial3,
             WhichSpecial = whichSpecial,
+            //Xp
+            Lvl = lvl,
+            Xp = xp,
+            //Difficulty
+            GeneralDifficulty = generalDifficulty,
+            EnemyAmountDifficulty = enemyAmountDifficulty,
+            XpAmountDifficulty = xpAmountDifficulty,
+            RerollDifficulty = rerollDifficulty,
+            NoDashDifficulty = noDashDifficulty,
+            NoChestDifficulty = noChestDifficulty,
+            PercentageBonus = percentageBonus,
+            NoInvocDifficulty = noInvocDifficulty,
+            NoDrop = noDrop,
             //Audio Source
             globalVolume = GlobalVolume,
             musicVolume = MusicVolume,
             sfxVolume = SFXVolume,
-            //Key Bidings
-            upKey = UpKey,
-            downKey = DownKey,
-            leftKey = LeftKey,
-            rightKey = RightKey,
-            dashKey = DashKey,
+
             FirstFight = firstFight,
 
         };
@@ -170,7 +188,7 @@ public class saveSytem : MonoBehaviour
         string jsonData = System.IO.File.ReadAllText(filePath);
 
         SaveData savedData = JsonUtility.FromJson<SaveData>(jsonData);
-        TotalSouls = savedData.totalSouls;
+        totalSouls = savedData.TotalSouls;
         HealthUpgrades = savedData.healthUpgrades;
         DamagesUpgrades = savedData.damagesUpgrades;
         AttackSpeedUpgrades = savedData.attackSpeedUpgrades;
@@ -180,7 +198,7 @@ public class saveSytem : MonoBehaviour
         CritChance = savedData.critChance;
         CritDamage = savedData.critDamage;
         SoulsAttract = savedData.soulsAttract;
-
+        Luck = savedData.luck;
         whichGameMode = savedData.WhichGameMode;
 
         //Carac
@@ -193,6 +211,7 @@ public class saveSytem : MonoBehaviour
         PlayerCritchance = savedData.playerCritchance;
         PlayerCritDamages = savedData.playerCritDamages;
         PlayerSoulsA = savedData.playerSoulsA;
+        PlayerLuck = savedData.playerLuck;
         //Weapons
         hasGun1 = savedData.HasGun1;
         hasGun2 = savedData.HasGun2;
@@ -208,6 +227,19 @@ public class saveSytem : MonoBehaviour
         hasSpecial2 = savedData.HasSpecial2;
         hasSpecial3 = savedData.HasSpecial3;
         whichSpecial = savedData.WhichSpecial;
+        //XP
+        xp = savedData.Xp;
+        lvl = savedData.Lvl;
+        //Difficulty
+        generalDifficulty = savedData.GeneralDifficulty;
+        xpAmountDifficulty = savedData.XpAmountDifficulty;
+        enemyAmountDifficulty = savedData.EnemyAmountDifficulty;
+        rerollDifficulty = savedData.RerollDifficulty;
+        noDashDifficulty = savedData.NoDashDifficulty;
+        noChestDifficulty = savedData.NoChestDifficulty;
+        noInvocDifficulty = savedData.NoInvocDifficulty;
+        noDrop = savedData.NoDrop;
+        percentageBonus = savedData.PercentageBonus;
         //Invoc
         InvocSlot1 = savedData.invocSlot1;
         InvocSlot2 = savedData.invocSlot2;
@@ -215,6 +247,7 @@ public class saveSytem : MonoBehaviour
         InvocSlot4 = savedData.invocSlot4;
         hasInvoc5 = savedData.HasInvoc5;
         hasInvoc6 = savedData.HasInvoc6;
+        hasInvoc7 = savedData.HasInvoc7;
         //FPS
         MaxFps = savedData.maxFps;
         //Audio Volume
@@ -223,19 +256,14 @@ public class saveSytem : MonoBehaviour
         SFXVolume = savedData.sfxVolume;
         isAutoAim = savedData.IsAutoAim;
         isAutoShoot = savedData.IsAutoShoot;
-        //Key Bidings
-        UpKey = savedData.upKey;
-        DownKey = savedData.downKey;
-        LeftKey = savedData.leftKey;
-        RightKey = savedData.rightKey;
-        DashKey = savedData.dashKey;
+
         firstFight = savedData.FirstFight;
 
     }
 }
 public class SaveData
 {
-    public int totalSouls;
+    public int TotalSouls;
     public int healthUpgrades;
     public int damagesUpgrades;
     public int attackSpeedUpgrades;
@@ -245,7 +273,7 @@ public class SaveData
     public int critChance;
     public int critDamage;
     public int soulsAttract;
-
+    public int luck;
     public string WhichGameMode;
     //---- SETTINGS ----
     //FPS
@@ -256,12 +284,7 @@ public class SaveData
     public float sfxVolume;
     public bool IsAutoShoot;
     public bool IsAutoAim;
-    //Key Bidings
-    public string upKey;
-    public string downKey;
-    public string leftKey;
-    public string rightKey;
-    public string dashKey;
+
     //Carac
     public int playerHealth;
     public float playerDamages;
@@ -272,9 +295,11 @@ public class SaveData
     public int playerCritchance;
     public float playerCritDamages;
     public int playerSoulsA;
+    public int playerLuck;
     //Invoc
     public bool HasInvoc5;
     public bool HasInvoc6;
+    public bool HasInvoc7;
     //Invoc
     public string invocSlot1;
     public string invocSlot2;
@@ -293,9 +318,22 @@ public class SaveData
     public string WhichWeapon;
     public bool FirstFight;
     //Special
-    //Special
     public bool HasSpecial1;
     public bool HasSpecial2;
     public bool HasSpecial3;
     public string WhichSpecial;
+    //XP
+    public int Lvl;
+    public float Xp;
+    //Difficulty
+    public bool GeneralDifficulty;
+    public bool EnemyAmountDifficulty;
+    public bool XpAmountDifficulty;
+    public bool RerollDifficulty;
+    public bool NoDashDifficulty;
+    public bool NoChestDifficulty;
+    public bool NoInvocDifficulty;
+    public bool NoDrop;
+    public float PercentageBonus;
+
 }

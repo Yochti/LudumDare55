@@ -6,11 +6,17 @@ public class PlayMaintittle : MonoBehaviour
 {
     public GameObject optionPanel;
     public GameObject gameModePanel;
+    public GameObject recapPanel;
    
 
     public void chooseGameMode()
     {
         gameModePanel.SetActive(true);
+        recapPanel.SetActive(false);
+    }
+    public void RecapPanel()
+    {
+        recapPanel.SetActive(true);
     }
     public void backtomainmenuFromGameMode()
     {

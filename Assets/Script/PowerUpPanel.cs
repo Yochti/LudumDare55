@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+
 public class PowerUpPanel : MonoBehaviour
 {
     public GameObject[] powerUpButtons;
@@ -9,11 +10,11 @@ public class PowerUpPanel : MonoBehaviour
     public powerUpBuy powerUpBuyScript;
     public TextMeshProUGUI numberRollText;
 
-
     private void Update()
     {
         numberRollText.text = numberRoll.ToString();
     }
+
     public void ShowRandomPowerUps()
     {
         if (!panel.activeSelf) return;
@@ -25,20 +26,29 @@ public class PowerUpPanel : MonoBehaviour
 
         List<int> validIndices = GetValidPowerUpIndices();
 
-        int[] randomIndices = GetRandomIndices(3, validIndices.Count);
+        if (validIndices.Count == 0)
+        {
+            panel.SetActive(false);
+            return;
+        }
 
-
+        int numberToShow = Mathf.Min(3, validIndices.Count);
+        int[] randomIndices = GetRandomIndices(numberToShow, validIndices.Count);
 
         for (int i = 0; i < randomIndices.Length; i++)
         {
             int index = validIndices[randomIndices[i]];
-            powerUpButtons[index].SetActive(true);
+            if (index >= 0 && index < powerUpButtons.Length)
+            {
+                powerUpButtons[index].SetActive(true);
+            }
         }
     }
+
     public void ShowRandomPowerUpsButton()
     {
-
         if (numberRoll < 1) return;
+
         foreach (GameObject button in powerUpButtons)
         {
             button.SetActive(false);
@@ -46,14 +56,22 @@ public class PowerUpPanel : MonoBehaviour
 
         List<int> validIndices = GetValidPowerUpIndices();
 
-        int[] randomIndices = GetRandomIndices(3, validIndices.Count);
+        if (validIndices.Count == 0)
+        {
+            panel.SetActive(false);
+            return;
+        }
 
-
+        int numberToShow = Mathf.Min(3, validIndices.Count);
+        int[] randomIndices = GetRandomIndices(numberToShow, validIndices.Count);
 
         for (int i = 0; i < randomIndices.Length; i++)
         {
             int index = validIndices[randomIndices[i]];
-            powerUpButtons[index].SetActive(true);
+            if (index >= 0 && index < powerUpButtons.Length)
+            {
+                powerUpButtons[index].SetActive(true);
+            }
         }
         numberRoll--;
     }
@@ -62,19 +80,16 @@ public class PowerUpPanel : MonoBehaviour
     {
         List<int> validIndices = new List<int>();
 
-        // Vérifiez chaque bouton par rapport à son niveau actuel dans powerUpBuy
-        if (powerUpBuyScript.lvlS < 4) validIndices.Add(0);  // Exemple pour Sickle
-        if (powerUpBuyScript.lvlLa < 4) validIndices.Add(1); // Exemple pour Laser
-        if (powerUpBuyScript.lvlP < 3) validIndices.Add(2);  // Exemple pour Poison
-        if (powerUpBuyScript.lvlvAxes < 4) validIndices.Add(3); // Exemple pour Axes
-        if (powerUpBuyScript.lvlvF < 4) validIndices.Add(4);         
-        if (powerUpBuyScript.lvlBulletRain < 4) validIndices.Add(5);  
-
+        if (powerUpBuyScript.lvlS < 4) validIndices.Add(0);
+        if (powerUpBuyScript.lvlLa < 4) validIndices.Add(1);
+        if (powerUpBuyScript.lvlP < 4) validIndices.Add(2);
+        if (powerUpBuyScript.lvlvAxes < 5) validIndices.Add(3);
+        if (powerUpBuyScript.lvlvF < 5) validIndices.Add(4);
+        if (powerUpBuyScript.lvlBulletRain < 5) validIndices.Add(5);
 
         return validIndices;
     }
 
-    // Génération d'indices aléatoires
     private int[] GetRandomIndices(int count, int max)
     {
         int[] indices = new int[count];

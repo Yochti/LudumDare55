@@ -56,7 +56,7 @@ public class SniperWeapon : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(KeyCode.Mouse0)) // Si l'input est maintenu, charger
+            if (Input.GetKey(KeyCode.Mouse0)) 
             {
                 StartCharging();
             }
@@ -131,36 +131,50 @@ public class SniperWeapon : MonoBehaviour
         y = 0;
         isCharging = false;
 
-        int damage = Mathf.FloorToInt(Mathf.Lerp(baseDamage, maxDamage, currentChargeTime / (maxChargeTime - attackSpeed)));
-        if (Random.Range(1, 100) <= critChance)
-        {
-            damage = (int)(damage * (critDamage / 100f));
-            isCritical = true;
-        }
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, maxRange, enemyLayer);
+        float chargeRatio = currentChargeTime / (maxChargeTime - attackSpeed);
+        int damage = Mathf.FloorToInt(Mathf.Lerp(baseDamage, maxDamage, chargeRatio) * (1f + PlayerStats.additionalDamage));
 
-        if (hit.collider != null && hit.collider.GetComponent<EnemmiHealth>() != null)
+
+        isCritical = Random.Range(1, 101) <= critChance;
+        if (isCritical)
+            damage = Mathf.FloorToInt(damage * (critDamage / 100f));
+
+        Vector2 origin = transform.position;
+        Vector2 direction = transform.up;
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, maxRange, enemyLayer);
+
+        foreach (RaycastHit2D hit in hits)
         {
-            hit.collider.GetComponent<EnemmiHealth>().TakeDamage(damage);
-            DamagePopUp.Create(hit.transform.position, damage, isCritical);
-            isCritical = false;
-        }
-        else if (hit.collider != null && hit.collider.GetComponent<Boss1Health>() != null)
-        {
-            hit.collider.GetComponent<Boss1Health>().TakeDamage(damage);
-            DamagePopUp.Create(hit.transform.position, damage, isCritical);
-            isCritical = false;
+            if (hit.collider == null) continue;
+
+            if (hit.collider.TryGetComponent(out EnemmiHealth enemy))
+            {
+                if(enemy.currentHealth != enemy.maxHealth || !PlayerHealth.doubleDamage) DamagePopUp.Create(hit.point, damage, isCritical);
+
+                else DamagePopUp.Create(hit.point, damage*2, isCritical);
+
+                enemy.TakeDamage(damage);
+
+            }
+            else if (hit.collider.TryGetComponent(out Boss1Health boss))
+            {
+                boss.TakeDamage(damage);
+                DamagePopUp.Create(hit.point, damage, isCritical);
+            }
+
         }
 
         Color color = currentLineRenderer.startColor;
-        color.a = 1f; // Opacité totale lors du tir
+        color.a = 1f;
         currentLineRenderer.startColor = color;
         currentLineRenderer.endColor = color;
 
         Invoke(nameof(ClearLine), 0.2f);
-
-        currentChargeTime = 0f; // Réinitialise le temps de charge après le tir
+        currentChargeTime = 0f;
+        isCritical = false;
     }
+
 
     void ClearLine()
     {

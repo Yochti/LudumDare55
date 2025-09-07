@@ -10,8 +10,8 @@ public class PlayerStats : MonoBehaviour
     public static int healthRegen;
     public static float moveSpeed;
     public static float invincibilityFrame;
-    public static int critRate;
-    public static float critDamage;
+    public static int critRate = 25;
+    public static float critDamage = 175f;
     public static float luck;
     public saveSytem save;
     public static float xpModifier;
@@ -46,7 +46,8 @@ public class PlayerStats : MonoBehaviour
 
         attackSpeed = save.PlayerAttackSpeed;
         healthRegen = save.PlayerRegen;
-        moveSpeed = save.PlayerMoveSpeed;
+        if (save.PlayerMoveSpeed == 0) moveSpeed = 5f;
+        else moveSpeed = save.PlayerMoveSpeed;
 
         invincibilityFrame = save.PlayerFrame;
         if (save.InvincibilityFrame == 0)
@@ -54,23 +55,22 @@ public class PlayerStats : MonoBehaviour
             invincibilityFrame = 0.4f;  // Valeur par défaut
         }
 
-        critRate = save.PlayerCritchance;
-        if (save.PlayerCritchance == 0)
-        {
-            critRate = 15;  // Valeur par défaut
-        }
+        critRate += save.PlayerCritchance;
 
-        critDamage = save.PlayerCritDamages;
-        if (save.PlayerCritDamages == 0)
-        {
-            critDamage = 200f;  // Valeur par défaut
-        }
+        if (save.Luck == 0) luck = 0;
+        xpModifier = 0;
+        critDamage += save.PlayerCritDamages;
+
     }
 
     public static void additionalDmg(float addDmg)
     {
         additionalDamage += addDmg;
 
+    }
+    private void Update()
+    {
+        print(additionalDamage);
     }
     public static void addCrit(int critRateAdd, float critDmgAdd)
     {

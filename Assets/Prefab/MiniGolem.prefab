@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 1692674641730784639}
   - component: {fileID: 2137598157659540748}
   - component: {fileID: 2471327732374857331}
+  - component: {fileID: 4564904014097290339}
   m_Layer: 6
   m_Name: MiniGolem
   m_TagString: Enemy
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81133d7104893b488bc12c424713a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 95
   currentHealth: 0
   deathSFX: {fileID: 4860908189560402773}
   explosionVFXPrefab: {fileID: 1860452179276237136, guid: 4489978f146254a48b252542be528532, type: 3}
@@ -410,6 +411,21 @@ MonoBehaviour:
   speedBoostDropChance: 1
   upgradeDropChance: 0
   playerLuck: 0
+--- !u!114 &4564904014097290339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491700632731090606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 5.5
+  currentSpeed: 0
+  stunCooldown: 2
 --- !u!1 &6148154935456835669
 GameObject:
   m_ObjectHideFlags: 0

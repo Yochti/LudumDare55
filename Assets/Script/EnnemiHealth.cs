@@ -4,7 +4,7 @@ using System.Collections;
 
 public class EnemmiHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
     public AudioSource deathSFX;
     public ParticleSystem explosionVFXPrefab; // Prefab de l'effet d'explosion
@@ -15,8 +15,12 @@ public class EnemmiHealth : MonoBehaviour
     private Color originalColor;
     private int verificationScore;
     public bool hasBeenHit;
+    private PlayerHealth pH;
     void Start()
     {
+        pH = FindObjectOfType<PlayerHealth>();
+        if (pH == null)
+            Debug.LogWarning("Référence à PlayerHealth non trouvée !");
         verificationScore = 0;
         currentHealth = maxHealth;
         originalColor = sprite.color; // Sauvegarde de la couleur originale du sprite
@@ -24,11 +28,17 @@ public class EnemmiHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (currentHealth == maxHealth && PlayerHealth.doubleDamage) damage *= 2;
+
         sprite.color = Color.white; // Change la couleur pour indiquer des dégâts
         currentHealth -= damage;
-
+        
         if (currentHealth <= 0)
         {
+            if (EnemyWaveManager.hasRegenKillGolem)
+            {
+                pH.Heal(2);
+            }
             Die();
         }
         else

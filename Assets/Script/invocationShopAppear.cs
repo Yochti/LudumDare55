@@ -12,7 +12,26 @@ public class InvocationShopAppear : MonoBehaviour
 
     private void OnEnable()
     {
+        save.LoadData();
+
+        List<string> allInvocations = new List<string>
+        {
+            save.InvocSlot1,
+            save.InvocSlot2,
+            save.InvocSlot3,
+            save.InvocSlot4
+        };
+
+        // Vérifie s’il n’y a aucune invocation active
+        bool allEmpty = allInvocations.TrueForAll(string.IsNullOrEmpty);
+        if (allEmpty)
+        {
+            gameObject.SetActive(false); // Désactive complètement le panel
+            return;
+        }
+
         Time.timeScale = 0f;
+
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
@@ -25,38 +44,24 @@ public class InvocationShopAppear : MonoBehaviour
             { "Junktrap", invocPanels[2] },
             { "Hermes", invocPanels[3] },
             { "Dimitri", invocPanels[4] },
-            { "Hera", invocPanels[5] }
+            { "Hera", invocPanels[5] },
+            { "Izo", invocPanels[6] }
         };
 
-        save.LoadData();
-
-        if (string.IsNullOrEmpty(save.InvocSlot1))
-            save.InvocSlot1 = "Bababoy";
-        if (string.IsNullOrEmpty(save.InvocSlot2))
-            save.InvocSlot2 = "Name";
-        if (string.IsNullOrEmpty(save.InvocSlot3))
-            save.InvocSlot3 = "Junktrap";
-        if (string.IsNullOrEmpty(save.InvocSlot4))
-            save.InvocSlot4 = "Hermes";
-
-        ShowRandomInvocations();
+        ShowRandomInvocations(allInvocations);
     }
 
-    private void ShowRandomInvocations()
+    private void ShowRandomInvocations(List<string> allInvocations)
     {
-        List<string> allInvocations = new List<string>
-        {
-            save.InvocSlot1,
-            save.InvocSlot2,
-            save.InvocSlot3,
-            save.InvocSlot4
-        };
-
         HashSet<int> selectedIndices = new HashSet<int>();
-        while (selectedIndices.Count < 3)
+
+        while (selectedIndices.Count < 3 && selectedIndices.Count < allInvocations.Count)
         {
             int randomIndex = Random.Range(0, allInvocations.Count);
-            selectedIndices.Add(randomIndex);
+            if (!string.IsNullOrEmpty(allInvocations[randomIndex]))
+            {
+                selectedIndices.Add(randomIndex);
+            }
         }
 
         foreach (int index in selectedIndices)

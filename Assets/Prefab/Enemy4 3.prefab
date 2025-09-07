@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 2591895611422208679}
   - component: {fileID: 7058486935074670579}
   - component: {fileID: 5120334229752228667}
+  - component: {fileID: -9164025818027394459}
   m_Layer: 6
   m_Name: Enemy4 3
   m_TagString: Enemy
@@ -490,6 +491,20 @@ MonoBehaviour:
   attackDamage: 10
   enemyHp: {fileID: -4693336880265390284}
   detectionRadius: 8
+--- !u!114 &-9164025818027394459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857285634338656741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 6
+  stunCooldown: 2
 --- !u!1 &6437471225111103089
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0302fc818124843b9cc7784e709ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer1: {fileID: 9132808487557083869}
+  extraSpriteToDisable: {fileID: 9132808487557083869}
   attractSpeed: 40
   destructionDelay: 5
 --- !u!1 &7868163002637745683

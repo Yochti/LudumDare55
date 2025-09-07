@@ -10,8 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3301219655129516229}
   - component: {fileID: 5286903243475420599}
-  - component: {fileID: 3604878450116960572}
-  - component: {fileID: 7682020316111843103}
+  - component: {fileID: 4981866059654721963}
+  - component: {fileID: 4215359686968163560}
+  - component: {fileID: 8855292424310595924}
+  - component: {fileID: 2323267115725374898}
+  - component: {fileID: 4006006690576531834}
+  - component: {fileID: 8101110690439504682}
+  - component: {fileID: 3108873111866410832}
   m_Layer: 0
   m_Name: GAMEMANAGER
   m_TagString: Untagged
@@ -50,11 +55,60 @@ MonoBehaviour:
   - {fileID: 5140718148431446908, guid: ba2d4b8191a4cc949b780a472d4aa119, type: 3}
   - {fileID: 7566667275867037205, guid: 455e673aa1a462349849c8615a9abf70, type: 3}
   - {fileID: 801645912519270603, guid: a48aad556c308aa499ed2854bdea7d9d, type: 3}
-  spawnInterval: 15
-  enemiesPerWave: 5
-  wavesCount: 3
-  maxSpawnRange: 4
---- !u!114 &3604878450116960572
+  - {fileID: 5857285634338656741, guid: 39ef4c2a6cedccd4d9a347ecd70b93a1, type: 3}
+  - {fileID: 6977827353050025656, guid: 6898224216099874083db74f9437db4f, type: 3}
+  - {fileID: 7099781372076000237, guid: 15777c9a5465c104b81cea1d59c01ba9, type: 3}
+  - {fileID: 117350190930514185, guid: 2208e2997f6cdda4592e3daf2f58adda, type: 3}
+  - {fileID: 5631428006026131284, guid: 25b251a10909c4e47bdf67b599d273d7, type: 3}
+  - {fileID: 1491700632731090606, guid: 208c32ce632e740479866f688505805c, type: 3}
+  - {fileID: 1590331036323950346, guid: ac8e944cfff98114a88b7b077d35f3a5, type: 3}
+  - {fileID: 6663153977354861336, guid: cd34dd0767e74d846bab2811db24a28e, type: 3}
+  bossPrefabs5:
+  - {fileID: 4902051105938509024, guid: 0c6d3ed80e28a3e499953b3312f9c7bc, type: 3}
+  - {fileID: 2866625965084010780, guid: 1a312aa2159864647b6e0fa5dd0f2679, type: 3}
+  bossPrefabs10:
+  - {fileID: 3012851990810065665, guid: d4ee1158e12800d4e9fffafb8e4d9515, type: 3}
+  - {fileID: 1972092279587177863, guid: f01e4573494fd6441a8850241d948962, type: 3}
+  spawnInterval: 4
+  enemiesPerWave: 6
+  multiplicator: 3.5
+  wavesCount: 20
+  maxSpawnRange: 100
+  waveText: {fileID: 0}
+  player: {fileID: 0}
+  eHp:
+  - {fileID: 2807021187412462428, guid: 8ccb4ab826800af4dbda3aa191427629, type: 3}
+  - {fileID: 8782721222183716434, guid: 455e673aa1a462349849c8615a9abf70, type: 3}
+  - {fileID: -8736133378208771900, guid: 39ef4c2a6cedccd4d9a347ecd70b93a1, type: 3}
+  - {fileID: 1706019573270706140, guid: 2208e2997f6cdda4592e3daf2f58adda, type: 3}
+  - {fileID: 4593384292433521484, guid: 25b251a10909c4e47bdf67b599d273d7, type: 3}
+  - {fileID: 7855090738710770030, guid: 04c575c35cc41d447ac8fc9831f7112b, type: 3}
+  - {fileID: 3397782836574853039, guid: ac8e944cfff98114a88b7b077d35f3a5, type: 3}
+  - {fileID: 7855090738710770030, guid: ba2d4b8191a4cc949b780a472d4aa119, type: 3}
+  - {fileID: 7392678638600557120, guid: 6898224216099874083db74f9437db4f, type: 3}
+  - {fileID: 2982487201522353153, guid: 208c32ce632e740479866f688505805c, type: 3}
+  - {fileID: 1894243187005300201, guid: cd34dd0767e74d846bab2811db24a28e, type: 3}
+  - {fileID: 4013955343760137827, guid: a48aad556c308aa499ed2854bdea7d9d, type: 3}
+  bHp:
+  - {fileID: 6937689100921896247, guid: 0c6d3ed80e28a3e499953b3312f9c7bc, type: 3}
+  - {fileID: 5712180596353418740, guid: d4ee1158e12800d4e9fffafb8e4d9515, type: 3}
+  - {fileID: -2132600143221422538, guid: f01e4573494fd6441a8850241d948962, type: 3}
+  - {fileID: 6891115463559994302, guid: 1a312aa2159864647b6e0fa5dd0f2679, type: 3}
+  pH: {fileID: 0}
+  boss4AI: {fileID: 1139460347396022478, guid: 1a312aa2159864647b6e0fa5dd0f2679, type: 3}
+  eAI1: {fileID: 8950732210897556296, guid: ba2d4b8191a4cc949b780a472d4aa119, type: 3}
+  bulletEnemy: {fileID: -2069414905204056260, guid: 467815a030cbc6d44a1074ecad34f5d1, type: 3}
+  eAI3: {fileID: 8418067759230939452, guid: a48aad556c308aa499ed2854bdea7d9d, type: 3}
+  eAI5: {fileID: 5944386591504174411, guid: 6898224216099874083db74f9437db4f, type: 3}
+  eAI7: {fileID: 1793613709416867186, guid: 25b251a10909c4e47bdf67b599d273d7, type: 3}
+  eAI8: {fileID: 2137598157659540748, guid: 208c32ce632e740479866f688505805c, type: 3}
+  eAI9: {fileID: 2255856861963615962, guid: ac8e944cfff98114a88b7b077d35f3a5, type: 3}
+  eMirageAI: {fileID: 8053408821475762614, guid: cd34dd0767e74d846bab2811db24a28e, type: 3}
+  eBigAI: {fileID: 990942568040979826, guid: 8ccb4ab826800af4dbda3aa191427629, type: 3}
+  powerUpPanel: {fileID: 0}
+  currentWave: 0
+  winPanel: {fileID: 0}
+--- !u!114 &4981866059654721963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,11 +117,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3790628068686049931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1abf891d37f4cc468cee351bbe9c1d7, type: 3}
+  m_Script: {fileID: 11500000, guid: b6c82021b6b081a48bd0d68139dd5e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelShop: {fileID: 0}
---- !u!114 &7682020316111843103
+  killPlayer: {fileID: 0}
+  damagePlayer: {fileID: 0}
+  killBababoy: {fileID: 0}
+  damageBababoy: {fileID: 0}
+  healName: {fileID: 0}
+  damageJunktrap: {fileID: 0}
+  killJunktrap: {fileID: 0}
+  damageH: {fileID: 0}
+  killH: {fileID: 0}
+  healH: {fileID: 0}
+  damageDimitri: {fileID: 0}
+  killDimitri: {fileID: 0}
+  pDamage: {fileID: 4215359686968163560}
+  bDmg: {fileID: 0}
+  kStats: {fileID: 8855292424310595924}
+  WaveText: {fileID: 0}
+--- !u!114 &4215359686968163560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,6 +145,170 @@ MonoBehaviour:
   m_GameObject: {fileID: 3790628068686049931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6845d098d0f22b74d833518a20b01096, type: 3}
+  m_Script: {fileID: 11500000, guid: 212c3ba0e217618499f759fa7860dbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDamageInt: 0
+  fois3PortalsDamage: 0
+  explosionPortalsDamage: 0
+  dimitriDamage: 0
+  healAmoutName: 0
+  healAmoutTurret: 0
+  dmgTurret1: 0
+  dmgTurret3: 0
+  totalHDamage: 0
+  dmgMine: 0
+  dmgTrap3: 0
+  totalTDamage: 0
+--- !u!114 &8855292424310595924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790628068686049931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d33409efc06f041bdd4ff15b293602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killPlayer: 0
+  killBababoy: 0
+  trap3kill: 0
+  mineTrapKill: 0
+  totalkillJunktrap: 0
+  turret1kill: 0
+  turet3kill: 0
+  totalkillH: 0
+  fois3kill: 0
+  explosiveBullet: 0
+  totalKillDimitri: 0
+--- !u!114 &2323267115725374898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790628068686049931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59a12d14c5c69a489dc3817ef523561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalSouls: 0
+  HealthUpgrades: 0
+  DamagesUpgrades: 0
+  AttackSpeedUpgrades: 0
+  SpeedUpgrades: 0
+  HealthRegen: 0
+  InvincibilityFrame: 0
+  CritChance: 0
+  CritDamage: 0
+  SoulsAttract: 0
+  whichGameMode: 
+  GlobalVolume: 0
+  MusicVolume: 0
+  SFXVolume: 0
+  isAutoShoot: 0
+  isAutoAim: 0
+  MaxFps: 0
+  UpKey: 
+  DownKey: 
+  LeftKey: 
+  RightKey: 
+  DashKey: 
+  PlayerHealth: 0
+  PlayerDamages: 0
+  PlayerAttackSpeed: 0
+  PlayerMoveSpeed: 0
+  PlayerRegen: 0
+  PlayerFrame: 0
+  PlayerCritchance: 0
+  PlayerCritDamages: 0
+  PlayerSoulsA: 0
+  InvocSlot1: 
+  InvocSlot2: 
+  InvocSlot3: 
+  InvocSlot4: 
+  firstFight: 0
+  hasInvoc5: 0
+  hasInvoc6: 0
+  hasGun1: 0
+  hasGun2: 0
+  hasGun3: 0
+  hasGun4: 0
+  hasGun5: 0
+  hasGun6: 0
+  hasGun7: 0
+  hasGun8: 0
+  whichWeapon: 
+  hasSpecial1: 1
+  hasSpecial2: 0
+  hasSpecial3: 0
+  whichSpecial: 
+--- !u!114 &4006006690576531834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790628068686049931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d069c3e66873b459e3192fa0c304ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClientID: 1300956832465948762
+  AllowDiscordRPCUpdate: 1
+  DiscordUpateTime: 3
+--- !u!114 &8101110690439504682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790628068686049931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d29a26506b34443a0aff7230c4d80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
+  ally1: {fileID: 0}
+  ally2: {fileID: 0}
+  ally3: {fileID: 0}
+  ally4: {fileID: 0}
+  bulletAlly: {fileID: -8272091742248328753, guid: 80d0527dc4a12624f80c7f3997cb5693, type: 3}
+  bulletH: {fileID: 5966119669035650796, guid: 4bdcbe17482805546b69daa3133ef24a, type: 3}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+  player: {fileID: 0}
+  friendHolder: {fileID: 0}
+  bababoy: {fileID: 0}
+  bababoy2: {fileID: 0}
+  namee: {fileID: 0}
+  JunkTrap: {fileID: 0}
+  heiMERDEinger: {fileID: 0}
+  Dimitri: {fileID: 0}
+  hera: {fileID: 0}
+  bababoyStatus: 0
+  nameStatus: 0
+  junktrapStatus: 0
+  hStatus: 0
+  dimitriStatus: 0
+  heraStatus: 0
+  lvlToRevive: 0
+--- !u!114 &3108873111866410832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790628068686049931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acc16d8837a66f4098c7d330b748318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves: {fileID: 5286903243475420599}
+  addPoints: {fileID: 1227178605456889943, guid: ef8ae42e505d78a47b6f5a8e160373b7, type: 3}

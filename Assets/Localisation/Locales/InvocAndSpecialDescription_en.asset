@@ -19,19 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 6389116928
-    m_Localized: Bababoy is a summon that deals a lot of damage.
+    m_Localized: Bababoy
     m_Metadata:
       m_Items: []
   - m_Id: 76903755776
-    m_Localized: Name is a support summon that heals you.
+    m_Localized: Name
     m_Metadata:
       m_Items: []
   - m_Id: 90027732992
-    m_Localized: Junktrap is a summon that lays traps on the battlefield.
+    m_Localized: Junktrap
     m_Metadata:
       m_Items: []
   - m_Id: 113822019584
-    m_Localized: Hermes is a versatile summon thanks to the turrets he deploys.
+    m_Localized: Hermes
     m_Metadata:
       m_Items: []
   - m_Id: 130783784960
@@ -39,21 +39,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 149242916864
-    m_Localized: Hera is a versatile summon thanks to the special effect zones surrounding
-      her.
+    m_Localized: Hera
     m_Metadata:
       m_Items: []
   - m_Id: 1858115612672
-    m_Localized: Allows you to shoot two portals, teleporting you from one to the
-      other.
+    m_Localized: Portal
     m_Metadata:
       m_Items: []
   - m_Id: 2021408256000
-    m_Localized: Allows you to clone yourself for 15 seconds.
+    m_Localized: Clone
     m_Metadata:
       m_Items: []
   - m_Id: 1397187549474816
-    m_Localized: Takes the monsters' aggro in your place.
+    m_Localized: Poutch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77936554962489344
+    m_Localized: IZO
     m_Metadata:
       m_Items: []
   references:

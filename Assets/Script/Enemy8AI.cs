@@ -1,114 +1,143 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy8AI : MonoBehaviour
 {
-    public float detectionRadius = 10f;   // Rayon de détection pour fusionner avec d'autres petits golems
-    public float moveSpeed = 5f;          // Vitesse de déplacement
-    public GameObject largeGolemPrefab;   // Préfabriqué du grand golem
-    public float playerDetectionRadius = 15f; // Rayon de détection du joueur
-    public int damage = 10;               // Dégâts infligés au joueur
-    public float attackCooldown = 1f;     // Temps entre chaque attaque du joueur
-    public float attackRange = 2.5f;
-    private bool isMerging = false;       // Est-ce que ce golem est en train de fusionner ?
-    private Transform player;             // Référence au joueur
-    private float nextAttackTime = 0f;    // Temps de la prochaine attaque autorisée
+    [Header("Fusion Settings")]
+    public float detectionRadius = 10f;
+    public GameObject largeGolemPrefab;
+    public float fusionDistance = 1.5f;
+    public float fusionCheckInterval = 0.5f;
+
+    [Header("Movement Settings")]
+    public float moveSpeed = 5f;
+    public float attackRange = 3.5f;
+
+    [Header("Combat Settings")]
+    public int damage = 10;
+    public float attackCooldown = 1f;
+
+    private float nextAttackTime = 0f;
+    private float nextFusionCheckTime = 0f;
+
+    private bool isMerging = false;
+    private Transform player;
     private Rigidbody2D rb;
+    private EnemyC enemyC;
+    private GameObject fusionTarget;
+
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyC = GetComponent<EnemyC>();
         rb = GetComponent<Rigidbody2D>();
 
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
     }
 
     private void Update()
     {
-        if (!isMerging)
+        if (isMerging || player == null) return;
+
+        if (Time.time >= nextFusionCheckTime)
         {
-            GameObject closestGolem = FindClosestGolem();
+            fusionTarget = FindClosestGolem();
+            nextFusionCheckTime = Time.time + fusionCheckInterval;
+        }
 
-            if (closestGolem != null)
+        if (fusionTarget != null)
+        {
+            float sqrDist = ((Vector2)fusionTarget.transform.position - (Vector2)transform.position).sqrMagnitude;
+            if (sqrDist <= fusionDistance * fusionDistance)
             {
-                MoveTowards(closestGolem.transform.position);
+                FuseWithGolem(fusionTarget);
+            }
+        }
+    }
 
-                if (Vector2.Distance(transform.position, closestGolem.transform.position) <= 1.5f)
-                {
-                    FuseWithGolem(closestGolem);
-                }
-            }
-            else
-            {
-                MoveTowardsPlayer();
-            }
+    private void FixedUpdate()
+    {
+        if (isMerging || player == null) return;
+
+        moveSpeed = enemyC.currentSpeed;
+
+        if (fusionTarget != null)
+        {
+            MoveTowards(fusionTarget.transform.position);
+        }
+        else
+        {
+            MoveTowardsPlayer();
         }
     }
 
     private GameObject FindClosestGolem()
     {
-        Collider2D[] nearbyGolems = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
-        GameObject closestGolem = null;
-        float closestDistance = Mathf.Infinity;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+        GameObject closest = null;
+        float minSqrDist = Mathf.Infinity;
+        Vector2 currentPos = transform.position;
 
-        foreach (Collider2D golemCollider in nearbyGolems)
+        foreach (Collider2D col in hits)
         {
-            if (golemCollider != null && golemCollider.gameObject != this.gameObject)
+            if (col.gameObject == gameObject) continue;
+
+            Enemy8AI other = col.GetComponent<Enemy8AI>();
+            if (other != null && !other.isMerging)
             {
-                Enemy8AI otherGolemAI = golemCollider.GetComponent<Enemy8AI>();
-                if (otherGolemAI != null && !otherGolemAI.isMerging)
+                float sqrDist = ((Vector2)col.transform.position - currentPos).sqrMagnitude;
+                if (sqrDist < minSqrDist)
                 {
-                    float distance = Vector2.Distance(transform.position, golemCollider.transform.position);
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        closestGolem = golemCollider.gameObject;
-                    }
+                    minSqrDist = sqrDist;
+                    closest = col.gameObject;
                 }
             }
         }
 
-        return closestGolem;
+        return closest;
     }
 
-    private void MoveTowards(Vector2 targetPosition)
+    private void MoveTowards(Vector2 target)
     {
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
     }
 
     private void MoveTowardsPlayer()
     {
-        Vector2 direction = (player.position - transform.position).normalized;
-
+        Vector2 direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
         rb.velocity = direction * moveSpeed;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer <= attackRange)
+        float sqrDist = ((Vector2)player.position - (Vector2)transform.position).sqrMagnitude;
+        if (sqrDist <= attackRange * attackRange)
         {
             AttackPlayer();
-            
         }
     }
-
 
     private void AttackPlayer()
     {
         if (Time.time >= nextAttackTime)
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(damage);
-            nextAttackTime = Time.time + attackCooldown;
+            PlayerHealth health = player.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+                nextAttackTime = Time.time + attackCooldown;
+            }
         }
     }
 
     private void FuseWithGolem(GameObject otherGolem)
     {
+        if (otherGolem == null) return;
+
         isMerging = true;
-        Vector2 fusionPosition = (transform.position + otherGolem.transform.position) / 2;
-        Instantiate(largeGolemPrefab, fusionPosition, Quaternion.identity);
+        Vector2 fusionPos = (transform.position + otherGolem.transform.position) * 0.5f;
+        Instantiate(largeGolemPrefab, fusionPos, Quaternion.identity);
 
         Destroy(otherGolem);
         Destroy(gameObject);
     }
-
-   
 }

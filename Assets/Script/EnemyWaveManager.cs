@@ -28,30 +28,34 @@ public class EnemyWaveManager : MonoBehaviour
     public Enemy9AI eAI9;
     public MirageEnemy eMirageAI;
     public LargeGolemAI eBigAI;
-
+    public static bool hasRegenKillGolem;
+    public static bool hasSpeedBoostWaveActivated;
     public GameObject powerUpPanel;
     public int currentWave = 0;
     private bool isWaveActive = false;
     public GameObject winPanel;
+    public saveSytem save;
     void Start()
     {
-        currentWave = 0;
         for (int i = 0; i < eHp.Length; i++)
         {
             eHp[i].maxHealth = 95;
         }
         eHp[11].maxHealth = 45;
         eHp[0].maxHealth = 200;
+
         for (int y = 0; y < bHp.Length; y++)
         {
             bHp[y].maxHealth = 2100;
         }
-        bHp[3].maxHealth = 1100;
-        boss4AI.numberOfSmallEnemies = 20;
+        bHp[3].maxHealth = 1350;
+        bHp[2].maxHealth = 1600;
+
+        // Valeurs de base des ennemis
         eAI1.damage = 10;
         bulletEnemy.bulletDamage = 8f;
         eAI3.explosionDamage = 40f;
-        eAI3.moveSpeed = 7.5f;
+        eAI3.moveSpeed = 8f;
         eAI5.attackDamage = 14;
         eAI7.damage = 11;
         eAI8.damage = 12;
@@ -61,7 +65,33 @@ public class EnemyWaveManager : MonoBehaviour
         eMirageAI.maxIllusions = 4;
         eBigAI.damage = 16;
 
+        if (save.generalDifficulty)
+        {
+            for (int i = 0; i < eHp.Length; i++)
+            {
+                eHp[i].maxHealth += 45; 
+            }
 
+            for (int y = 0; y < bHp.Length; y++)
+            {
+                bHp[y].maxHealth += 400; 
+            }
+
+            eAI1.damage += 4f;
+            bulletEnemy.bulletDamage += 3f;
+            eAI3.explosionDamage += 10f;
+            eAI3.moveSpeed += 0.5f;
+            eAI5.attackDamage += 5;
+            eAI7.damage += 4;
+            eAI8.damage += 4;
+            eAI8.moveSpeed += 0.5f;
+            eAI9.attackDamage += 4;
+            eMirageAI.attackDamage += 5;
+            eMirageAI.maxIllusions += 1;
+            eBigAI.damage += 6;
+        }
+        if (save.enemyAmountDifficulty) multiplicator = 5f;
+        else multiplicator = 3.5f;
         StartCoroutine(InitialDelay());
     }
 
@@ -73,7 +103,9 @@ public class EnemyWaveManager : MonoBehaviour
 
     void StartNextWave()
     {
+        if(hasRegenKillGolem) pH.currentHealth = (int)(PlayerHealth.maxHealth * 0.15f);
         StartCoroutine(SpawnWave());
+
         if ((currentWave + 1) == 10 || (currentWave > 0 && (currentWave + 1) % 10 == 0))
         {
             SpawnBoss10();
@@ -86,14 +118,21 @@ public class EnemyWaveManager : MonoBehaviour
             SpawnBoss5();
             IncreaseEnemyStats10();
         }
+
     }
 
     IEnumerator SpawnWave()
     {
         
+        
         isWaveActive = true;
 
         SpawnEnemy();
+        if (hasSpeedBoostWaveActivated)
+        {
+            PlayerStats.moveSpeed += 4f;
+            StartCoroutine(ReduceMoveSpeedGradually(4f, 12f));
+        }
         yield return new WaitForSeconds(spawnInterval);
 
         yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0);
@@ -105,12 +144,9 @@ public class EnemyWaveManager : MonoBehaviour
             yield return new WaitForSeconds(0.8f);
             pH.Heal(PlayerStats.healthRegenWaves);
             powerUpPanel.SetActive(true);
-            waveText.gameObject.SetActive(true);
             waveText.text = "Wave " + (currentWave + 1);
 
             yield return new WaitForSeconds(0.01f);
-            waveText.gameObject.SetActive(false);
-
             yield return new WaitForSeconds(1f);
             StartNextWave();
         }
@@ -121,12 +157,28 @@ public class EnemyWaveManager : MonoBehaviour
             Cursor.visible = true;
         }
     }
+    private IEnumerator ReduceMoveSpeedGradually(float totalReduction, float duration)
+    {
+        float elapsed = 0f;
+        float stepTime = 0.5f;
+        int steps = Mathf.RoundToInt(duration / stepTime);
+        float speedStep = totalReduction / steps;
+
+        while (elapsed < duration)
+        {
+            yield return new WaitForSeconds(stepTime);
+            PlayerStats.moveSpeed -= speedStep;
+            elapsed += stepTime;
+        }
+
+        PlayerStats.moveSpeed = Mathf.Max(0, PlayerStats.moveSpeed);
+    }
 
     void IncreaseEnemyStats5()
     {
         for (int i = 0; i < eHp.Length; i++)
         {
-            eHp[i].maxHealth += 15;
+            eHp[i].maxHealth += 20;
         }
     }
     void IncreaseEnemyStats10()
@@ -139,7 +191,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             bHp[y].maxHealth += 650;
         }
-        boss4AI.numberOfSmallEnemies += 10;
+        boss4AI.numberOfSmallEnemies += 20;
         eAI1.damage += 6f;
         eAI1.moveSpeed += .2f;
         eAI3.explosionDamage += 10f;

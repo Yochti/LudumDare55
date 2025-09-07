@@ -1,199 +1,202 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 
 public class InvocShopBuy : MonoBehaviour
 {
     public saveSytem save;
-    public int maxInvoc = 4; // Nombre maximum d'invocations sélectionnables
-    public AudioSource audioo;  // Son d'achat réussi
-    public AudioSource audioo2; // Son d'achat échoué
-    public PurchaseConfirmationPanelInvocation confirmationPanel;  // Référence au panneau de confirmation
 
-    // TextMeshProUGUI associés à chaque invocation pour afficher le numéro de sélection
-    public TextMeshProUGUI textInvoc1;
-    public TextMeshProUGUI textInvoc2;
-    public TextMeshProUGUI textInvoc3;
-    public TextMeshProUGUI textInvoc4;
-    public TextMeshProUGUI textInvoc5;
-    public TextMeshProUGUI textInvoc6;
+    public Button invocButton;
+    public Image progressBar;
+    public Image background;
+    public Image background2;
+    public TextMeshProUGUI selectionText;
 
-    private List<string> selectedInvocs = new List<string>(); // Liste pour suivre les invocations sélectionnées
+    public string invocName;
+    public int price;
+
+    public Color baseColor;
+    public Color purchasedBarColor;
+    public Color notOwnedColor;
+    public Color ownedColor;
+    public Color equippedColor;
+
+    public AudioSource audioPurchase;
+    public AudioSource audioDenied;
+
+    private bool isHolding = false;
+    private float holdTime = 1f;
+    private Coroutine holdCoroutine;
 
     private void Start()
     {
-        ResetAllText(); // Initialise les textes
-        save.LoadData(); // Charge les données sauvegardées
-        LoadSelectedInvocations(); // Recharge les invocations sélectionnées précédemment
+        LoadSelectedInvocations();
+        UpdateVisualState();
     }
 
-    // Réinitialise tous les textes de sélection
-    void ResetAllText()
+    private void Update()
     {
-        textInvoc1.text = "";
-        textInvoc2.text = "";
-        textInvoc3.text = "";
-        textInvoc4.text = "";
-        textInvoc5.text = "";
-        textInvoc6.text = "";
+        UpdateVisualState();
     }
 
-    // Ajoute une invocation à la liste sélectionnée
-    void AddInvocation(string invocName, TextMeshProUGUI invocText)
+    public void OnPointerDown()
     {
-        if (selectedInvocs.Count >= maxInvoc) return; // Limite le nombre de sélections
-
-        selectedInvocs.Add(invocName); // Ajoute l'invocation à la liste
-        UpdateInvocText(); // Met à jour les numéros affichés
-        SaveSelectedInvocations(); // Sauvegarde l'ordre des invocations
-    }
-
-    // Supprime une invocation de la liste sélectionnée
-    void RemoveInvocation(string invocName)
-    {
-        selectedInvocs.Remove(invocName); // Retire l'invocation de la liste
-        UpdateInvocText(); // Met à jour les numéros affichés
-        SaveSelectedInvocations(); // Sauvegarde l'ordre des invocations
-    }
-
-    // Vérifie si une invocation est déjà sélectionnée
-    bool IsInvocSelected(string invocName)
-    {
-        return selectedInvocs.Contains(invocName); // Retourne true si l'invocation est déjà dans la liste
-    }
-
-    // Gère l'ajout ou le retrait de l'invocation lorsqu'on clique dessus
-    void ToggleInvocation(string invocName, TextMeshProUGUI invocText)
-    {
-        if (IsInvocSelected(invocName))
+        if (IsInvocationOwned())
         {
-            RemoveInvocation(invocName);
+            ToggleInvocation();
         }
-        else
+        else if (!isHolding)
         {
-            AddInvocation(invocName, invocText);
+            holdCoroutine = StartCoroutine(HoldToBuy());
         }
     }
 
-    // Méthodes pour chaque invocation (à lier à chaque bouton)
-    public void Invocation1()
+    public void OnPointerUp()
     {
-        ToggleInvocation("Bababoy", textInvoc1);
-    }
-
-    public void Invocation2()
-    {
-        ToggleInvocation("Name", textInvoc2);
-    }
-
-    public void Invocation3()
-    {
-        ToggleInvocation("Junktrap", textInvoc3);
-    }
-
-    public void Invocation4()
-    {
-        ToggleInvocation("Hermes", textInvoc4);
-    }
-
-    public void Invocation5()
-    {
-        TryPurchaseInvocation("Dimitri", 5000, textInvoc5);
-    }
-
-    public void Invocation6()
-    {
-        TryPurchaseInvocation("Hera", 5000, textInvoc6);
-    }
-
-    public void TryPurchaseInvocation(string invocName, int price, TextMeshProUGUI invocText)
-    {
-        // Vérifie si l'invocation est déjà possédée
-        if (HasInvocation(invocName))
+        if (isHolding && holdCoroutine != null)
         {
-            ToggleInvocation(invocName, invocText);
-        }
-        else
-        {
-            confirmationPanel.ShowConfirmation(invocName, price, this);
+            StopCoroutine(holdCoroutine);
+            ResetProgressBar();
+            isHolding = false;
         }
     }
 
-    // Confirmation d'achat (appelée par le panneau de confirmation)
-    public void PurchaseInvocation(string invocName, int price)
+    private IEnumerator HoldToBuy()
     {
-        if (save.TotalSouls >= price)
+        isHolding = true;
+        float elapsedTime = 0f;
+        progressBar.fillAmount = 0f;
+
+        while (elapsedTime < holdTime)
         {
-            audioo.Play();  // Joue le son d'achat réussi
-            save.TotalSouls -= price;
-            AssignInvocationOwnership(invocName);
+            elapsedTime += Time.deltaTime;
+            progressBar.fillAmount = elapsedTime / holdTime;
+            yield return null;
+        }
+
+        progressBar.fillAmount = 1f;
+        PurchaseInvocation();
+        isHolding = false;
+    }
+
+    private void PurchaseInvocation()
+    {
+        if (save.totalSouls >= price)
+        {
+            save.totalSouls -= price;
+            AssignInvocationOwnership();
+            audioPurchase?.Play();
             save.SaveData();
+            ResetProgressBar();
+            UpdateVisualStateAll();
         }
         else
         {
-            audioo2.Play();  // Joue le son d'achat échoué
+            audioDenied?.Play();
+            ResetProgressBar();
         }
     }
 
-    private void AssignInvocationOwnership(string invocName)
+    private void ResetProgressBar()
+    {
+        progressBar.fillAmount = 0f;
+    }
+
+    private void ToggleInvocation()
+    {
+        List<string> selected = GetSelectedInvocations();
+
+        if (selected.Contains(invocName))
+        {
+            selected.Remove(invocName);
+        }
+        else if (selected.Count < 4)
+        {
+            selected.Add(invocName);
+        }
+
+        SaveSelectedInvocations(selected);
+        save.SaveData();
+        UpdateVisualStateAll();
+    }
+
+    private void UpdateVisualState()
+    {
+        List<string> selected = GetSelectedInvocations();
+
+        if (!IsInvocationOwned())
+        {
+            background2.color = notOwnedColor;
+            background.color = notOwnedColor;
+            selectionText.text = "";
+        }
+        else if (selected.Contains(invocName))
+        {
+            background2.color = equippedColor;
+            background.color = equippedColor;
+            selectionText.text = (selected.IndexOf(invocName) + 1).ToString();
+        }
+        else
+        {
+            background2.color = ownedColor;
+            background.color = ownedColor;
+            selectionText.text = "";
+        }
+
+    }
+
+    private void UpdateVisualStateAll()
+    {
+        foreach (InvocShopBuy invoc in FindObjectsOfType<InvocShopBuy>())
+        {
+            invoc.UpdateVisualState();
+        }
+    }
+
+    private bool IsInvocationOwned()
+    {
+        return invocName == "Bababoy" ||
+               invocName == "Name" ||
+               invocName == "Junktrap" ||
+               invocName == "Hermes" ||
+               (invocName == "Dimitri" && save.hasInvoc5) ||
+               (invocName == "Hera" && save.hasInvoc6) ||
+               (invocName == "Izo" && save.hasInvoc7); 
+    }
+
+    private void AssignInvocationOwnership()
     {
         switch (invocName)
         {
             case "Dimitri": save.hasInvoc5 = true; break;
             case "Hera": save.hasInvoc6 = true; break;
+            case "Izo": save.hasInvoc7 = true; break; 
         }
     }
 
-    private bool HasInvocation(string invocName)
+
+    private List<string> GetSelectedInvocations()
     {
-        switch (invocName)
-        {
-            case "Dimitri": return save.hasInvoc5;
-            case "Hera": return save.hasInvoc6;
-            default: return false;
-        }
+        List<string> selected = new List<string>();
+        if (!string.IsNullOrEmpty(save.InvocSlot1)) selected.Add(save.InvocSlot1);
+        if (!string.IsNullOrEmpty(save.InvocSlot2)) selected.Add(save.InvocSlot2);
+        if (!string.IsNullOrEmpty(save.InvocSlot3)) selected.Add(save.InvocSlot3);
+        if (!string.IsNullOrEmpty(save.InvocSlot4)) selected.Add(save.InvocSlot4);
+        return selected;
     }
 
-    // Met à jour les textes des invocations et sauvegarde les sélections
-    void UpdateInvocText()
+    private void SaveSelectedInvocations(List<string> selected)
     {
-        ResetAllText(); // Réinitialise les textes avant de les réattribuer
-
-        for (int i = 0; i < selectedInvocs.Count; i++)
-        {
-            string invocName = selectedInvocs[i];
-            string number = (i + 1).ToString(); // Le numéro est l'index + 1
-
-            // Réattribue les numéros en fonction des invocations sélectionnées
-            if (invocName == "Bababoy") textInvoc1.text = number;
-            else if (invocName == "Name") textInvoc2.text = number;
-            else if (invocName == "Junktrap") textInvoc3.text = number;
-            else if (invocName == "Hermes") textInvoc4.text = number;
-            else if (invocName == "Dimitri") textInvoc5.text = number;
-            else if (invocName == "Hera") textInvoc6.text = number;
-        }
+        save.InvocSlot1 = selected.Count > 0 ? selected[0] : "";
+        save.InvocSlot2 = selected.Count > 1 ? selected[1] : "";
+        save.InvocSlot3 = selected.Count > 2 ? selected[2] : "";
+        save.InvocSlot4 = selected.Count > 3 ? selected[3] : "";
     }
 
-    // Sauvegarde l'état des invocations sélectionnées
-    void SaveSelectedInvocations()
+    private void LoadSelectedInvocations()
     {
-        save.InvocSlot1 = selectedInvocs.Count > 0 ? selectedInvocs[0] : "";
-        save.InvocSlot2 = selectedInvocs.Count > 1 ? selectedInvocs[1] : "";
-        save.InvocSlot3 = selectedInvocs.Count > 2 ? selectedInvocs[2] : "";
-        save.InvocSlot4 = selectedInvocs.Count > 3 ? selectedInvocs[3] : "";
-
-        save.SaveData(); // Appelle la fonction pour sauvegarder les données
-    }
-
-    // Recharge les invocations sélectionnées lors du chargement des données
-    void LoadSelectedInvocations()
-    {
-        // Recharge les invocations des slots de sauvegarde
-        if (!string.IsNullOrEmpty(save.InvocSlot1)) selectedInvocs.Add(save.InvocSlot1);
-        if (!string.IsNullOrEmpty(save.InvocSlot2)) selectedInvocs.Add(save.InvocSlot2);
-        if (!string.IsNullOrEmpty(save.InvocSlot3)) selectedInvocs.Add(save.InvocSlot3);
-        if (!string.IsNullOrEmpty(save.InvocSlot4)) selectedInvocs.Add(save.InvocSlot4);
-
-        UpdateInvocText(); // Met à jour l'affichage des textes après chargement
+        // Cette fonction est gardée au cas où tu veux initialiser manuellement plus tard
     }
 }

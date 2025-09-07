@@ -17,14 +17,19 @@ public class MirageEnemy : MonoBehaviour
     private Vector3 targetPosition;
     public float detectionRadius = 8f;
     private Transform poutch;
+    private EnemyC enemyC;
+
     void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         timeSinceLastIllusion = 5f;
     }
 
     void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
         if (poutch == null)
         {
             GameObject poutchObject = GameObject.FindGameObjectWithTag("Poutch");

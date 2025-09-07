@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 569454396590649463}
   - component: {fileID: 990942568040979826}
   - component: {fileID: 6934482282147861439}
+  - component: {fileID: 2741686127935356503}
   m_Layer: 6
   m_Name: BigGolem (1)
   m_TagString: Enemy
@@ -642,6 +643,20 @@ MonoBehaviour:
   speedBoostDropChance: 1
   upgradeDropChance: 0
   playerLuck: 0
+--- !u!114 &2741686127935356503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934414819551043130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 4
+  stunCooldown: 2
 --- !u!1 &8215816902124581309
 GameObject:
   m_ObjectHideFlags: 0

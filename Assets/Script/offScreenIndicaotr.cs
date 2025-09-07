@@ -9,7 +9,7 @@ public class OffScreenIndicator : MonoBehaviour
     public float minDistance = 30f;
     private RectTransform canvasRectTransform;
     public TextMeshProUGUI textMeters;
-
+    public string nameTag;
     void Start()
     {
         canvasRectTransform = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
@@ -17,7 +17,7 @@ public class OffScreenIndicator : MonoBehaviour
 
     void Update()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(nameTag);
 
         Transform closestEnemy = GetClosestEnemy(enemies);
 

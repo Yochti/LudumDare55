@@ -13,9 +13,13 @@ public class Boss1Health : MonoBehaviour
     private Slider easeSlider;
     private float lerpSpeed = 0.01f;
     public bool hasBeenHit;
-
+    public static bool hasRegenBossKill;
+    private PlayerHealth playerHealth;
     void Start()
     {
+        hasRegenBossKill = false;
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        print(playerHealth);
         currentHealth = maxHealth;
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
         easeSlider = GameObject.Find("EaseSlider").GetComponent<Slider>();
@@ -42,6 +46,7 @@ public class Boss1Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            if (hasRegenBossKill) playerHealth.currentHealth = maxHealth;
 
             Die();
         }
@@ -62,7 +67,6 @@ public class Boss1Health : MonoBehaviour
         {
             Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
         }
-
         deathSFX.Play();
         CameraShake.Instance.ShakeCamera(3f, 0.1f);
         Score.ScoreCount += scorePoint;

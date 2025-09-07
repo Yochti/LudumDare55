@@ -16,13 +16,17 @@ public class Enemy9AI : MonoBehaviour
     public float detectionRadius = 8f;
     private Vector3 targetPosition;
     private Transform poutch;
+    private EnemyC enemyC;
+
     void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
         if (!isDead && player != null)
         {
             if (poutch == null)

@@ -23,6 +23,10 @@ public class killAmountStats : MonoBehaviour
 
 
     public static int totalKill;
+    private void Start()
+    {
+        totalKill = 0;
+    }
     public void IncreaseKillPlayer()
     {
         killPlayer++;

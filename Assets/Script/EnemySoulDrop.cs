@@ -8,15 +8,13 @@ public class EnemySoulDrop : MonoBehaviour
 
     public int soulAmount = 1;        // Nombre d'âmes à faire apparaître
 
-    // Taux de drop (en pourcentage)
-    public float magnetDropChance = 0.3f;   // 0.5% de chance pour l'aimant
-    public float healthDropChance = 1.5f;   // 1.5% de chance pour le soin
+    public float magnetDropChance = 0.3f;   
+    public float healthDropChance = 1.5f;   
     [HideInInspector] public float upgradeDropChance;
 
 
     private void OnDestroy()
     {
-        upgradeDropChance = GetUpgradeDropChance(staticRef.wavesS);
 
         GenerateSouls();
         GenerateDrops();
@@ -59,19 +57,4 @@ public class EnemySoulDrop : MonoBehaviour
         }
     }
 
-    public float GetUpgradeDropChance(int currentWave)
-    {
-        float initialDropChance = 0.025f;
-
-        float decayFactor = 0.18f;
-
-        float upgradeDropChance = initialDropChance * Mathf.Exp(-decayFactor * currentWave);
-
-        if (currentWave >= 20)
-        {
-            upgradeDropChance = Mathf.Max(upgradeDropChance, 0.0005f);
-        }
-
-        return upgradeDropChance *100;
-    }
 }

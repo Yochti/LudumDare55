@@ -6,7 +6,7 @@ public class MouseCursor : MonoBehaviour
 {
     public Sprite defaultCursorSprite; // Sprite du curseur par défaut
     public Sprite hoverEnemyBossSprite; // Sprite du curseur lorsque survolant un ennemi ou un boss
-
+    public Sprite cursorOutGame;
     private SpriteRenderer rend;
 
     private void Start()
@@ -22,6 +22,15 @@ public class MouseCursor : MonoBehaviour
         transform.position = cursorPos;
 
 
+    }
+    /*public void changeToCursorOutgame()
+    {
+       
+        rend.sprite = cursorOutGame;
+    }*/
+    public void resetCursor()
+    {
+        rend.sprite = defaultCursorSprite;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

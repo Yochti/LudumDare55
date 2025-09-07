@@ -18,6 +18,9 @@ TagManager:
   - Poutch
   - Soul2
   - Soul3
+  - PowerUpPoint
+  - AnimPoints
+  - chest
   layers:
   - Default
   - TransparentFX

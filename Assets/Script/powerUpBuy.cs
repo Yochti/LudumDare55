@@ -90,15 +90,15 @@ public class powerUpBuy : MonoBehaviour
 
     public void Axes()
     {
-        if(lvlvAxes < 1)
+        if (lvlvAxes < 1)
         {
             ProjectileSpawner.numberOfProjectiles = 2;
         }
-        else if(lvlvAxes < 2)
+        else if (lvlvAxes < 2)
         {
             ProjectileSpawner.numberOfProjectiles = 3;
         }
-        else if(lvlvAxes < 3)
+        else if (lvlvAxes < 3)
         {
             ProjectileSpawner.numberOfProjectiles = 4;
         }
@@ -106,6 +106,7 @@ public class powerUpBuy : MonoBehaviour
         {
             ProjectileSpawner.numberOfProjectiles = 5;
         }
+        else if (lvlvAxes < 5) ProjectileSpawner.numberOfProjectiles = 6;
         else
             return;
         lvlvAxes++;
@@ -118,15 +119,15 @@ public class powerUpBuy : MonoBehaviour
     }
     public void BulletRain()
     {
-        if(lvlBulletRain < 1)
+        if (lvlBulletRain < 1)
         {
             ProjectileRain.numberOfProjectiles = 4;
         }
-        else if(lvlBulletRain < 2)
+        else if (lvlBulletRain < 2)
         {
             ProjectileRain.numberOfProjectiles = 6;
         }
-        else if(lvlBulletRain < 3)
+        else if (lvlBulletRain < 3)
         {
             ProjectileRain.numberOfProjectiles = 8;
         }
@@ -134,6 +135,7 @@ public class powerUpBuy : MonoBehaviour
         {
             ProjectileRain.numberOfProjectiles = 10;
         }
+        else if (lvlBulletRain < 5) ProjectileRain.numberOfProjectiles = 12;
         else
             return;
         lvlBulletRain++;
@@ -146,15 +148,15 @@ public class powerUpBuy : MonoBehaviour
     }
     public void Flame()
     {
-        if(lvlvF < 1)
+        if (lvlvF < 1)
         {
             FlameZoneInstanciate.number = 2;
         }
-        else if(lvlvF < 2)
+        else if (lvlvF < 2)
         {
             FlameZoneInstanciate.number = 3;
         }
-        else if(lvlvF < 3)
+        else if (lvlvF < 3)
         {
             FlameZoneInstanciate.number = 4;
         }
@@ -162,7 +164,8 @@ public class powerUpBuy : MonoBehaviour
         {
             FlameZoneInstanciate.number = 5;
         }
-        else
+        else if (lvlvF < 5) FlameZoneInstanciate.number = 6;
+        else 
             return;
         lvlvF++;
         panelPowerUp.SetActive(false);
@@ -173,36 +176,5 @@ public class powerUpBuy : MonoBehaviour
 
     }
 
-
-    public void addDamages()
-    {
-        if (lvlAddDmg < 10)
-        {
-            PlayerStats.additionalDmg(.1f);
-            lvlAddDmg++;
-
-        }
-        else return;
-        panelPowerUp.SetActive(false);
-        Time.timeScale = 1f;
-        Cursor.visible = false;
-        PowerUpPanel.numberRoll++;
-
-    }
-    public void addCrit()
-    {
-        if (lvlCrit < 4)
-        {
-            PlayerStats.addCrit(7, 12.5f);
-            lvlCrit++;
-
-        }
-        else return;
-        panelPowerUp.SetActive(false);
-        Time.timeScale = 1f;
-        Cursor.visible = false;
-        PowerUpPanel.numberRoll++;
-
-    }
 
 }

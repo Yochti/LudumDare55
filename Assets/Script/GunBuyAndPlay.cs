@@ -1,98 +1,149 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GunBuyAndPlay : MonoBehaviour
 {
     public saveSytem save;
-    public Button gun1sprite, gun2sprite, gun3sprite, gun4sprite, gun5sprite, gun6sprite, gun7sprite, gun8sprite;
-    public Color baseColor;
-    public AudioSource audioo;public AudioSource audioo2;
-    public PurchaseConfirmationPanel confirmationPanel;  // Référence au panneau de confirmation
+
+    public Button gunButton;
+    public Image progressBar;
+    public Image background;
+
+    public string gunName;
+    public int price;
+
+    public Color baseColor;           // Couleur du bouton par défaut
+    public Color purchasedBarColor;   // Couleur de la barre après achat
+    public Color notOwnedColor;       // Couleur du fond quand pas encore acheté
+    public Color ownedColor;          // Couleur du fond quand acheté
+    public Color equippedColor;       // Couleur du fond quand équipé
+
+    public AudioSource audioPurchase;
+    public AudioSource audioDenied;
+
+    private bool isHolding = false;
+    private float holdTime = 1f;
+    private Coroutine holdCoroutine;
+
 
     private void Update()
     {
-        UpdateGunColors();
+         UpdateVisualState();
     }
 
-    private void UpdateGunColors()
+    public void OnPointerDown()
     {
-        Button[] buttons = { gun1sprite, gun2sprite, gun3sprite, gun4sprite, gun5sprite, gun6sprite, gun7sprite, gun8sprite };
-        foreach (Button button in buttons) button.GetComponent<Image>().color = baseColor;
-
-        // Applique la couleur verte à l'arme sélectionnée
-        if (save.whichWeapon == "Gun1") gun1sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun2") gun2sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun3") gun3sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun4") gun4sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun5") gun5sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun6") gun6sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun7") gun7sprite.GetComponent<Image>().color = Color.green;
-        else if (save.whichWeapon == "Gun8") gun8sprite.GetComponent<Image>().color = Color.green;
-    }
-
-    public void PurchaseWeapon(string gunName, int price)
-    {
-        // Vérifie les âmes et effectue l'achat
-        if (save.TotalSouls >= price)
-        {
-            audioo.Play();
-            save.TotalSouls -= price;
-            AssignWeaponOwnership(gunName);
-            save.SaveData();
-        }
-        else audioo2.Play();
-    }
-
-    private void AssignWeaponOwnership(string gunName)
-    {
-        save.whichWeapon = gunName;
-        switch (gunName)
-        {
-            case "Gun2": save.hasGun2 = true; break;
-            case "Gun3": save.hasGun3 = true; break;
-            case "Gun4": save.hasGun4 = true; break;
-            case "Gun5": save.hasGun5 = true; break;
-            case "Gun6": save.hasGun6 = true; break;
-            case "Gun7": save.hasGun7 = true; break;
-            case "Gun8": save.hasGun8 = true; break;
-        }
-    }
-
-    // Méthodes pour chaque arme
-    public void Gun1() { save.whichWeapon = "Gun1"; save.SaveData(); }
-    public void Gun2() { TryPurchaseWeapon("Gun2", 250); }
-    public void Gun3() { TryPurchaseWeapon("Gun3", 50); }
-    public void Gun4() { TryPurchaseWeapon("Gun4", 500); }
-    public void Gun5() { TryPurchaseWeapon("Gun5", 1500); }
-    public void Gun6() { TryPurchaseWeapon("Gun6", 2000); }
-    public void Gun7() { TryPurchaseWeapon("Gun7", 5000); }
-    public void Gun8() { TryPurchaseWeapon("Gun8", 5000); }
-
-    private void TryPurchaseWeapon(string gunName, int price)
-    {
-        if (HasWeapon(gunName))
+        if (IsWeaponOwned())
         {
             save.whichWeapon = gunName;
             save.SaveData();
+            UpdateVisualStateAll(); 
         }
-        else
+        else if (!isHolding)
         {
-            confirmationPanel.ShowConfirmation(gunName, price, this);
+            holdCoroutine = StartCoroutine(HoldToBuy());
         }
     }
 
-    private bool HasWeapon(string gunName)
+    public void OnPointerUp()
+    {
+        if (isHolding && holdCoroutine != null)
+        {
+            StopCoroutine(holdCoroutine);
+            ResetProgressBar();
+            isHolding = false;
+        }
+    }
+
+    private IEnumerator HoldToBuy()
+    {
+        isHolding = true;
+        float elapsedTime = 0f;
+        progressBar.fillAmount = 0f;
+
+        while (elapsedTime < holdTime)
+        {
+            elapsedTime += Time.deltaTime;
+            progressBar.fillAmount = elapsedTime / holdTime;
+            yield return null;
+        }
+
+        progressBar.fillAmount = 1f;
+        PurchaseWeapon();
+        isHolding = false;
+    }
+
+    private void ResetProgressBar()
+    {
+        progressBar.fillAmount = 0f;
+    }
+
+    private void PurchaseWeapon()
+    {
+        if (save.totalSouls >= price)
+        {
+            save.totalSouls -= price;
+            AssignWeaponOwnership();
+            save.whichWeapon = gunName;
+            progressBar.color = purchasedBarColor;
+            save.SaveData();
+            audioPurchase?.Play();
+            UpdateVisualStateAll(); // rafraîchir tout
+        }
+        else
+        {
+            audioDenied?.Play();
+            progressBar.fillAmount = 0f;
+            background.color = notOwnedColor;
+            return;
+        }
+    }
+
+    private void UpdateVisualState()
+    {
+        if (!IsWeaponOwned())
+        {
+            background.color = notOwnedColor;
+        }
+        else if (save.whichWeapon == gunName)
+        {
+            background.color = equippedColor;
+        }
+        else
+        {
+            background.color = ownedColor;
+        }
+
+        // Couleur du bouton sélectionné
+        gunButton.GetComponent<Image>().color = (save.whichWeapon == gunName) ? Color.green : baseColor;
+    }
+
+    private bool IsWeaponOwned()
+    {
+        return gunName == "Gun1" ||
+               (gunName == "Gun3" && save.hasGun3) ||
+               (gunName == "Gun4" && save.hasGun4) ||
+               (gunName == "Gun6" && save.hasGun6) ||
+               (gunName == "Gun7" && save.hasGun7);
+    }
+
+    private void AssignWeaponOwnership()
     {
         switch (gunName)
         {
-            case "Gun2": return save.hasGun2;
-            case "Gun3": return save.hasGun3;
-            case "Gun4": return save.hasGun4;
-            case "Gun5": return save.hasGun5;
-            case "Gun6": return save.hasGun6;
-            case "Gun7": return save.hasGun7;
-            case "Gun8": return save.hasGun8;
-            default: return false;
+            case "Gun3": save.hasGun3 = true; break;
+            case "Gun4": save.hasGun4 = true; break;
+            case "Gun6": save.hasGun6 = true; break;
+            case "Gun7": save.hasGun7 = true; break;
+        }
+    }
+
+    private void UpdateVisualStateAll()
+    {
+        foreach (GunBuyAndPlay gun in FindObjectsOfType<GunBuyAndPlay>())
+        {
+            gun.UpdateVisualState();
         }
     }
 }

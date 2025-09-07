@@ -167,8 +167,8 @@ MonoBehaviour:
   bulletDamagemax: 21
   bulletDamage: 15
   isCritical: 0
-  critChance: 15
-  critDamage: 200
+  critChance: 25
+  critDamage: 175
 --- !u!1 &6233416925279187815
 GameObject:
   m_ObjectHideFlags: 0

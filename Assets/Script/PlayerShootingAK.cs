@@ -27,7 +27,7 @@ public class PlayerShootingAk : MonoBehaviour
 
     void Update()
     {
-        attackSpeed = .65f  - (PlayerStats.attackSpeed * attackSpeed);
+        attackSpeed = .85f  - (PlayerStats.attackSpeed * attackSpeed);
         autoShoot = save.isAutoShoot;
         autoAim = save.isAutoAim;
         timeSinceLastShot += Time.deltaTime;
@@ -57,7 +57,7 @@ public class PlayerShootingAk : MonoBehaviour
         for (int i = 0; i < numberBullet; i++)
         {
             Shoot();  // Tir d'une seule balle
-            yield return new WaitForSeconds(0.08f);  
+            yield return new WaitForSeconds(0.1f);  
         }
     }
 

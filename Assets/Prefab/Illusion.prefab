@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 6264058998070764861}
   - component: {fileID: 8203858971151239737}
   - component: {fileID: 1681841239093753704}
+  - component: {fileID: 4605579999467484077}
   m_Layer: 6
   m_Name: Illusion
   m_TagString: Enemy
@@ -552,6 +553,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4605579999467484077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294885776241752888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca565174fb48e4294dbba89728d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 3
+  currentSpeed: 3
+  stunCooldown: 2
 --- !u!1 &3528477831993927274
 GameObject:
   m_ObjectHideFlags: 0

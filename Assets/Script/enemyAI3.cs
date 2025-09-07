@@ -9,10 +9,10 @@ public class EnemyAI3 : MonoBehaviour
     public float explosionDamage = 20f; // Dégâts de l'explosion
     public float detectionRadius = 8f; // Rayon autour de la dernière position connue du joueur
     private Vector3 targetPosition; // Position vers laquelle l'ennemi se dirige
-
+    private EnemyC enemyC;
     private void Start()
     {
-        // Initialiser la référence du joueur si présent
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -22,7 +22,7 @@ public class EnemyAI3 : MonoBehaviour
 
     void Update()
     {
-        // Vérifier et mettre à jour les références du joueur et du poutch
+        moveSpeed = enemyC.currentSpeed;
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");

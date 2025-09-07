@@ -11,14 +11,17 @@ public class LargeGolemAI : MonoBehaviour
     private Transform player;    
     private float nextAttackTime = 0f;
     public float detectionRadius = 8f;
-    private Vector3 targetPosition;     
+    private Vector3 targetPosition;
+    private EnemyC enemyC;
     private void Start()
     {
+        enemyC = this.gameObject.GetComponent<EnemyC>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
+        moveSpeed = enemyC.currentSpeed;
         if(!PlayerInvisibleZone.isInvisible)
             MoveTowardsPlayer();
         else

@@ -19,20 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 6389116928
-    m_Localized: Bababoy est une invocation qui fait beaucoup de degats.
+    m_Localized: Bababoy
     m_Metadata:
       m_Items: []
   - m_Id: 76903755776
-    m_Localized: Name est une invocation support qui vous soigne.
+    m_Localized: Name
     m_Metadata:
       m_Items: []
   - m_Id: 90027732992
-    m_Localized: "Junktrap est une invocation qui pose des pi\xE8ges sur le terrain."
+    m_Localized: Junktrap
     m_Metadata:
       m_Items: []
   - m_Id: 113822019584
-    m_Localized: Hermes est une invocation polyvalente grace aux tourelles qu'il
-      pose.
+    m_Localized: Hermes
     m_Metadata:
       m_Items: []
   - m_Id: 130783784960
@@ -40,20 +39,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 149242916864
-    m_Localized: Hera est une invocation polyvalente grace aux zones a effets particuliers
-      l'entourant
+    m_Localized: Hera
     m_Metadata:
       m_Items: []
   - m_Id: 1858115612672
-    m_Localized: "Permet de tirer deux portails vous teleportant de l'un \xE0 l'autre."
+    m_Localized: Portail
     m_Metadata:
       m_Items: []
   - m_Id: 2021408256000
-    m_Localized: Permet de vous cloner pendant 15 secondes
+    m_Localized: Clonage
     m_Metadata:
       m_Items: []
   - m_Id: 1397187549474816
-    m_Localized: "Prends l'aggro des monstres \xE0 votre place."
+    m_Localized: Poutch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77936554962489344
+    m_Localized: IZO
     m_Metadata:
       m_Items: []
   references:

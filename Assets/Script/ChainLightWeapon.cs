@@ -55,7 +55,7 @@ public class ChainLightningWeapon : MonoBehaviour
         Transform target = autoAim ? FindTarget() : null;
         if (autoAim && target != null)
             AimAtTarget(target);
-        if (autoShoot && (target != null || !autoAim))
+        if (autoShoot && (target != null || !autoAim) && target != null)
         {
             Chronomater -= Time.deltaTime;
 
@@ -155,7 +155,7 @@ public class ChainLightningWeapon : MonoBehaviour
             }
         }
     }
-
+    
     void ChainDamageAndDrawLines(Transform currentEnemy, List<Transform> damagedEnemies)
     {
         Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(currentEnemy.position, chainDistance, enemyLayer);
